@@ -2,59 +2,39 @@
         require_once('auth.php');
 ?>
 
+
+<!--Dont forget to add edit profile-->
+
 <html>
 <head>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--LINK CSS FILES-->
+  <link rel="stylesheet" type="text/css" href="css/general.css"> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
   <title>Profile</title>
-  <link rel="stylesheet" type="text/css" href="css/general.css" />
-  <div align="center" class="largetext">Profile</div>
 </head>
 
 <body>
   <?php
-    require_once('connection.php');
-    function clean($str) 
-    {
-      $str = @trim($str);
-      if( get_magic_quotes_gpc() ) 
-      {
-      //if magic quotes is running, remove slashes it added
-        $str = stripslashes($str);
-      }
-      return mysql_real_escape_string($str);
-    }
-    $username = clean($_SESSION['SESS_USERNAME']);
-    $password = clean($_SESSION['SESS_PASSWORD']);
-    $qry="SELECT * FROM $table WHERE username='$username' AND password='$password'";
-    $result=mysql_query($qry);
-    $member   = mysql_fetch_assoc($result);
-    $name     =$member['name'];
-    $batch    =$member['batch'];
-    $email    =$member['email'];
-    $phone    =$member['phone'];
-    $curr_loc =$member['curr_loc'];
-    $perm_loc =$member['perm_loc'];
-    $job      =$member['job'];
+    require_once('navbar.php');
+    require_once('fetchprofile.php');
   ?>
 
-  <table width="500" align="center" cellpadding="10">
-    <tr>
-      <td align="center">
-          <a href="home.php">Home</a>
-      </td>
-      <td align="center">
-          <a href="editprofile.php">Edit Profile</a>
-      </td>
-      <td align="center">
-          <a href="logout.php">Logout</a>
-      </td>
-    </tr>
-  </table>
 
-  <br>
 
-  <table width="500" border="0" align="center" cellpadding="10">
+<div class="containter">
 
+<div class="col-md-4 col-md-offset-4">
+
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3><b><?php echo $username;?><b></h3>
+  </div>
+  <table class="table table-striped">
+  <tbody>
     <tr>
       <td valign="top">
         <div class="c2">
@@ -124,7 +104,15 @@
 
       <td valign="top"><?php echo $job ?></td>
     </tr>
-
+  </tbody>
   </table>
+
+  <div class="panel-footer" align="right">
+    <a href="editprofile.php"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+  </div>
+
+
+  </div>
+  </div>
 </body>
 </html>

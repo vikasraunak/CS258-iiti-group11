@@ -1,33 +1,12 @@
-@font-face {
-    font-family: chalet;
-    src: local(chalet), url('chalet.ttf') format('opentype');
-}
-@font-face {
-    font-family: graduate;
-    src: local(graduate), url('graduate.ttf') format('opentype');
-}
-
 body {
-	color: #882626;
-  	background-image:url("whitepat.png");
-  	background-repeat:no-repeat;
-	background-size:cover;
+	color: #3C3C45;
+  padding-top: 8%;
+
   	font-family: Trebuchet MS;
-  	font-size: 16;
-  	padding-top: 160px;
+  	background-image:url("background2.jpg");
+    background-size: cover;
+  	background-repeat:no-repeat;
+    
+  	
 
 }
-
-.largetext{
-	color: #4f98b7;
-	font-size: 48;
-	font-family: graduate;
-}
-
-a:link {
-	color:#005b5e;
-	text-decoration: none;
-	}    /* unvisited link */
-a:visited {color:#005b5e;text-decoration: none;} /* visited link */
-a:hover {color:#9b9ba6;text-decoration: none;}   /* mouse over link */
-a:active {color:#005b5e;text-decoration: none;}  /* selected link */

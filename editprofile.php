@@ -10,176 +10,144 @@
 
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/general.css">
-  <div align="center" class="largetext">Edit Profile</div>
-  <!-- <script type="text/javascript">
 
-  function validateForm()
-  {
-    var a=document.forms["reg"]["name"].value;
-    var b=document.forms["reg"]["batch"].value;
-    var c=document.forms["reg"]["email"].value;
-    var d=document.forms["reg"]["phone"].value;
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    if ((a==null || a=="") && (b==null || b=="") && (c==null || c=="") && (d==null || d=="") )
-    {
-      alert("All fields must be filled out");
-      return false;
-    }
-    if (a==null || a=="")
-    {
-      alert("Username cannot be empty");
-      return false;
-    }
-    if (b==null || b=="")
-    {
-      alert("Password cannot be empty");
-      return false;
-    }
-    if (c==null || c=="")
-    {
-      alert("Username cannot be empty");
-      return false;
-    }
-    if (d==null || d=="")
-    {
-      alert("Password cannot be empty");
-      return false;
-    }
-  
-  }
-  </script> -->
+  <!--LINK CSS FILES-->
+  <link rel="stylesheet" type="text/css" href="css/general.css"> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
 
   <title>Edit Profile</title>
 </head>
 
 <body>
 
-  <table width="500" align="center" cellpadding="10">
-    <tr>
-      <td align="center">
-          <a href="home.php">Home</a>
-      </td>
-      <td align="center">
-          <a href="profile.php">Profile</a>
-      </td>
-      <td align="center">
-          <a href="logout.php">Logout</a>
-      </td>
-    </tr>
-  </table>
+<!--NAVIGATION BAR START-->
+  <?php require_once('navbar.php'); 
 
-  <br>
+        require_once('fetchprofile.php');
+  ?>
+<!--NAVIGATION BAR END-->
 
-  <form name="reg" action="edit_exec.php" method="post" id="reg">
-    <table width="400" border="0" align="center" cellpadding="5" cellspacing="5">
-      <tr>
-        <td colspan="2">
-          <div align="center">
-            <?php 
+  <form name="reg" action="edit_exec.php" method="post" id="reg" class="form-horizontal" role="form">
+    <div class="container">
+    <div class="col-md-4 col-md-offset-4">
+
+
+      <div class="row">
+        <?php 
                             if(count($_GET)==1)
                             {  
                               if($_GET['remarks']=='success')
-                                echo 'Profile Information Updated!';
+                                echo '<div class="alert alert-success"><span class="glyphicon glyphicon-ok-sign"></span> Profile Information Updated</div>';
                               elseif($_GET['remarks']=='inactive') 
                               {
-                                echo "Welcome, please update your profile to continue";
+                                echo '<div class="alert alert-info"><span class="glyphicon glyphicon-asterix"></span> First Time Login</div>';
                               }
                               elseif ($_GET['remarks']=='fail')
                               {
                                 if( isset($_SESSION['EDIT_ERRORS']) && is_array($_SESSION['EDIT_ERRORS']) && count($_SESSION['EDIT_ERRORS']) >0 ) 
                                 {
                                         //print error messages collected during editing profile info
-                                        echo '<ul class="err">'; //unordered list formatting (ul)
+                                        echo '<ul class="list-group">'; //unordered list formatting (ul)
                                         foreach($_SESSION['EDIT_ERRORS'] as $msg) 
                                         {
-                                                echo '<li>',$msg,'</li>'; 
+                                                echo '<li class="list-group-item list-group-item-danger"><span class="glyphicon glyphicon-remove"></span> '.$msg.'</li>'; 
                                         }
                                         echo '</ul>';
                                         unset($_SESSION['EDIT_ERRORS']);
                                 }
-                              }
+                              
                             }
-                            ?>
-          </div>
-        </td>
-      </tr>
+                          }
+            ?>
+      </div>
 
-      <tr>
-        <td width="95">
-          <div align="right">
-            Full Name*:
-          </div>
-        </td>
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3>Edit Profile</h3></div>
+            <table class="table table-striped" align="center">
+        <tr>
+          <td>
+            <div for="name">Full Name</span>:</div>
+          </td>
+          <td><input type="text" class="form-control" name="name" placeholder="Jose Mourinho" value="<?php echo $name;?>" required></td>
+        </tr>
 
-        <td width="171"><input type="text" name="name"></td>
-      </tr>
-
-      <tr>
+        <tr>
         <td>
-          <div align="right">
-            Batch*:
+          <div>
+            Batch:
           </div>
         </td>
 
-        <td><input type="text" value="Eg: 2012" name="batch"></td>
-      </tr>
+        <td><input type="text" class="form-control" placeholder="2012" name="batch" value="<?php echo $batch;?>" required></td>
+        </tr>
 
-      <tr>
+        <tr>
         <td>
-          <div align="right">
-            Email ID*:
+          <div>
+            Email ID:
           </div>
         </td>
 
-        <td><input type="email" name="email"></td>
-      </tr>
+        <td><input type="email" name="email" class="form-control" value="<?php echo $email;?>" required placeholder="no_trophies@arsenal.co.uk"></td>
+        </tr>
 
-      <tr>
+        <tr>
         <td>
-          <div align="right">
-            Phone*:
+          <div>
+            Phone:
           </div>
         </td>
 
-        <td><input type="text" name="phone"></td>
-      </tr>
+        <td><input type="text" name="phone" class="form-control" placeholder="9871124100" required value="<?php echo $phone;?>"></td>
+        </tr>
 
-      <tr>
+        <tr>
         <td>
-          <div align="right">
+          <div>
             Current Location:
           </div>
         </td>
 
-        <td><input type="text" name="curr_loc"></td>
-      </tr>
+        <td><input type="text" class="form-control" placeholder="London" name="curr_loc" value="<?php echo $curr_loc;?>"></td>
+        </tr>
 
-      <tr>
+        <tr>
         <td>
-          <div align="right">
+          <div>
             Permanent Location:
           </div>
         </td>
 
-        <td><input type="text" name="perm_loc"></td>
-      </tr>
+        <td><input type="text" class="form-control" placeholder="Lisbon" name="perm_loc" value="<?php echo $perm_loc;?>"></td>
+        </tr>
 
-      <tr>
+        <tr>
         <td>
           <div align="right">
             Current Occupation:
           </div>
         </td>
 
-        <td><input type="text" value="Eg: POST at COMPANY" name="job"></td>
-      </tr>
+        <td><input type="text" class="form-control" placeholder="Manager at Chelsea FC" name="job" value="<?php echo $job;?>"></td>
+        </tr>
 
+        <tr>
         <td colspan="2">
-        <div align="center"><input name="submit" type="submit" value="Update"><input type="reset" value="Reset"></div>
+        <div align="center"><input name="submit" class="btn btn-primary" type="submit" value="Save"></div>
         </td>
-      </tr>
-    </table>
+        </tr>
+
+            </table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
   </form>
 </body>
 </html>

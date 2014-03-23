@@ -11,7 +11,7 @@ Project Client: Dr. I. A. Palani, IIT Indore
 - Vikas Raunak
 
 #TO DO
-- Front end design using bootstrap
+
 - Check for potential security breaches like XSS or SQLInjection
 - Add Name as search parameter while searching Alumni Database
 - Add photo to profile. 
@@ -19,7 +19,7 @@ Project Client: Dr. I. A. Palani, IIT Indore
 - Add 'Friend Profile' and 'Friend Request' functionality
 - Add 'Notification' functionality
 - Add 'Events' functionality
-- Add 'Forums' functionality
+- Add 'Forums' functionality2
 - Add 'Admin Panel' that comprises of:
 	* Creation of batch usernames and passwords when batch passes
 	* Approve password reset requests

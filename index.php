@@ -9,66 +9,53 @@
         }
 ?>
 
+<!DOCTYPE html>
+
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/general.css">
-  <div align="center" class="largetext">IIT Indore<br>Alumni Website</div>
-  <title>IIT Indore Alumni Login</title>
-  <style type="text/css">
-input.c2 {font-family:'Trebuchet MS';}
-  div.c1 {text-align: right}
-  </style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+  	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  	<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+  	<link rel="stylesheet" type="text/css" href="css/general.css">
+  	<title>IIT Indore Alumni Login</title>
+  	
 </head>
 
 <body>
-  <form name="loginform" action="login_exec.php" method="post" id="loginform">
-    <table width="309" border="0" align="center" cellpadding="2" cellspacing="5">
-      <tr>
-        <td colspan="2">
+<div class="container">
+  <form name="loginform" action="login_exec.php" method="post" id="loginform" class="form-signin">
+
+        <div class="col-lg-4 col-lg-offset-4">
+        <div class="row">
+        <div align="center"><h2 class="form-signin-heading">Alumni Login</h2></div> <br>
         <?php
                                 if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) 
                                 {
                                         //print error messages collected during login
-                                        echo '<ul class="err">'; //unordered list formatting (ul)
+                                        echo '<ul class="list-group">'; //unordered list formatting (ul)
                                         foreach($_SESSION['ERRMSG_ARR'] as $msg) 
                                         {
-                                                echo '<li>',$msg,'</li>'; 
+                                                echo '<li class="list-group-item list-group-item-danger"><span class="glyphicon glyphicon-remove"></span>',$msg,'</li>'; 
                                         }
                                         echo '</ul>';
                                         unset($_SESSION['ERRMSG_ARR']);
                                 }
         ?>
-        </td>
-      </tr>
 
-      <tr>
-        <td width="116">
-          <div class="c1">
-            Username
+        <input name="username" type="text" class="form-control" placeholder="Username" required autofocus>
+        <input name="password" type="password" class="form-control" placeholder="Password" required>
+        <br>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
           </div>
-        </td>
-
-        <td width="177"><input name="username" type="text"></td>
-      </tr>
-
-      <tr>
-        <td>
-          <div class="c1">
-            Password
-          </div>
-        </td>
-
-        <td><input name="password" type="password"></td>
-      </tr>
-
-      <tr>
-        <td>
-          <div class="c1"></div>
-        </td>
-
-        <td><input name="" type="submit" value="Login" class="c2"></td>
-      </tr>
-    </table>
+        </div>
+        <br>
+        <div align="center"><a href="forgot.php">Forgot Login Credentials</a></div>
+        </div>
   </form>
+</div>
 </body>
 </html>

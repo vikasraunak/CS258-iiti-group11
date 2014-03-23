@@ -11,61 +11,60 @@
 	}
 
 	?>
+
 <html>
+
 <head>
-	<link rel="stylesheet" type="text/css" href="css/general.css">
-  <title>Search Alumni Database</title>
-  <div align="center" class="largetext">Alumni Database</div>
-  <style type="text/css">
-/*<![CDATA[*/
-  span.c1 {
-  				font-family: Trebuchet MS, Helvetica, sans-serif;
-  				font-size: "16";
-  			}
-  /*]]>*/
-  </style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  	<!--LINK CSS FILES-->
+  	<link rel="stylesheet" type="text/css" href="css/general.css"> 
+  	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  	<title>Search Alumni Database</title>
+
+  	<script type="text/javascript">
+  		function clear1()
+		{
+			window.location.href='./search.php';
+		}
+  	</script>
+
+
 </head>
+
 <body>
-	<table width="200" align="center" cellpadding="10">
-    <tr>
-      <td align="center"><a href="home.php">Home</a></td>
-      <td align="center"><a href="logout.php">Logout</a></td>
-    </tr>
-  </table><br>
-  <form action="<?php  echo $_SERVER['PHP_SELF'] ?>" method="GET">
-  <table align="center" width="300" cellpadding="5">
-  		<tr>
-        <td width="95">
-          <div align="right">
-            Batch:
-          </div>
-        </td>
-        <td width="171"><input type="text" name="param_batch" value="<?php  echo $param_batch ?>"></td>
-      </tr>
+	<?php require_once('navbar.php');?>    
+
+<div class="container">
+
+  	<form action="<?php  echo $_SERVER['PHP_SELF'] ?>" method="GET" class="form-inline">
+  		<div class="row">
+  		<div class="container col-md-8 col-md-offset-2 well" align="left">
+  			<div class="col-md-3"><input type="text" class="form-control disabled" name="param_name" placeholder="Work Under Progress" disabled/></div>
+    		<div class="col-md-3"><input type="text" class="form-control" name="param_batch" placeholder="Batch" value="<?php  echo $param_batch ?>"/></div>
+      		<div class="col-md-3"><input type="text" class="form-control" name="param_roll" placeholder="Roll Num" value="<?php  echo $param_roll ?>"/></div>
+      		<div class="col-md-2" align="center"><input name="submit" class="btn btn-primary" type="submit" value="Search"></div>
+      		</form>
+      		<div class="col-md-1" align="left"><button type="button" class="btn btn-primary" onclick="clear1()">Clear</button></div>
+      	</div>
+      	</div>
+
+  	<div class="row">
+  	<div class="col-md-8 col-md-offset-2 panel">
+  	<div class="panel-header">
+  		<h3><span class="glyphicon glyphicon-search"></span> Search Results</h3>
+  	</div>
+  	<div class="panel-body">
+    <table class="table table-striped">
+    <thead>
       <tr>
-        <td width="95">
-          <div align="right">
-            Roll No:
-          </div>
-        </td>
-        <td width="171"><input type="text" name="param_roll" value="<?php  echo $param_roll ?>"></td>
+        <th>Index No.</th>
+        <th>Name</th>
+        <th>Roll Number</th>
+        <th>Batch</th>
       </tr>
-      <tr>
-      	<td colspan="2">
-      		<div align="center">
-        		<input name="submit" type="submit" value="Submit">
-      		</div>
-      	</td>
-      </tr>
-  </table>
-  </form>
-      <table width="600" border="0" cellspacing="2" cellpadding="2" align="center">
-      <tr>
-        <td><span class="c1">Index No.</span></td>
-        <td><span class="c1">Name</span></td>
-        <td><span class="c1">Roll Number</span></td>
-        <td><span class="c1">Batch</span></td>
-      </tr>
+    </thead>
     <?php
 	
 	function clean($str)
@@ -110,6 +109,12 @@
 		{
 			$result=mysql_query($qry);
 			$num=mysql_numrows($result);
+
+			if ($num==0) 
+			{
+				echo '<div class="alert alert-warning">No matches found</div>';
+			}
+
 			mysql_close();
 			$i=0;
 			while ($i < $num)
@@ -135,5 +140,16 @@
 
 	?>
     </table>
+</div>
+</div>
+</div>
+</div>
+
+<!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+
 </body>
+
 </html>
