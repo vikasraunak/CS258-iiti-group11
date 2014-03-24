@@ -1,0 +1,17 @@
+<html>
+<body>
+<link href="_css/site.css" rel="stylesheet">
+
+
+<form action="send_mail.php" method="post">
+ Subject: <input type="text" name="subject"><br>
+ <p>Recipient(s)<BR></p>
+<input name='emails[]' type='text' />
+<TEXTAREA Name="emails[]" rows="2" cols="50"></TEXTAREA>
+<p>Your Message<BR></p>
+<TEXTAREA Name="message" rows="20" cols="100"></TEXTAREA>
+<input type="submit">
+</form>
+
+</body>
+</html>

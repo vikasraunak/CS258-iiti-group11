@@ -1,0 +1,36 @@
+<html>
+
+<body>
+<?php
+   require '../connection.php' ;
+   $select_query = "SELECT * FROM pwdreset WHERE approval = "false" ; 
+   $result = mysql_query($select_query);
+   if($result)
+{ $row = mysql_fetch_array($result) ;}
+else { die("Error") ; }
+$num=mysql_numrows($result);
+$i=0;
+			while ($i < $num)
+			{
+				$name=mysql_result($result, $i, "name");
+				$batch=mysql_result($result,$i,"batch");
+				$roll=mysql_result($result,$i,"roll");
+				$branch=mysql_result($result,$i,"branch");
+				?>
+      <tr>
+        <td><span class="c1"><?php  echo $i+1; ?></span></td>
+        <td><span class="c1"><?php  echo $name; ?></span></td>
+        <td><span class="c1"><?php  echo $roll; ?></span></td>
+        <td><span class="c1"><?php  echo $batch; ?></span></td>
+        <td> <span class="c1"><a href"show_user.html">Show User</a></span></td>
+        <form action="approve_pwd.php" method="get">
+  <button name="approval" type="submit" value="true">APPROVE</button>
+  <button name="disapproval" type="submit" value="false">REJECT</button>
+</form>
+      </tr>
+      <?php
+				$i++;
+ 
+?>
+<html>
+<body>
