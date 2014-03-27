@@ -68,7 +68,27 @@
 
       <div class="row">
         <div class="panel panel-default">
-          <div class="panel-heading"><h3>Edit Profile</h3></div>
+          <?php 
+          if ($imgbool==1) {
+
+          ?>
+          <div align="center"  class="panel-heading"><?php
+                                        /*
+                                        $temp_username=$_SESSION['SESS_USERNAME'];
+                                        $query = "SELECT mem_id,name,img,imgbool,username FROM alumni WHERE username='$temp_username' ";
+                                        if ( !($result = mysql_query($query,$con)) ) {
+                                          die('<p>Error reading database</p></body></html>');
+                                        } else {
+                                              $row = mysql_fetch_assoc($result);*/?>
+                                              <a href="profile.php"><?php
+                                              echo '<img width="100"  src="getImage.php?id=' . $mem_id . '"/>  ' . "\n";
+                                              ?> </a> <?php
+                                          //}    
+                                    //mysql_close($con);
+
+}
+?> <input type="file" size="40" name="userFile"/></div>
+          <div class="panel-heading" align="center"><h3>Edit Profile</h3></div>
             <table class="table table-striped" align="center">
         <tr>
           <td>
