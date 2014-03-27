@@ -1,3 +1,6 @@
+<!--  NOTE!! Do not forget to add username, password and database name on getImage.php And you will need to update
+your alumni database table. Instructions for that would be on updatetable.txt-->
+
 <?php
         require_once('auth.php');
 ?>
