@@ -18,6 +18,7 @@
     $name     =$member['name'];
     $batch    =$member['batch'];
     $email    =$member['email'];
+    $branch   =$member['branch'];
     $phone    =$member['phone'];
     $curr_loc =$member['curr_loc'];
     $perm_loc =$member['perm_loc'];
