@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Reaquest sent to institute</title>
-<link href="_css/site.css" rel="stylesheet">
-<script src="_js/jquery-1.7.2.min.js"></script>
+<link href="project/_css/site.css" rel="stylesheet">
+<script src="project/_js/jquery-1.7.2.min.js"></script>
 <script>
 $(document).ready(function() {
 
