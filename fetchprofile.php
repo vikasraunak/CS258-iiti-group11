@@ -11,19 +11,34 @@
       }
       return mysql_real_escape_string($str);
     }
-    $username = clean($_SESSION['SESS_USERNAME']);
-    $password = clean($_SESSION['SESS_PASSWORD']);
-    $qry="SELECT * FROM $table WHERE username='$username' AND password='$password'";
-    $result=mysql_query($qry);
-    $member   = mysql_fetch_assoc($result);
-    $name     =$member['name'];
-    $batch    =$member['batch'];
-    $branch   =$member['branch'];
-    $email    =$member['email'];
-    $phone    =$member['phone'];
-    $curr_loc =$member['curr_loc'];
-    $perm_loc =$member['perm_loc'];
-    $job      =$member['job'];
 
+    $name     ='';
+    $batch    ='';
+    $branch   ='';
+    $email    ='';
+    $phone    ='';
+    $curr_loc ='';
+    $perm_loc ='';
+    $job      ='';
+
+    function fetchProfile($username, $visibility)
+    {
+      //v describes visibility
+      global $table, $name, $batch, $branch, $email, $phone, $curr_loc, $perm_loc, $job;
+      $qry="SELECT * FROM $table WHERE username='$username'";
+      $result=mysql_query($qry);
+      $member   = mysql_fetch_assoc($result);      
+      $name     =$member['name'];
+      $batch    =$member['batch'];
+      $branch   =$member['branch'];
+      if($visibility==1)
+      {
+        $email    =$member['email'];
+        $phone    =$member['phone'];
+        $curr_loc =$member['curr_loc'];
+        $perm_loc =$member['perm_loc'];
+        $job      =$member['job'];
+      }
+    }
     
   ?>

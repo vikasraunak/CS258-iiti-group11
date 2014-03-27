@@ -148,7 +148,7 @@
 				?>
       <tr>
         <td><span class="c1"><?php  echo $i+1; ?></span></td>
-        <td><span class="c1"><?php  echo $name; ?></span></td>
+        <td><span class="c1"><a href="<?php  echo 'profile.php?param='.$roll; ?>"><?php  echo $name; ?></a></span></td>
         <td><span class="c1"><?php  echo $roll; ?></span></td>
         <td><span class="c1"><?php  echo $batch; ?></span></td>
       </tr>
