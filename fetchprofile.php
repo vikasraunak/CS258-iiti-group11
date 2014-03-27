@@ -1,6 +1,5 @@
 <?php
     require_once('connection.php');
-    $branches=array('CSE', 'EE','ME');
     function clean($str) 
     {
       $str = @trim($str);
@@ -18,12 +17,15 @@
     $member   = mysql_fetch_assoc($result);
     $name     =$member['name'];
     $batch    =$member['batch'];
-    $branch   =$member['branch'];
     $email    =$member['email'];
     $phone    =$member['phone'];
     $curr_loc =$member['curr_loc'];
     $perm_loc =$member['perm_loc'];
     $job      =$member['job'];
-
-    
+    $mem_id   =$member['mem_id'];
+    $type     =$member['type'];
+    $imgbool  =$member['imgbool'];
+    $img      =$member['img'];
+  
+  
   ?>
