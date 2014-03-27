@@ -10,9 +10,21 @@ CREATE TABLE IF NOT EXISTS `alumni` (
   `gender` varchar(10) NOT NULL DEFAULT "",
   `email` varchar(40) NOT NULL DEFAULT "",
   `batch` varchar(10) NOT NULL DEFAULT "",
+  `branch` varchar(25) NOT NULL DEFAULT "",
   `job` varchar(100) NOT NULL DEFAULT "",
   `active` tinyint(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`mem_id`),
   UNIQUE(`mem_id`),
   UNIQUE(`username`),
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
+
+
+
+For events table: (Create manually)
+
+$table = calendar_events
+id  - INT  -  primary  -  autoincrement
+event_ title   -  VARCHAR(30)
+event_venue   - VARCHAR(100)
+event_shortdesc  - VARCHAR(300)
+event_start  -  DATETIME

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Panel</title>
-<link href="../_css/site.css" rel="stylesheet">
+<link href="./_css/site.css" rel="stylesheet">
 <style>
 .tabbedPanels {
 	width: 100%;
@@ -106,12 +106,12 @@ $(document).ready(function() {
 </div>
 <div id="panel2" class="panel">
 <h2>Panel 2 content</h2>
-<p><a href="http://localhost/project/IPV/approve_pwd.html" style="color: rgb(0,0,0)">View and Approve Password Reset Requests</a></p>
+<p><a href="approve_pwd.html" style="color: rgb(0,0,0)">View and Approve Password Reset Requests</a></p>
 <p></p></div>
 <div id="panel3" class="panel">
 <h2>Panel 3 content</h2>
 <p>General Post</p>
-<p><a href="http://localhost/project/IPV/Election_Invite.html" style="color: rgb(0,0,0)">Invite Candidates for Election : Form Link</a></p>
+<p><a href="Election_Invite.html" style="color: rgb(0,0,0)">Invite Candidates for Election : Form Link</a></p>
 <p>Post Regarding Events </p>
 </div>
 </div>
@@ -125,7 +125,7 @@ $(document).ready(function() {
 <div class="panelContainer">
 <div id="panel4" class="panel">
 <h2>Panel 4 content</h2>
-<p><a href="http://localhost/project/IPV/send_mail.html" style="color: rgb(0,0,0)">Write Message</a></p>
+<p><a href="send_mail.html" style="color: rgb(0,0,0)">Write Message</a></p>
 
 </div>
 <div id="panel5" class="panel">
@@ -134,9 +134,9 @@ $(document).ready(function() {
 <p></p></div>
 <div id="panel6" class="panel">
 <h2>Panel 6 content</h2>
-<p><a href="http://localhost/project/IPV/complete_in-page-links.html" style="color: rgb(0,0,0)">See All Pages</a></p>
-<p><a href="http://localhost/project/IPV/upload.html" style="color: rgb(0,0,0)">Upload Files to Server</a></p>
-<p><a href="http://localhost/project/IPV/PageEditing.html" style="color: rgb(0,0,0)">Edit The Pages</a></p>
+<p><a href="complete_in-page-links.html" style="color: rgb(0,0,0)">See All Pages</a></p>
+<p><a href="upload.html" style="color: rgb(0,0,0)">Upload Files to Server</a></p>
+<p><a href="PageEditing.html" style="color: rgb(0,0,0)">Edit The Pages</a></p>
 </div>
 </div>
 </div>

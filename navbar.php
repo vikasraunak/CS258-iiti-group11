@@ -12,7 +12,7 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
 		echo '<li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>';
 
 
-	if ($filepath=='/profile.php') 
+	if ($filepath=='/profile.php'||$filepath=='/editprofile.php') 
     	echo '<li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>';
     else
 		echo '<li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></li>';
@@ -22,6 +22,11 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
     	echo '<li class="active"><a href="#"><span class="glyphicon glyphicon-search"></span> Search Database</a></li>';
     else
 		echo '<li><a href="search.php"><span class="glyphicon glyphicon-search"></span> Search Database</a></li>';
+
+    if ($filepath=='/events.php'||$filepath=='/event.php') 
+        echo '<li class="active"><a href="#"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>';
+    else
+        echo '<li><a href="events.php"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>';
 
 
 	if ($filepath=='/changepassword.php') 

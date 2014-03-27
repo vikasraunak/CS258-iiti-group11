@@ -1,6 +1,7 @@
 <?php
     $mysql = mysql_connect("localhost", "root", "");
-    mysql_select_db("alumni+website", $mysql) or die(mysql_error());
+    mysql_select_db("alumni_website", $mysql) or die(mysql_error());
+    
     define("ADAY", (60*60*24));
     if ((isset($_POST['month'])) && (isset($_POST['year'])))
     {
@@ -20,8 +21,13 @@
 
 <html>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--LINK CSS FILES-->
+        <link rel="stylesheet" type="text/css" href="css/general.css"> 
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
              <title>
-                    <?php echo "Calendar: ".$firstDayArray['month']."" . $firstDayArray['year']; ?>
+                    <?php echo "Calendar: ".$firstDayArray['month']." ". $firstDayArray['year']; ?>
              </title>
       </head>
 
@@ -34,6 +40,11 @@
       </script>
 
       <body>
+
+      <!--NAVIGATION BAR START-->
+      <?php require_once('navbar.php'); ?>
+      <!--NAVIGATION BAR END-->
+
                <h1>Select a Month/Year</h1>
                       <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                              <select name="month">
@@ -70,7 +81,7 @@
 
 <?php
 $days = Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
-echo "<table border=\"1\" cellpadding=\"5\"><tr>\n";
+echo '<table border=\"1\" cellpadding=\"5\" class="panel panel-default"><tr>';
 foreach ($days as $day) {
     echo "<td style=\"background-color: #CCCCCC; text-align: center; width: 14%\">
           <strong>$day</strong></td>\n";
@@ -108,5 +119,8 @@ for ($count=0; $count < (6*7); $count++) {
 echo "</tr></table>";
 mysql_close($mysql);
 ?>
+<!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

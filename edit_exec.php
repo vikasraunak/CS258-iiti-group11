@@ -23,6 +23,7 @@
 	$password = clean($_SESSION['SESS_PASSWORD']);
  	$name 	=clean($_POST['name']);
  	$batch 	=clean($_POST['batch']);
+ 	$branch	=clean($_POST['branch']);
  	$email 	=clean($_POST['email']);
  	$phone 	=clean($_POST['phone']);
  	$curr_loc =clean($_POST['curr_loc']);
@@ -37,6 +38,10 @@
 	}
 	if($batch == '') {
 		$errmsg_arr[] = 'Batch cannot be left blank';
+		$errflag = true;
+	}
+	if($branch == '') {
+		$errmsg_arr[] = 'Branch cannot be left blank';
 		$errflag = true;
 	}
 	if($email == '') {
@@ -58,7 +63,7 @@
  
 	//Create query
 	$qry="UPDATE $table 
-	SET name='$name', phone='$phone', email='$email', batch='$batch', curr_loc='$curr_loc', perm_loc='$perm_loc', active='$active', job='$job'
+	SET name='$name', phone='$phone', email='$email', branch='$branch', batch='$batch', curr_loc='$curr_loc', perm_loc='$perm_loc', active='$active', job='$job'
 	WHERE username='$username' AND password='$password'";
 	mysql_query($qry);
 	mysql_close($con);

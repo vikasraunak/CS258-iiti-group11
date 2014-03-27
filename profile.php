@@ -58,6 +58,16 @@
     <tr>
       <td valign="top">
         <div class="c2">
+          Branch:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $branch ?></td>
+    </tr>
+
+    <tr>
+      <td valign="top">
+        <div class="c2">
           Phone:
         </div>
       </td>

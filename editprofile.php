@@ -32,6 +32,8 @@
 
   <form name="reg" action="edit_exec.php" method="post" id="reg" class="form-horizontal" role="form">
     <div class="container">
+
+
     <div class="col-md-4 col-md-offset-4">
 
 
@@ -40,7 +42,7 @@
                             if(count($_GET)==1)
                             {  
                               if($_GET['remarks']=='success')
-                                echo '<div class="alert alert-success"><span class="glyphicon glyphicon-ok-sign"></span> Profile Information Updated</div>';
+                                echo '<div class="alert alert-success"><span class="glyphicon glyphicon-ok-sign"></span> Profile Information Updated<br>Back to <a href="profile.php">Profile</a></div>';
                               elseif($_GET['remarks']=='inactive') 
                               {
                                 echo '<div class="alert alert-info"><span class="glyphicon glyphicon-asterix"></span> First Time Login</div>';
@@ -70,7 +72,7 @@
             <table class="table table-striped" align="center">
         <tr>
           <td>
-            <div for="name">Full Name</span>:</div>
+            <div for="name">Full Name:</div>
           </td>
           <td><input type="text" class="form-control" name="name" placeholder="Jose Mourinho" value="<?php echo $name;?>" required></td>
         </tr>
@@ -78,12 +80,56 @@
         <tr>
         <td>
           <div>
-            Batch:
+            Batch:<br>[Year of passing out]
           </div>
         </td>
 
-        <td><input type="text" class="form-control" placeholder="2012" name="batch" value="<?php echo $batch;?>" required></td>
+        <td>
+        <select name="batch" class="form-control" required>
+    	<?php for ($i = 2013; $i <= 2099; $i++) 
+    		{
+    			if(intval($batch)==$i)
+    			{?>
+        			<option class="form-control" value="<?php echo $i; ?>" selected><?php echo $i; ?></option>
+           		<?php }
+        		else
+    			{?>
+        		<option class="form-control" value="<?php echo $i; ?>"><?php echo $i; ?></option><?php }
+   			} ?>	
+		</select>
+        <!--input type="text" class="form-control" placeholder="2012" name="batch" value="<?php echo $batch;?>" required-->
+        </td>
         </tr>
+
+
+        <tr>
+        <td>
+          <div>
+            Branch:
+          </div>
+        </td>
+
+        <td>
+        	<select name="branch" class="form-control" required>
+        		<?php for ($i = 0; $i < count($branches); $i++) 
+    			{
+    				if($branches[$i]==$branch)
+    				{	
+    					?>
+        				<option class="form-control" value="<?php echo $branches[$i]; ?>" selected><?php echo $branches[$i]; ?></option>
+           				<?php 
+           			}
+        			else
+    				{
+    					?>
+        				<option class="form-control" value="<?php echo $branches[$i]; ?>"><?php echo $branches[$i]; ?></option>
+        				<?php 
+        			}
+   				} ?>	
+        	</select>
+        </td>
+        </tr>
+
 
         <tr>
         <td>

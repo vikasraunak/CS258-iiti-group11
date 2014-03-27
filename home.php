@@ -29,7 +29,7 @@
     <div class="col-md-8">
 
       <div class="row">
-        <div class="col-md-8" align="center">
+        <div class="col-md-12" align="center">
 
         <!--WELCOME PANEL START-->
           <div class="panel panel-default">
@@ -50,21 +50,21 @@
       <div class="row">
 
       <!--EVENTS PANEL START-->
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="panel panel-default" align="center">
             <div class="panel-heading">
               <h3 class="panel-title">Events</h3>
             </div>
             <div class="panel-body">
-              No events
-              <a href="events.php">View all events</a>
+              No upcoming events
+              <a href="events.php">Create an event</a>
             </div>
           </div>     
         </div>
       <!--EVENTS PANEL END-->
 
       <!--ELECTION PORTAL START-->
-        <div class="col-md-4" align="center">
+        <div class="col-md-6" align="center">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Election Portal</h3>

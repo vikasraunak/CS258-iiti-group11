@@ -1,16 +1,24 @@
 <html>
      <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--LINK CSS FILES-->
+        <link rel="stylesheet" type="text/css" href="css/general.css"> 
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
           <title>
                  Show / Add Events
           </title>
      </head>
           <body>
+          <!--NAVIGATION BAR START-->
+      <?php require_once('navbar.php'); ?>
+      <!--NAVIGATION BAR END-->
                <h1>
                    Show / Add Events
                </h1>
   <?php
      $mysql = mysql_connect("localhost", "root", "");
-     mysql_select_db("alumni+website", $mysql) or die(mysql_error());
+     mysql_select_db("alumni_website", $mysql) or die(mysql_error());
      if ($_POST)
      {
        $m = $_POST['m'];
@@ -87,5 +95,8 @@
                                 <input type=\"submit\" name=\"submit\" value=\"Add Event!\">
               </form>";
    ?>
+   <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
  </body>
 </html>
