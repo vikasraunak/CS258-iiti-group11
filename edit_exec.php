@@ -66,6 +66,42 @@
 	SET name='$name', phone='$phone', email='$email', branch='$branch', batch='$batch', curr_loc='$curr_loc', perm_loc='$perm_loc', active='$active', job='$job'
 	WHERE username='$username' AND password='$password'";
 	mysql_query($qry);
+	
+	
+
+$nameofpic=$_FILES['userFile']['name'];
+if(isset($nameofpic)){
+if(!empty($nameofpic)){
+		if ( !isset($_FILES['userFile']['type'])  ) {
+}else if ( !preg_match( '/gif|png|x-png|jpeg/', $_FILES['userFile']['type']) ) {
+   die('<p>Only browser compatible images allowed</p></body></html>');
+// Copy image file into a variable
+} else if ( $_FILES['userFile']['size'] > 1048576 ) {
+   die('<p>Sorry file too large</p></body></html>');
+// Connect to database
+} else if ( !($handle = fopen ($_FILES['userFile']['tmp_name'], "r")) ) {
+   die('<p>Error opening temp file</p></body></html>');
+} else if ( !($image = fread ($handle, filesize($_FILES['userFile']['tmp_name']))) ) {
+   die('<p>Error reading temp file</p></body></html>');
+} else {
+   fclose ($handle);
+   // Commit image to the database
+   $image = mysql_real_escape_string($image);
+   $imagebool=1;
+   $filetype=$_FILES['userFile']['type'];
+   $query="UPDATE $table 
+	SET type='$filetype', img='$image', imgbool='$imagebool'
+	WHERE username='$username' AND password='$password'";
+
+   if ( !(mysql_query($query,$con)) ) {
+      die('<p>Error writing image to database</p></body></html>');
+   } else {
+   }
+}
+	}
+}
+
+	
 	mysql_close($con);
 	header("location: editprofile.php?remarks=success");
  
