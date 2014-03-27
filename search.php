@@ -2,12 +2,14 @@
 	require_once('auth.php');
 	$param_batch="";
 	$param_roll="";
+	$param_name="";
 	$num_param=count($_GET);
 	
 	if ($num_param>0)
 	{
 		$param_batch=clean($_GET['param_batch']);
 		$param_roll=clean($_GET['param_roll']);
+		$param_name=clean($_GET['param_name']);
 	}
 
 	?>
@@ -41,7 +43,7 @@
   	<form action="<?php  echo $_SERVER['PHP_SELF'] ?>" method="GET" class="form-inline">
   		<div class="row">
   		<div class="container col-md-8 col-md-offset-2 well" align="left">
-  			<div class="col-md-3"><input type="text" class="form-control disabled" name="param_name" placeholder="Work Under Progress" disabled/></div>
+  			<div class="col-md-3"><input type="text" class="form-control" name="param_name" placeholder="Name" value="<?php echo $param_name ?>"/></div>
     		<div class="col-md-3"><input type="text" class="form-control" name="param_batch" placeholder="Batch" value="<?php  echo $param_batch ?>"/></div>
       		<div class="col-md-3"><input type="text" class="form-control" name="param_roll" placeholder="Roll Num" value="<?php  echo $param_roll ?>"/></div>
       		<div class="col-md-2" align="center"><input name="submit" class="btn btn-primary" type="submit" value="Search"></div>
@@ -86,21 +88,41 @@
 	{
 		include('connection.php');
 		
-		if($param_roll=="" and $param_batch!="")
+		if($param_roll=="" and $param_batch!="" and $param_name=="")
 		{
 			$qry="SELECT * FROM $table WHERE batch='$param_batch'";
 			$flag=true;
 		}
 
-		elseif($param_batch=="" and $param_roll!="")
+		elseif($param_batch=="" and $param_roll!="" and $param_name=="")
 		{
 			$qry="SELECT * FROM $table WHERE username='$param_roll'";
 			$flag=true;
 		}
 
-		elseif($param_roll!="" and $param_batch!="")
+		elseif($param_roll!="" and $param_batch!="" and $param_name=="")
 		{
 			$qry="SELECT * FROM $table WHERE batch='$param_batch' AND username='$param_roll'";
+			$flag=true;
+		}elseif($param_roll=="" and $param_batch!="" and $param_name!="")
+		{
+			$qry="SELECT * FROM $table WHERE batch='$param_batch' AND `name` LIKE '%".$param_name."%' ";
+			$flag=true;
+		}
+
+		elseif($param_batch=="" and $param_roll!="" and $param_name!="")
+		{
+			$qry="SELECT * FROM $table WHERE username='$param_roll' AND `name` LIKE '%".$param_name."%'" ;
+			$flag=true;
+		}
+
+		elseif($param_roll!="" and $param_batch!="" and $param_name!="")
+		{
+			$qry="SELECT * FROM $table WHERE batch='$param_batch' AND username='$param_roll'  AND `name` LIKE '%".$param_name."%' ";
+			$flag=true;
+		}elseif($param_roll=="" and $param_batch=="" and $param_name!="")
+		{
+			$qry="SELECT * FROM $table WHERE `name` LIKE '%".$param_name."%' ";
 			$flag=true;
 		}
 
