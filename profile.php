@@ -31,8 +31,26 @@
 
   <div class="panel panel-default">
   <div class="panel-heading">
-    <h3><b><?php echo $username;?><b></h3>
-  </div>
+    
+    <?php 
+      if ($imgbool==1) {
+
+    ?>
+    <div align="center"  class="panel-heading"><?php
+                                        
+                                       /* if ( !($result = mysql_query($query,$con)) ) {
+                                          die('<p>Error reading database</p></body></html>');
+                                        } else {
+                                              $row = mysql_fetch_assoc($result);*/
+                                            ?><a href="profile.php"><?php
+                                              echo '<img width="100"  src="getImage.php?id=' . $mem_id. '"/>  ' . "\n";
+                                              ?></a><?php
+                                          //}    
+                                    //mysql_close($con);
+
+}
+?></div>
+    <div align="center"><h3><b><?php echo $username;?><b></h3></div>
   <table class="table table-striped">
   <tbody>
     <tr>
@@ -53,16 +71,6 @@
       </td>
 
       <td valign="top"><?php echo $batch ?></td>
-    </tr>
-
-    <tr>
-      <td valign="top">
-        <div class="c2">
-          Branch:
-        </div>
-      </td>
-
-      <td valign="top"><?php echo $branch ?></td>
     </tr>
 
     <tr>
