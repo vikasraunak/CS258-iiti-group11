@@ -30,5 +30,7 @@ event_ title   -  VARCHAR(30)
 event_venue   - VARCHAR(100)
 event_shortdesc  - VARCHAR(300)
 event_start  -  DATETIME
+event_invite_batch - INT(5)
+event_invite_dept - VARCHAR(30)
 
 /*for image, add another column manuallly.  name=img , type=blob ,  NULL ,(leave rest unchanged)*/
