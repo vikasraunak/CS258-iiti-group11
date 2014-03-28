@@ -50,16 +50,18 @@
       <div class="row">
 
       <!--EVENTS PANEL START-->
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="panel panel-default" align="center">
             <div class="panel-heading">
               <h3 class="panel-title">Events</h3>
             </div>
             <div class="panel-body">
-              No upcoming events
-              <a href="events.php">Create an event</a>
+               <?php
+                  include 'upcoming_events.php'
+                  ?>
+              <a href="allevents.php">View all events</a>
             </div>
-          </div>     
+          </div>
         </div>
       <!--EVENTS PANEL END-->
 
