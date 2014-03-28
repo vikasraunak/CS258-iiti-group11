@@ -2,6 +2,7 @@
 
 require_once('connection.php');	
 $table='alumni';
+$table_vis='vis_requests';
 
 function getVisibility($b)
 {
@@ -13,6 +14,35 @@ function getVisibility($b)
 
     return $visibility;
 }
+
+function requestStatus($a, $b)
+{
+	//returns 1 if $a has already sent request to $b
+	//returns 0 otherwise
+	global $table, $table_vis;
+	$qry 	  = "SELECT * FROM $table_vis WHERE sent_by='$a' sent_to='$b'";
+    $result	  = mysql_query($qry);
+    $num	  = mysql_num_rows($result);
+
+    return $num;
+
+
+}
+
+function sendRequest($a, $b)
+{
+	//send visibility request from $a to $b
+	global $table, $table_vis;
+
+	if(requestStatus($a, $b)!=1 && canView($a, $b)!=1)
+	{
+    	$qry="INSERT INTO $table_vis(sent_by, sent_to) VALUES  ($a,$b)";
+		mysql_query($qry);
+    }
+
+}
+
+
 
 function canView($a,$b)
 {

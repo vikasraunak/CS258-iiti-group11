@@ -20,11 +20,12 @@
     $curr_loc ='';
     $perm_loc ='';
     $job      ='';
+    $mem_id   ='';
 
     function fetchProfile($username, $visibility)
     {
       //v describes visibility
-      global $table, $name, $batch, $branch, $email, $phone, $curr_loc, $perm_loc, $job, $type, $img, $imgbool;
+      global $table, $name, $batch, $branch, $email, $phone, $curr_loc, $perm_loc, $job, $type, $img, $imgbool, $mem_id;
       $qry="SELECT * FROM $table WHERE username='$username'";
       $result=mysql_query($qry);
       $member   = mysql_fetch_assoc($result);      
@@ -34,6 +35,7 @@
       $type     =$member['type'];
       $imgbool  =$member['imgbool'];
       $img      =$member['img'];
+      $mem_id   =$member['mem_id'];
       if($visibility==1)
       {
         $email    =$member['email'];

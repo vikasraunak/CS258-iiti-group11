@@ -1,6 +1,6 @@
 <?php
 
-include 'connection.php';
+require_once('connection.php');
 
 $title=$_GET['title'];
 

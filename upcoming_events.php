@@ -6,7 +6,7 @@
  <h4 font-family: "tahoma"><strong>Upcoming events :</strong></h4>
 <?php
 
-include 'connection.php';
+require_once('connection.php');
 
 $nowarray = getdate();
 $year = $nowarray['year'];

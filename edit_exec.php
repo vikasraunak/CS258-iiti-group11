@@ -69,6 +69,7 @@
 	
 
 $nameofpic=$_FILES['userFile']['name'];
+
 if(isset($nameofpic)){
 if(!empty($nameofpic)){
 		if ( !isset($_FILES['userFile']['type'])  ) {

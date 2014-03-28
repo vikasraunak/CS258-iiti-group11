@@ -18,7 +18,7 @@
                </h2>
   <?php
      $mysql = mysql_connect("localhost", "root", "");
-     mysql_select_db("alumni+website", $mysql) or die('Could not connect to the database.');
+     mysql_select_db("alumni_website", $mysql) or die('Could not connect to the database.');
      if ($_POST)
      {
        $m = $_POST['m'];

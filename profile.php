@@ -35,7 +35,8 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
         fetchProfile($username,1);
       }
       else
-        fetchProfile($username,canView($_SESSION['SESS_USERNAME'],$username));
+        $canView=canView($_SESSION['SESS_USERNAME'],$username);
+        fetchProfile($username,$canView);
     }
     else
     {
@@ -58,20 +59,27 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
       if ($imgbool==1) {
 
     ?>
-    <div align="center"  class="panel-heading"><?php
+    <div align="center"  class="panel-heading">
+    <?php
                                         
-                                       /* if ( !($result = mysql_query($query,$con)) ) {
-                                          die('<p>Error reading database</p></body></html>');
-                                        } else {
-                                              $row = mysql_fetch_assoc($result);*/
-                                            ?><a href="profile.php"><?php
-                                              echo '<img width="100"  src="getImage.php?id=' . $mem_id. '"/>  ' . "\n";
-                                              ?></a><?php
-                                          //}    
-                                    //mysql_close($con);
+                                          
+                                         /* if ( !($result = mysql_query($query,$con)) ) {
+                                            die('<p>Error reading database</p></body></html>');
+                                          } else {
+                                                $row = mysql_fetch_assoc($result);*/
+                                              ?>
+                                              <a href="profile.php">
+                                                <?php
+                                                  echo '<img width="100"  src="getImage.php?id='.$mem_id. '"/>';
+                                                ?>
+                                              </a>
 
-}
-?></div>
+  <?php
+                                            //}    
+                                      //mysql_close($con);
+  }
+  ?>
+  </div>
     <div align="center"><h3><b><?php echo $username;?><b></h3></div>
   <table class="table table-striped">
   <tbody>
@@ -161,10 +169,16 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
     <?php
     if ($paramed==1)
     {
-      echo '<a href="#"><span class="glyphicon glyphicon-user"></span> Send Visibility Request</a>';
+      if($canView!=1)
+      {
+        if(requestStatus($_SESSION['username'], $username)==0)
+        echo '<a href="sendrequest.php?param='.$username.'"><span class="glyphicon glyphicon-user"></span> Send Visibility Request</a>';
+      }
     }
     else
+    {      
       echo '<a href="editprofile.php"><span class="glyphicon glyphicon-pencil"></span> Edit</a>';
+    }
     ?>
   </div>
 

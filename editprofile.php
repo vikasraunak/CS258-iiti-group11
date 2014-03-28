@@ -32,7 +32,7 @@
   ?>
 <!--NAVIGATION BAR END-->
 
-  <form name="reg" action="edit_exec.php" method="post" id="reg" class="form-horizontal" role="form">
+  <form name="reg" action="edit_exec.php" method="post" id="reg" class="form-horizontal" role="form" enctype="multipart/form-data">
     <div class="container">
 
 
@@ -84,13 +84,17 @@
                                               $row = mysql_fetch_assoc($result);*/?>
                                               <a href="profile.php"><?php
                                               echo '<img width="100"  src="getImage.php?id=' . $mem_id . '"/>  ' . "\n";
-                                              ?> </a> <?php
+                                              ?> </a> </div> <?php
                                           //}    
                                     //mysql_close($con);
 
 }
-?> <input type="file" size="40" name="userFile"/></div>
-          <div class="panel-heading" align="center"><h3>Edit Profile</h3></div>
+?> 
+		<div class="panel-heading">
+          	<h3>Edit Profile</h3>
+          </div>
+
+
             <table class="table table-striped" align="center">
         <tr>
           <td>
@@ -204,12 +208,17 @@
         </tr>
 
         <tr>
+        <td colspan="2" align="center"><input type="file" size="40" name="userFile"/></td>
+        </tr>
+
+        <tr>
         <td colspan="2">
         <div align="center"><input name="submit" class="btn btn-primary" type="submit" value="Save"></div>
         </td>
         </tr>
 
             </table>
+
         </div>
       </div>
     </div>

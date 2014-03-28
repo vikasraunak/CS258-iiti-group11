@@ -6,12 +6,12 @@
  <h2 font-family: "tahoma" ><strong>List of events </strong></h2>
  <p>
  <?php
-   include 'upcoming_events.php';
+   require_once('upcoming_events.php');
    ?>                 </p>
 <p> <h4 font-family: "tahoma"><strong>Past events :  </strong></h4>
 <?php
 
-include 'connection.php';
+require_once('connection.php');
 $nowarray = getdate();
 $year = $nowarray['year'];
 $pdate = $nowarray['mday'];
