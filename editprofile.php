@@ -27,6 +27,8 @@
   <?php require_once('navbar.php'); 
 
         require_once('fetchprofile.php');
+        $username=$_SESSION['SESS_USERNAME'];
+        fetchProfile($username,1);
   ?>
 <!--NAVIGATION BAR END-->
 

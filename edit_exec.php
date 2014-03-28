@@ -1,7 +1,6 @@
 <?php
 	session_start();
 	require_once('connection.php');
- 	$table='alumni';
 	//Array to store validation errors
 	$errmsg_arr = array();
 	//Validation error flag

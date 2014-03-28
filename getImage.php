@@ -1,15 +1,9 @@
-//used for <img src="...."> , url for image
+
 
 <?php
 //require('connection.php');
 
-$mysql_hostname = "localhost";
-$mysql_user = "";       //provide your username here
-$mysql_password = "";   //provide your password here
-$mysql_database = "";   //provide your database here..
-$table="alumni";
-$con = mysql_connect($mysql_hostname, $mysql_user, $mysql_password) or die("Could not connect database");
-mysql_select_db($mysql_database, $con) or die("Could not select database");
+require_once('connection.php');
 /*
 if(mysql_ping()){
 	echo "<script type='text/javascript'>alert('Yes')</script>";

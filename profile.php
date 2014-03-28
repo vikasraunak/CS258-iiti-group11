@@ -23,7 +23,26 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
 <body>
   <?php
     require_once('navbar.php');
+    require_once('stringops.php');
+    $paramed=count($_GET);
     require_once('fetchprofile.php');
+    if ($paramed==1) 
+    {
+      $username=trim($_GET['param']);
+      if($username==$_SESSION['SESS_USERNAME'])
+      {
+        $paramed=0;
+        fetchProfile($username,1);
+      }
+      else
+        fetchProfile($username,canView($_SESSION['SESS_USERNAME'],$username));
+    }
+    else
+    {
+      $username=$_SESSION['SESS_USERNAME'];
+      fetchProfile($username,1);
+    }
+    
   ?>
 
 
@@ -139,7 +158,14 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
   </table>
 
   <div class="panel-footer" align="right">
-    <a href="editprofile.php"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+    <?php
+    if ($paramed==1)
+    {
+      echo '<a href="#"><span class="glyphicon glyphicon-user"></span> Send Visibility Request</a>';
+    }
+    else
+      echo '<a href="editprofile.php"><span class="glyphicon glyphicon-pencil"></span> Edit</a>';
+    ?>
   </div>
 
 
