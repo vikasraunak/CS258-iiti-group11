@@ -34,3 +34,4 @@ event_invite_batch - INT(5)
 event_invite_dept - VARCHAR(30)
 
 /*for image, add another column manuallly.  name=img , type=blob ,  NULL ,(leave rest unchanged)*/
+/*add a separate db for admin, add a table for pwd_reset, public posts */
