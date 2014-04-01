@@ -1,177 +1,93 @@
 <?php
-	require_once('auth.php');
-	$param_batch="";
-	$param_roll="";
-	$param_name="";
-	$num_param=count($_GET);
-	
-	if ($num_param>0)
+
+require_once('connection.php');	
+$table='alumni';
+$table_vis='vis_requests';
+
+function getVisibility($b)
+{
+	global $table;
+	$qry 	  = "SELECT * FROM $table WHERE username='$b'";
+    $result	  = mysql_query($qry);
+    $member   = mysql_fetch_assoc($result);
+    $visibility    = $member['visibility'];
+
+    return $visibility;
+}
+
+function requestStatus($a, $b)
+{
+	//returns 1 if $a has already sent request to $b
+	//returns 0 otherwise
+	global $table, $table_vis;
+	$qry 	  = "SELECT * FROM $table_vis WHERE sent_by='$a' sent_to='$b'";
+    $result	  = mysql_query($qry);
+    $num	  = mysql_num_rows($result);
+
+    return $num;
+
+
+}
+
+function sendRequest($a, $b)
+{
+	//send visibility request from $a to $b
+	global $table, $table_vis;
+
+	if(requestStatus($a, $b)!=1 && canView($a, $b)!=1)
 	{
-		$param_batch=clean($_GET['param_batch']);
-		$param_roll=clean($_GET['param_roll']);
-		$param_name=clean($_GET['param_name']);
-	}
+    	$qry="INSERT INTO $table_vis(sent_by, sent_to) VALUES  ($a,$b)";
+		mysql_query($qry);
+    }
 
-	?>
-
-<html>
-
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  	<!--LINK CSS FILES-->
-  	<link rel="stylesheet" type="text/css" href="css/general.css"> 
-  	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-
-  	<title>Search Alumni Database</title>
-
-  	<script type="text/javascript">
-  		function clear1()
-		{
-			window.location.href='./search.php';
-		}
-  	</script>
+}
 
 
-</head>
 
-<body>
-	<?php require_once('navbar.php');?>    
+function canView($a,$b)
+{
+	//returns 1 if a can see b's profile
+	//0 otherwise
 
-<div class="container">
+	$v=getVisibility($b);
 
-  	<form action="<?php  echo $_SERVER['PHP_SELF'] ?>" method="GET" class="form-inline">
-  		<div class="row">
-  		<div class="container col-md-8 col-md-offset-2 well" align="left">
-  			<div class="col-md-3"><input type="text" class="form-control" name="param_name" placeholder="Name" value="<?php echo $param_name ?>"/></div>
-    		<div class="col-md-3"><input type="text" class="form-control" name="param_batch" placeholder="Batch" value="<?php  echo $param_batch ?>"/></div>
-      		<div class="col-md-3"><input type="text" class="form-control" name="param_roll" placeholder="Roll Num" value="<?php  echo $param_roll ?>"/></div>
-      		<div class="col-md-2" align="center"><input name="submit" class="btn btn-primary" type="submit" value="Search"></div>
-      		</form>
-      		<div class="col-md-1" align="left"><button type="button" class="btn btn-primary" onclick="clear1()">Clear</button></div>
-      	</div>
-      	</div>
+	if (strpos($v, $a) !== FALSE)
+    	return 1;
+	else
+    	return 0;
 
-  	<div class="row">
-  	<div class="col-md-8 col-md-offset-2 panel">
-  	<div class="panel-header">
-  		<h3><span class="glyphicon glyphicon-search"></span> Search Results</h3>
-  	</div>
-  	<div class="panel-body">
-    <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Index No.</th>
-        <th>Name</th>
-        <th>Roll Number</th>
-        <th>Batch</th>
-      </tr>
-    </thead>
-    <?php
-	
-	function clean($str)
-	{
-		$str = @trim($str);
-		
-		if( get_magic_quotes_gpc() )
-		{
-			//if magic quotes is running, remove slashes it added
-			$str = stripslashes($str);
-		}
+}
 
-		return mysql_real_escape_string($str);
-	}
+function addVisible($a, $b)
+{
+	//Allow a to view b
+	global $table;
 
-	$flag=false;
-	
-	if($num_param>0)
-	{
-		include('connection.php');
-		
-		if($param_roll=="" and $param_batch!="" and $param_name=="")
-		{
-			$qry="SELECT * FROM $table WHERE batch='$param_batch'";
-			$flag=true;
-		}
+	$v=getVisibility($b);
+	$v=$v." ".$a;
 
-		elseif($param_batch=="" and $param_roll!="" and $param_name=="")
-		{
-			$qry="SELECT * FROM $table WHERE username='$param_roll'";
-			$flag=true;
-		}
+	$qry="UPDATE $table 
+	SET visibility='$v'
+	WHERE username='$b'";
+	mysql_query($qry);
+}
 
-		elseif($param_roll!="" and $param_batch!="" and $param_name=="")
-		{
-			$qry="SELECT * FROM $table WHERE batch='$param_batch' AND username='$param_roll'";
-			$flag=true;
-		}elseif($param_roll=="" and $param_batch!="" and $param_name!="")
-		{
-			$qry="SELECT * FROM $table WHERE batch='$param_batch' AND `name` LIKE '%".$param_name."%' ";
-			$flag=true;
-		}
+function removeVisible($a, $b)
+{
+	//disallow a to view b
+	global $table;
 
-		elseif($param_batch=="" and $param_roll!="" and $param_name!="")
-		{
-			$qry="SELECT * FROM $table WHERE username='$param_roll' AND `name` LIKE '%".$param_name."%'" ;
-			$flag=true;
-		}
-
-		elseif($param_roll!="" and $param_batch!="" and $param_name!="")
-		{
-			$qry="SELECT * FROM $table WHERE batch='$param_batch' AND username='$param_roll'  AND `name` LIKE '%".$param_name."%' ";
-			$flag=true;
-		}elseif($param_roll=="" and $param_batch=="" and $param_name!="")
-		{
-			$qry="SELECT * FROM $table WHERE `name` LIKE '%".$param_name."%' ";
-			$flag=true;
-		}
-
-		
-		if($flag)
-		{
-			$result=mysql_query($qry);
-			$num=mysql_numrows($result);
-
-			if ($num==0) 
-			{
-				echo '<div class="alert alert-warning">No matches found</div>';
-			}
-
-			mysql_close();
-			$i=0;
-			while ($i < $num)
-			{
-				$active=mysql_result($result, $i, "active");
-				$name=mysql_result($result,$i,"name");
-				$roll=mysql_result($result,$i,"username");
-				$batch=mysql_result($result,$i,"batch");
-				?>
-      <tr>
-        <td><span class="c1"><?php  echo $i+1; ?></span></td>
-        <td><span class="c1"><a href="<?php  echo 'profile.php?param='.$roll; ?>"><?php  echo $name; ?></a></span></td>
-        <td><span class="c1"><?php  echo $roll; ?></span></td>
-        <td><span class="c1"><?php  echo $batch; ?></span></td>
-      </tr>
-      	<?php
-				$i++;
-			}
-
-		}
-
-	}
-
-	?>
-    </table>
-</div>
-</div>
-</div>
-</div>
-
-<!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
-  <script src="//code.jquery.com/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+	$v=getVisibility($b);
+	$pos=strpos($v, $b);
+	$v1=substr($v, 0, $pos-1);
+	$v2=substr($v, $pos+count($a));
+	$v=$v1.$v2;
 
 
-</body>
+	$qry="UPDATE $table 
+	SET visibility='$v'
+	WHERE username='$b'";
+	mysql_query($qry);
+}
 
-</html>
+?>

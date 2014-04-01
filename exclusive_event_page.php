@@ -1,33 +1,104 @@
 <?php
+  require_once('auth.php');
 
-require_once('connection.php');
-
-$title=$_GET['title'];
-
-$getEvent_sql = "SELECT event_title, event_venue, event_shortdesc,event_start, date_format(event_start, '%l:%i %p') as fmt_time, date_format(event_start, '%D %M %Y') as fmt_date, event_invite_batch, event_invite_dept FROM calendar_events WHERE event_title = '".$title."' ORDER BY event_start";
-     $getEvent_res = mysql_query($getEvent_sql) or die('An error has occured!');
-     if (mysql_num_rows($getEvent_res) == 1 )
-     {
-         $event_txt = "";
-         $ev = @mysql_fetch_array($getEvent_res)  ;
-         $event_title = stripslashes($ev["event_title"]);
-         $event_venue = stripslashes($ev["event_venue"]);
-         $event_shortdesc = stripslashes($ev["event_shortdesc"]);
-         $fmt_time = $ev['fmt_time'];
-         $fmt_date = $ev['fmt_date'];
-         $inv_batch = $ev["event_invite_batch"];
-         $inv_branch = $ev["event_invite_dept"];
-          $event_txt .= "<strong><em>Date:   </em></strong>".$fmt_date."</br><strong><em>Time:   </em></strong>".$fmt_time."<br/><strong><em>Venue:   </em></strong>".$event_venue."<br/><strong><em>Description:     </em></strong>".$event_shortdesc."<br/><strong><em>Invitees:     </em></strong>Batch - ".$inv_batch."  Department(s) - ".$inv_branch."" ;
-
-         $event_txt .="";
-     }
-     else
-     {
-         $event_txt = "";
-     }
-
-     if ($event_txt != "")
-     {
-          echo "<h2>".strtoupper($title)."</h2>$event_txt<hr/>";
-     }
 ?>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--LINK CSS FILES-->
+  <link rel="stylesheet" type="text/css" href="css/general.css"> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <title>Welcome Alumni</title>
+
+</head>
+
+<body>
+
+<!--NAVIGATION BAR START-->
+  <?php require_once('navbar.php'); ?>
+<!--NAVIGATION BAR END-->
+
+
+  <div class="container">
+    <div class="col-md-8">
+
+      <div class="row">
+        <div class="col-md-12" align="center">
+
+        <!--WELCOME PANEL START-->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Welcome</h3>
+            </div>
+            <div class="panel-body">
+              <p>Dear <b><?php $username=$_SESSION['SESS_USERNAME']; echo $username; ?></b></p>
+              <p>You may use the navbar at the top to browse various links. Notifications will appear in the area on the right. The election portal would be active during elections.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!--WELCOME PANEL END-->
+
+
+      <div class="row">
+
+      <!--EVENTS PANEL START-->
+        <div class="col-md-4">
+          <div class="panel panel-default" align="center">
+            <div class="panel-heading">
+              <h3 class="panel-title">Events</h3>
+            </div>
+            <div class="panel-body">
+               <?php
+                  include 'upcoming_events.php'
+                  ?>
+              <a href="allevents.php">View all events</a>
+            </div>
+          </div>
+        </div>
+      <!--EVENTS PANEL END-->
+
+      <!--ELECTION PORTAL START-->
+        <div class="col-md-6" align="center">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Election Portal</h3>
+            </div>
+            <div class="panel-body">
+              Next Election: [Fetch Date from Admin]
+            </div>
+          </div>  
+        </div>
+      <!--ELECTION PORTAL END-->
+
+      </div>
+    </div>
+
+    <!--NOTIFICATION PANEL START-->
+    <div class="col-md-4" align="center">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+         <h3 class="panel-title">Notifications</h3>
+        </div>
+        <div class="panel-body">
+          No new notifications
+        </div>
+      </div>
+    </div>
+    <!--NOTIFICATION PANEL END-->
+  </div>
+
+
+
+  <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

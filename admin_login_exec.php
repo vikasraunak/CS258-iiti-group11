@@ -3,8 +3,8 @@
 	session_start();
  
 	//Include database connection details
-	require_once('connection.php');
- 	$table='alumni';
+	require_once('../connection.php');
+ 	$table='admin';
 	//Array to store validation errors
 	$errmsg_arr = array();
  	

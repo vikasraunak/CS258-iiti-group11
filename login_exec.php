@@ -1,84 +1,189 @@
+<!--  NOTE!! Do not forget to add username, password and database name on getImage.php And you will need to update
+your alumni database table. Instructions for that would be on updatetable.txt-->
+
 <?php
-	//Start session
-	session_start();
- 
-	//Include database connection details
-	require_once('connection.php');
- 	$table='alumni';
-	//Array to store validation errors
-	$errmsg_arr = array();
- 	
-	//Validation error flag
-	$errflag = false;
- 
-	//Function to sanitize values received from the form. Prevents SQL injection
-	function clean($str) 
-	{
-		$str = @trim($str);
-		if( get_magic_quotes_gpc() ) 
-		{
-			//if magic quotes is running, remove slashes it added
-			$str = stripslashes($str);
-		}
-		return mysql_real_escape_string($str);
-	}
- 
-	//Sanitize the POST values
-	$username = clean($_POST['username']);
-	$password = clean($_POST['password']);
- 
-	//Input Validations
-	if($username == '') {
-		$errmsg_arr[] = 'Username missing';
-		$errflag = true;
-	}
-	if($password == '') {
-		$errmsg_arr[] = 'Password missing';
-		$errflag = true;
-	}
- 
-	//If there are input validations, redirect back to the login form
-	if($errflag) {
-		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-		session_write_close();
-		header("location: index.php");
-		exit();
-	}
- 
-	//Create query
-	$qry="SELECT * FROM $table WHERE username='$username' AND password='$password'";
-	$result=mysql_query($qry);
- 
-	//Check whether the query was successful or not
-	if($result) 
-	{
-		if(mysql_num_rows($result) > 0) 
-		{
-			//Login Successful
-			session_regenerate_id();
-			$member = mysql_fetch_assoc($result);
-			$_SESSION['SESS_USERNAME'] = $member['username'];
-			$_SESSION['SESS_PASSWORD'] = $member['password'];
-			$_SESSION['SESS_ACTIVE']   = $member['active'];
-			session_write_close();
-			header("location: home.php");
-			exit();
-		}
-		else 
-		{
-			//Login failed
-			$errmsg_arr[] = 'Username and Password do not match';
-			$errflag = true;
-			if($errflag) {
-				$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-				session_write_close();
-				header("location: index.php");
-				exit();
-			}
-		}
-	}
-	else 
-	{
-		die("Query failed");
-	}
+        require_once('auth.php');
 ?>
+
+
+<!--Dont forget to add edit profile-->
+
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--LINK CSS FILES-->
+  <link rel="stylesheet" type="text/css" href="css/general.css"> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <title>Profile</title>
+</head>
+
+<body>
+  <?php
+    require_once('navbar.php');
+    require_once('stringops.php');
+    $paramed=count($_GET);
+    require_once('fetchprofile.php');
+    if ($paramed==1) 
+    {
+      $username=trim($_GET['param']);
+      if($username==$_SESSION['SESS_USERNAME'])
+      {
+        $paramed=0;
+        fetchProfile($username,1);
+      }
+      else
+        $canView=canView($_SESSION['SESS_USERNAME'],$username);
+        fetchProfile($username,$canView);
+    }
+    else
+    {
+      $username=$_SESSION['SESS_USERNAME'];
+      fetchProfile($username,1);
+    }
+    
+  ?>
+
+
+
+<div class="containter">
+
+<div class="col-md-4 col-md-offset-4">
+
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    
+    <?php 
+      if ($imgbool==1) {
+
+    ?>
+    <div align="center"  class="panel-heading">
+    <?php
+                                        
+                                          
+                                         /* if ( !($result = mysql_query($query,$con)) ) {
+                                            die('<p>Error reading database</p></body></html>');
+                                          } else {
+                                                $row = mysql_fetch_assoc($result);*/
+                                              ?>
+                                              <a href="profile.php">
+                                                <?php
+                                                  echo '<img width="100"  src="getImage.php?id='.$mem_id. '"/>';
+                                                ?>
+                                              </a>
+
+  <?php
+                                            //}    
+                                      //mysql_close($con);
+  }
+  ?>
+  </div>
+    <div align="center"><h3><b><?php echo $username;?><b></h3></div>
+  <table class="table table-striped">
+  <tbody>
+    <tr>
+      <td valign="top">
+        <div class="c2">
+          Name:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $name ?></td>
+    </tr>
+
+    <tr>
+      <td valign="top">
+        <div class="c2">
+          Batch:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $batch ?></td>
+    </tr>
+
+    <tr>
+      <td valign="top">
+        <div class="c2">
+          Branch:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $branch ?></td>
+    </tr>
+    
+    <tr>
+      <td valign="top">
+        <div class="c2">
+          Phone:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $phone ?></td>
+    </tr>
+
+    <tr>
+      <td valign="top">
+        <div class="c2">
+          Email ID:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $email ?></td>
+    </tr>
+
+    <tr>
+      <td valign="top">
+        <div class="c2">
+          Current Location:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $curr_loc ?></td>
+    </tr>
+
+    <tr>
+      <td valign="top">
+        <div class="c2">
+          Permanent Location:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $perm_loc ?></td>
+    </tr>
+
+    <tr>
+      <td valign="top">
+        <div class="c2">
+          Occupation:
+        </div>
+      </td>
+
+      <td valign="top"><?php echo $job ?></td>
+    </tr>
+  </tbody>
+  </table>
+
+  <div class="panel-footer" align="right">
+    <?php
+    if ($paramed==1)
+    {
+      if($canView!=1)
+      {
+        if(requestStatus($_SESSION['username'], $username)==0)
+        echo '<a href="sendrequest.php?param='.$username.'"><span class="glyphicon glyphicon-user"></span> Send Visibility Request</a>';
+      }
+    }
+    else
+    {      
+      echo '<a href="editprofile.php"><span class="glyphicon glyphicon-pencil"></span> Edit</a>';
+    }
+    ?>
+  </div>
+
+
+  </div>
+  </div>
+</body>
+</html>
