@@ -1,110 +1,126 @@
 <?php
-	session_start();
-	require_once('connection.php');
-	//Array to store validation errors
-	$errmsg_arr = array();
-	//Validation error flag
-	$errflag = false;
-	//Function to sanitize values received from the form. Prevents SQL injection
-	function clean($str) 
-	{
-		$str = @trim($str);
-		if( get_magic_quotes_gpc() ) 
-		{
-			//if magic quotes is running, remove slashes it added
-			$str = stripslashes($str);
-		}
-		return mysql_real_escape_string($str);
-	}
- 
-	//Sanitize the POST values
-	$username = clean($_SESSION['SESS_USERNAME']);
-	$password = clean($_SESSION['SESS_PASSWORD']);
- 	$name 	=clean($_POST['name']);
- 	$batch 	=clean($_POST['batch']);
- 	$branch	=clean($_POST['branch']);
- 	$email 	=clean($_POST['email']);
- 	$phone 	=clean($_POST['phone']);
- 	$curr_loc =clean($_POST['curr_loc']);
- 	$perm_loc 	=clean($_POST['perm_loc']);
- 	$job 	=clean($_POST['job']);
- 	$active = 1;
- 	$_SESSION['SESS_ACTIVE']=1;
-	//Input Validations
-	if($name == '') {
-		$errmsg_arr[] = 'Name cannot be left blank';
-		$errflag = true;
-	}
-	if($batch == '') {
-		$errmsg_arr[] = 'Batch cannot be left blank';
-		$errflag = true;
-	}
-	if($branch == '') {
-		$errmsg_arr[] = 'Branch cannot be left blank';
-		$errflag = true;
-	}
-	if($email == '') {
-		$errmsg_arr[] = 'Email cannot be left blank';
-		$errflag = true;
-	}
-	if($phone == '') {
-		$errmsg_arr[] = 'Phone cannot be left blank';
-		$errflag = true;
-	}
- 
-	//If there are input validations, redirect back to the login form
-	if($errflag) {
-		$_SESSION['EDIT_ERRORS'] = $errmsg_arr;
-		session_write_close();
-		header("location: editprofile.php?remarks=fail");
-		exit();
-	}
- 
-	//Create query
-	$qry="UPDATE $table 
-	SET name='$name', phone='$phone', email='$email', branch='$branch', batch='$batch', curr_loc='$curr_loc', perm_loc='$perm_loc', active='$active', job='$job'
-	WHERE username='$username' AND password='$password'";
-	mysql_query($qry);
-	
-	
+    $mysql = mysql_connect("localhost", "root", "");
+    mysql_select_db("alumni_website", $mysql) or die(mysql_error());
+    
+    define("ADAY", (60*60*24));
+    if ((isset($_POST['month'])) && (isset($_POST['year'])))
+    {
+      $month = $_POST['month'];
+      $year = $_POST['year'];
+    } 
+    else
+    {
+      $nowArray = getdate();
+      $month = $nowArray['mon'];
+      $year = $nowArray['year'];
+    }
+    $start = mktime(12,0,0,$month,1,$year);
+    $firstDayArray = getdate($start);
+?>  
 
-$nameofpic=$_FILES['userFile']['name'];
 
-if(isset($nameofpic)){
-if(!empty($nameofpic)){
-		if ( !isset($_FILES['userFile']['type'])  ) {
-}else if ( !preg_match( '/gif|png|x-png|jpeg/', $_FILES['userFile']['type']) ) {
-   die('<p>Only browser compatible images allowed</p></body></html>');
-// Copy image file into a variable
-} else if ( $_FILES['userFile']['size'] > 1048576 ) {
-   die('<p>Sorry file too large</p></body></html>');
-// Connect to database
-} else if ( !($handle = fopen ($_FILES['userFile']['tmp_name'], "r")) ) {
-   die('<p>Error opening temp file</p></body></html>');
-} else if ( !($image = fread ($handle, filesize($_FILES['userFile']['tmp_name']))) ) {
-   die('<p>Error reading temp file</p></body></html>');
-} else {
-   fclose ($handle);
-   // Commit image to the database
-   $image = mysql_real_escape_string($image);
-   $imagebool=1;
-   $filetype=$_FILES['userFile']['type'];
-   $query="UPDATE $table 
-	SET type='$filetype', img='$image', imgbool='$imagebool'
-	WHERE username='$username' AND password='$password'";
+<html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   if ( !(mysql_query($query,$con)) ) {
-      die('<p>Error writing image to database</p></body></html>');
-   } else {
-   }
+        <!--LINK CSS FILES-->
+        <link rel="stylesheet" type="text/css" href="css/general.css"> 
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+             <title>
+                    <?php echo "Calendar: ".$firstDayArray['month']." ". $firstDayArray['year']; ?>
+             </title>
+      </head>
+
+      <script type="text/javascript">
+             function eventWindow(url) 
+             {
+                   event_popupWin = window.open(url, 'event', 'resizable=yes,scrollbars=yes,toolbar=no,width=400,height=400');
+                   event_popupWin.opener = self;
+             }
+      </script>
+
+      <body>
+
+      <!--NAVIGATION BAR START-->
+      <?php require_once('navbar.php'); ?>
+      <!--NAVIGATION BAR END-->
+
+               <h1>Select a Month/Year</h1>
+                      <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                             <select name="month">
+                             <?php
+                                   $months = Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+                                   for ($x=1; $x<=count($months); $x++)
+                                   {
+                                     echo "<option value=\"$x\"";
+                                     if ($x == $month)
+                                     {
+                                              echo " selected";
+                                     }
+                                     echo ">".$months[$x-1]."</option>";
+                                   }
+                             ?>
+                             </select>
+                             <select name="year">
+                             <?php
+                                  for ($x=2014; $x<=2050; $x++)
+                                  {
+                                    echo "<option";
+                                    if ($x == $year)
+                                    {
+                                         echo " selected";
+                                    }
+                                    echo ">$x</option>";
+                                  }
+                             ?>
+                             </select>
+<input type="submit" name="submit" value="Display calendar">
+</form>
+<br />
+
+
+<?php
+$days = Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
+echo '<table border=\"1\" cellpadding=\"5\" class="panel panel-default"><tr>';
+foreach ($days as $day) {
+    echo "<td style=\"background-color: #CCCCCC; text-align: center; width: 14%\">
+          <strong>$day</strong></td>\n";
+
 }
-	}
-}
+for ($count=0; $count < (6*7); $count++) {
+    $dayArray = getdate($start);
+    if (($count % 7) == 0) {
+        if ($dayArray["mon"] != $month) {
+            break;
+        } else {
+            echo "</tr><tr>\n";
+        }
+    }
+    if ($count < $firstDayArray["wday"] || $dayArray["mon"] != $month) {
+        echo "<td> </td>\n";
+    } else {
+        $chkEvent_sql = "SELECT event_title FROM calendar_events WHERE month(event_start) = '".$month."' AND dayofmonth(event_start) = '".$dayArray["mday"]."' AND year(event_start) = '".$year."' ORDER BY event_start";
+        $chkEvent_res = mysql_query($chkEvent_sql, $mysql) or die(mysql_error($mysql));
+        if (mysql_num_rows($chkEvent_res) > 0) {
+            $event_title = "<br/>";
+            while ($ev = mysql_fetch_array($chkEvent_res)) {
 
-	
-	mysql_close($con);
-	header("location: editprofile.php?remarks=success");
- 
-	//Added security, verifies username and pass once again before updating
-	
+                $event_title .= stripslashes($ev["event_title"])."<br/>";
+            }
+            mysql_free_result($chkEvent_res);
+        } else {
+            $event_title = "";
+        }
+        echo "<td valign=\"top\"><a href=\"event.php?m=".$month."&d=".$dayArray["mday"]."&y=$year\">".$dayArray["mday"]."</a><br/>".$event_title."</td>\n";
+        unset($event_title);
+        $start += ADAY;
+    }
+}
+echo "</tr></table>";
+mysql_close($mysql);
 ?>
+<!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

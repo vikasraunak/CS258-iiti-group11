@@ -1,3 +1,5 @@
+<html>
+<body>
 <?php
 	//Unset the variables stored in session
 	session_start();
@@ -10,3 +12,8 @@
 
 	exit();
 ?>
+
+<li><a href="index.php" title="Return To Website">Admin 
+Login page</a></li>
+</html>
+</body>

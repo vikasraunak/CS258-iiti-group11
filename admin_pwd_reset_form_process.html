@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Password Reset Form</title>
+<link href="_css/site.css" rel="stylesheet">
+<script src="_js/jquery-1.7.2.min.js"></script>
+<script>
+$(document).ready(function() {
+
+}); // end ready
+</script>
+</head>
+<body>
+
+<?php
+
+include("con_config.php") ;
+
+mysqli_query("INSERT INTO pwdreset (name, branch, batch,programme,sex,dob,approval)
+VALUES ('$_POST[name]','$_POST[branch]','$_POST[batch]','$_POST[programme]','$_POST[sex]','$_POST[dob]','0')");
+
+?>
+<div class="wrapper">
+	<div class="header">
+		<p class="logo">IIT<i> </i> Indore <i class="mm">IITI<br>
+			Alumni<br>
+			Network</i></p>
+	</div>
+	<div class="content">
+		<div class="main">
+			<h1>Form Processed</h1>
+			<p>Yay ! You've successfully submitted the form. </br>
+                                                            Admin will verify your request and </br>
+                                                            You will receive an e-mail shortly on your primary mail.
+                                                     </p>
+			
+		</div>
+	</div>
+
+	<div class="footer">
+		<p>Return to <a href="http://www.iiti.ac.in"> IITI Website</a> Or <a href="http://www.iiti.ac.in">IITI Alumni Network</a>.</p>
+	</div>
+</div>
+</body>
+</html>

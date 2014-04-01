@@ -1,49 +1,62 @@
 <?php
-    require_once('connection.php');
-    $branches=array('CSE', 'EE','ME');
-    function clean($str) 
-    {
-      $str = @trim($str);
-      if( get_magic_quotes_gpc() ) 
-      {
-      //if magic quotes is running, remove slashes it added
-        $str = stripslashes($str);
-      }
-      return mysql_real_escape_string($str);
-    }
+        //Start session
+        session_start();        
 
-    $name     ='';
-    $batch    ='';
-    $branch   ='';
-    $email    ='';
-    $phone    ='';
-    $curr_loc ='';
-    $perm_loc ='';
-    $job      ='';
-    $mem_id   ='';
+        if(isset($_SESSION['SESS_USERNAME']) && (trim($_SESSION['SESS_USERNAME']) != '')) 
+        {
+                header("location: home.php");
+                exit();
+        }
+?>
 
-    function fetchProfile($username, $visibility)
-    {
-      //v describes visibility
-      global $table, $name, $batch, $branch, $email, $phone, $curr_loc, $perm_loc, $job, $type, $img, $imgbool, $mem_id;
-      $qry="SELECT * FROM $table WHERE username='$username'";
-      $result=mysql_query($qry);
-      $member   = mysql_fetch_assoc($result);      
-      $name     =$member['name'];
-      $batch    =$member['batch'];
-      $branch   =$member['branch'];
-      $type     =$member['type'];
-      $imgbool  =$member['imgbool'];
-      $img      =$member['img'];
-      $mem_id   =$member['mem_id'];
-      if($visibility==1)
-      {
-        $email    =$member['email'];
-        $phone    =$member['phone'];
-        $curr_loc =$member['curr_loc'];
-        $perm_loc =$member['perm_loc'];
-        $job      =$member['job'];
-      }
-    }
-    
-  ?>
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+  	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  	<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+  	<link rel="stylesheet" type="text/css" href="css/general.css">
+  	<title>IIT Indore Alumni Login</title>
+  	
+</head>
+
+<body>
+<div class="container">
+  <form name="loginform" action="login_exec.php" method="post" id="loginform" class="form-signin">
+
+        <div class="col-lg-4 col-lg-offset-4">
+        <div class="row">
+        <div align="center"><h2 class="form-signin-heading">Alumni Login</h2></div> <br>
+        <?php
+                                if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) 
+                                {
+                                        //print error messages collected during login
+                                        echo '<ul class="list-group">'; //unordered list formatting (ul)
+                                        foreach($_SESSION['ERRMSG_ARR'] as $msg) 
+                                        {
+                                                echo '<li class="list-group-item list-group-item-danger"><span class="glyphicon glyphicon-remove"></span>',$msg,'</li>'; 
+                                        }
+                                        echo '</ul>';
+                                        unset($_SESSION['ERRMSG_ARR']);
+                                }
+        ?>
+
+        <input name="username" type="text" class="form-control" placeholder="Username" required autofocus>
+        <input name="password" type="password" class="form-control" placeholder="Password" required>
+        <br>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+          </div>
+        </div>
+        <br>
+        <div align="center"><a href="forgot.php">Forgot Login Credentials</a></div>
+        <div align="center"><a href="admin_index.php">Administrator Login</a></div>
+        </div>
+  </form>
+</div>
+</body>
+</html>
