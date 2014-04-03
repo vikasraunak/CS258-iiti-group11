@@ -1,16 +1,14 @@
 <html>
 <body>
 <?php
-
 include("admin_connection.php");
 $subject = $_POST ['subject'];
-$emails= $_POST['to'];
+$emails= $_POST['emails'];
 $message = $_POST ['message'];
-
 $to = implode(", ", $emails);
 
 $from = "admin@iiti.alumni.ac.in";
-$headers = "From:" . $from;
+$header = "From:" . $from;
 $message = wordwrap($message, 70, "\r\n");
 
  $retval = mail ($to,$subject,$message,$header);
