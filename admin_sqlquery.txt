@@ -1,0 +1,26 @@
+// For Public Forum and Password reset request Tables Under admin database 
+// Set the admin database , put its  username and password in admin_con_config file 
+
+ CREATE TABLE IF NOT EXISTS 'pforum' ( 
+   pf_id int(10) NOT NULL auto_increment, 
+   pf_name varchar(50) NOT NULL, 
+   pf_title varchar(255) NOT NULL, 
+   pf_ppost varchar(255) NOT NULL, 
+   pf_aud varchar(20) NOT NULL, 
+   pf_username varchar(20) NOT NULL, 
+   pf_date timestamp(14) NOT NULL, 
+   pfb_status int(1) DEFAULT 0 NOT NULL, 
+   PRIMARY KEY (pr_id) 
+ ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
+
+ CREATE TABLE IF NOT EXISTS 'p_reset' ( 
+   pr_id int(10) NOT NULL auto_increment, 
+   pr_name varchar(50) NOT NULL, 
+   pr_email varchar(255) NOT NULL, 
+   pr_dob varchar(20) NOT NULL, 
+   pr_roll varchar(20) NOT NULL, 
+   pr_date timestamp(14) NOT NULL, 
+   gb_status int(1) DEFAULT 0 NOT NULL, 
+   PRIMARY KEY (gb_id) 
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
+ 
