@@ -41,7 +41,7 @@
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		session_write_close();
-		header("location: index.php");
+		header("location: admin_index.php");
 		exit();
 	}
  
@@ -61,7 +61,7 @@
 			$_SESSION['SESS_PASSWORD'] = $member['password'];
 			$_SESSION['SESS_ACTIVE']   = $member['active'];
 			session_write_close();
-			header("location: home.php");
+			header("location: admin_home.php");
 			exit();
 		}
 		else 
@@ -72,7 +72,7 @@
 			if($errflag) {
 				$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 				session_write_close();
-				header("location: index.php");
+				header("location: admin_index.php");
 				exit();
 			}
 		}
