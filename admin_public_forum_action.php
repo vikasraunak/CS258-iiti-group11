@@ -1,4 +1,3 @@
-
 <?php 
 /* 
  Create table in database: 
@@ -14,7 +13,7 @@
    PRIMARY KEY (pr_id) 
  ) 
 */ 
-include "connection.php"; 
+include "admin_connection.php"; 
 
 IF ( (isset($_POST['name'])    AND trim($_POST['name']) <> "") AND (isset($_POST['title'])    AND trim($_POST['title']) <> "") 
  AND (isset($_POST['roll']) AND trim($_POST['roll']) <> "") AND (isset($_POST['ppost']) AND trim($_POST['ppost']) <> "") ): 
