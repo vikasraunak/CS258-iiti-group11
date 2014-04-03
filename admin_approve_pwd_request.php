@@ -1,13 +1,5 @@
 <?php 
-// Change these to your own database settings 
-/* 
-$host = "localhost"; 
-$user = "username"; 
-$pass = "password"; 
-$db = "database"; 
-mysql_connect($host, $user, $pass) OR die ("Could not connect to the server."); 
-mysql_select_db($db) OR die("Could not connect to the database."); 
-*/ 
+
 include "admin_connection.php"; 
 
 
@@ -16,9 +8,9 @@ IF (isset($_POST['submit_ap'])) :
   $arrAPP = array(); 
   FOREACH ($_POST['action'] as $pr_id => $thisACTION) : 
     IF ($thisACTION == "APP") : 
-      $arrAPP[] = $gb_id; 
+      $arrAPP[] = $pr_id; 
     ELSE : 
-      $arrDEL[] = $gb_id; 
+      $arrDEL[] = $pr_id; 
     ENDIF; 
   ENDFOREACH; 
   IF ($arrDEL) : 
@@ -35,7 +27,7 @@ IF (isset($_POST['submit_ap'])) :
   ENDIF; 
 ENDIF; 
 
-$sql  = " SELECT `pr_id`, `pr_name`, `pr_email`, DATE_FORMAT(`gb_date`, '%M %D, %Y at %H:%i') as `pr_date` FROM `p_reset` "; 
+$sql  = " SELECT `pr_id`, `pr_name`, `pr_email`, DATE_FORMAT(`pr_date`, '%M %D, %Y at %H:%i') as `pr_date` FROM `p_reset` "; 
 $sql .= " WHERE `pr_status`=0 ORDER BY `pr_id` "; 
 $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
 
