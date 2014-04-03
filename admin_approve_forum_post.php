@@ -37,7 +37,7 @@ print "<table border=1>";
   print "<tr>"; 
   print "<td>Approve</td>"; 
   print "<td>Remove</td>"; 
-  print "<td>Request</td>"; 
+  print "<td>Forwarded Post</td>"; 
   print "</tr>"; 
 WHILE ($row = mysql_fetch_array($qry)) : 
   print "<tr>"; 
