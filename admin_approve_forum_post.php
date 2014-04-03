@@ -1,13 +1,5 @@
 <?php 
-// Change these to your own database settings 
-/* 
-$host = "localhost"; 
-$user = "username"; 
-$pass = "password"; 
-$db = "database"; 
-mysql_connect($host, $user, $pass) OR die ("Could not connect to the server."); 
-mysql_select_db($db) OR die("Could not connect to the database."); 
-*/ 
+
 include "admin_connection.php"; 
 
 
@@ -35,8 +27,8 @@ IF (isset($_POST['submit_ap'])) :
   ENDIF; 
 ENDIF; 
 
-$sql  = " SELECT `pf_id`, `pf_name`, `pf_roll`, DATE_FORMAT(`gb_date`, '%M %D, %Y at %H:%i') as `pf_date` FROM `pforum` "; 
-$sql .= " WHERE `pr_status`=0 ORDER BY `pr_id` "; 
+$sql  = " SELECT `pf_id`, `pf_name`, `pf_roll`, DATE_FORMAT(`pf_date`, '%M %D, %Y at %H:%i') as `pf_date` FROM `pforum` "; 
+$sql .= " WHERE `pf_status`=0 ORDER BY `pf_id` "; 
 $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
 
 print "List of Requests pending approval:<br>"; 
