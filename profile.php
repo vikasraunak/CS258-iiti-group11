@@ -35,8 +35,10 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
         fetchProfile($username,1);
       }
       else
+      {
         $canView=canView($_SESSION['SESS_USERNAME'],$username);
         fetchProfile($username,$canView);
+      }
     }
     else
     {

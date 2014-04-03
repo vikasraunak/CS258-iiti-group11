@@ -1,3 +1,0 @@
-ADD three new columns : 'img', 'type','imgbool'.
-Just ramember to use BLOB while selecting type of the column.
-Rest details are updated on sqlquery.txt.
