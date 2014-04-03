@@ -8,12 +8,12 @@
 	unset($_SESSION['SESS_PASSWORD']);
 	unset($_SESSION['SESS_ACTIVE']); 
 
-	header('location:index.php');
+	header('location:admin_index.php');
 
 	exit();
 ?>
 
-<li><a href="index.php" title="Return To Website">Admin 
+<li><a href="admin_index.php" title="Return To Website">Admin 
 Login page</a></li>
 </html>
 </body>
