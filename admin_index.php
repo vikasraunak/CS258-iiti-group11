@@ -4,14 +4,14 @@
 
         if(isset($_SESSION['SESS_USERNAME']) && (trim($_SESSION['SESS_USERNAME']) != '')) 
         {
-                header("location: home.php");
+                header("location: admin_home.php");
                 exit();
         }
 ?>
 
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="/css/general.css">
+  <link rel="stylesheet" type="text/css" href="css/general.css">
   <div align="center" class="largetext">IIT Indore<br>Alumni Website</div>
   <title>Admin Login</title>
   <style type="text/css">
