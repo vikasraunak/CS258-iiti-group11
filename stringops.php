@@ -1,8 +1,7 @@
 <?php
 
 require_once('connection.php');	
-$table='alumni';
-$table_vis='vis_requests';
+
 
 function getVisibility($b)
 {
@@ -12,7 +11,7 @@ function getVisibility($b)
     $member   = mysql_fetch_assoc($result);
     $visibility    = $member['visibility'];
 
-    return $visibility;
+    return trim($visibility);
 }
 
 function requestStatus($a, $b)
@@ -20,9 +19,9 @@ function requestStatus($a, $b)
 	//returns 1 if $a has already sent request to $b
 	//returns 0 otherwise
 	global $table, $table_vis;
-	$qry 	  = "SELECT * FROM $table_vis WHERE sent_by='$a' sent_to='$b'";
-    $result	  = mysql_query($qry);
-    $num	  = mysql_num_rows($result);
+	$qry 	  = "SELECT * FROM $table_vis WHERE sent_by='$a' AND sent_to='$b'";
+    $result=mysql_query($qry);
+	$num=mysql_numrows($result);
 
     return $num;
 
@@ -36,11 +35,11 @@ function sendRequest($a, $b)
 
 	if(requestStatus($a, $b)!=1 && canView($a, $b)!=1)
 	{
-    	$qry="INSERT INTO $table_vis(sent_by, sent_to) VALUES  ($a,$b)";
+    	$qry="INSERT INTO $table_vis(sent_by,sent_to) VALUES ('$a','$b')";
 		mysql_query($qry);
     }
 
-}
+}	
 
 
 
@@ -70,6 +69,17 @@ function addVisible($a, $b)
 	SET visibility='$v'
 	WHERE username='$b'";
 	mysql_query($qry);
+
+	removeRequest($a, $b);
+}
+
+function removeRequest($a, $b)
+{
+	//removes request sent by a to b from vis_requests table
+	global $table_vis;
+
+	$qry="DELETE FROM $table_vis WHERE sent_by='$a' AND sent_to='$b'";
+	mysql_query($qry);
 }
 
 function removeVisible($a, $b)
@@ -78,10 +88,14 @@ function removeVisible($a, $b)
 	global $table;
 
 	$v=getVisibility($b);
+	echo $v;
 	$pos=strpos($v, $b);
+	echo $pos;
 	$v1=substr($v, 0, $pos-1);
 	$v2=substr($v, $pos+count($a));
 	$v=$v1.$v2;
+	echo $v;
+	die();
 
 
 	$qry="UPDATE $table 

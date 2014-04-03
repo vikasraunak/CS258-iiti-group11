@@ -52,14 +52,13 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
 
 <div class="col-md-4 col-md-offset-4">
 
-  <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel panel-info">
+  <div class="panel-heading" align="center">
     
     <?php 
       if ($imgbool==1) {
 
     ?>
-    <div align="center"  class="panel-heading">
     <?php
                                         
                                           
@@ -68,21 +67,23 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
                                           } else {
                                                 $row = mysql_fetch_assoc($result);*/
                                               ?>
+                                              
                                               <a href="profile.php">
                                                 <?php
-                                                  echo '<img width="100"  src="getImage.php?id='.$mem_id. '"/>';
+                                                  echo '<img width="100" class="img-circle" src="getImage.php?id='.$mem_id. '"/>';
                                                 ?>
                                               </a>
+                                              
 
   <?php
                                             //}    
                                       //mysql_close($con);
   }
   ?>
+  <h3><b><?php echo $username;?><b></h3>
   </div>
-    <div align="center"><h3><b><?php echo $username;?><b></h3></div>
+
   <table class="table table-striped">
-  <tbody>
     <tr>
       <td valign="top">
         <div class="c2">
@@ -162,7 +163,6 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
 
       <td valign="top"><?php echo $job ?></td>
     </tr>
-  </tbody>
   </table>
 
   <div class="panel-footer" align="right">
@@ -171,8 +171,10 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
     {
       if($canView!=1)
       {
-        if(requestStatus($_SESSION['username'], $username)==0)
-        echo '<a href="sendrequest.php?param='.$username.'"><span class="glyphicon glyphicon-user"></span> Send Visibility Request</a>';
+        if(requestStatus($_SESSION['SESS_USERNAME'], $username)==0)
+          echo '<a href="send_vis_request.php?param='.$username.'"><span class="glyphicon glyphicon-plus-sign"></span> Send Visibility Request</a>';
+        else
+          echo '<span class="glyphicon glyphicon-transfer"></span> Visibility Request Sent';
       }
     }
     else
