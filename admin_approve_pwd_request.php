@@ -38,16 +38,25 @@ print "<table border=1>";
   print "<td>Approve</td>"; 
   print "<td>Remove</td>"; 
   print "<td>Request</td>"; 
+  print "<td>Entered Form Inputs</td>"; 
+  print "<td>Data Stored in Database</td>"; 
   print "</tr>"; 
+
+
 WHILE ($row = mysql_fetch_array($qry)) : 
   print "<tr>"; 
   print "<td><input type='radio' name='action[{$row['pr_id']}]' value='APP'></td>";
   print "<td><input type='radio' name='action[{$row['pr_id']}]' value='DEL'></td>";
   print "<td><strong>" . $row['pr_email'] . "</strong>"; 
   print "<br>&nbsp;&nbsp;(Requested by " . $row['pr_name'] . " on " . $row['pr_date'] . ")</td>"; 
+  print "<td><strong>" ."Username :". $row['pr_roll'] . "</strong>" ."<br>"."<strong>" . "Date Of Birth :". $row['pr_dob'] . "</strong>" . "</td>"; 
+  // These results must be queried from the database alumni : Have to put the search and then print inside the table
+  print "<td><strong>" ."Username :". $row['pr_roll'] . "</strong>" ."<br>"."<strong>" . "Date Of Birth :". $row['pr_dob'] . "</strong>" . "</td>"; 
+
   print "</tr>"; 
 ENDWHILE; 
 print "</table>"; 
 print "<input type='submit' name='submit_ap' value='Process'>"; 
 print "</form>"; 
+mysqli_close($con);
 ?>
