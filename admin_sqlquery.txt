@@ -26,5 +26,3 @@ CREATE TABLE IF NOT EXISTS `pforum`
      pr_date timestamp NOT NULL, 
      pr_status int(1) DEFAULT 0 NOT NULL, 
      PRIMARY KEY (pr_id) ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
-
-//ignore this 1 line comment please
