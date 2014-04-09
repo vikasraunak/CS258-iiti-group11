@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Reaquest sent to institute</title>
-<link href="project/_css/site.css" rel="stylesheet">
-<script src="project/_js/jquery-1.7.2.min.js"></script>
+<link href="css/admin_css/site.css" rel="stylesheet">
+<script src="js/admin_js/jquery-1.7.2.min.js"></script>
 <script>
 $(document).ready(function() {
 
@@ -20,6 +20,9 @@ $(document).ready(function() {
 <?php
 
 require('fetchprofile.php');
+$nam=$_SESSION['SESS_USERNAME'];
+fetchprofile($nam,0);
+
 
  if($_POST['reason'] =='acc'){
  	$reason='REQUEST FOR ACCOMODATION';
@@ -34,7 +37,7 @@ $to=$_POST['emailto'];
 $from=$_POST['email'];
 $sub=$_POST['sub'];
 $msg=$_POST['msg'];
-$msg=$reason."\n".$msg."\n\n"."From:\nname: ".$name."\nbatch: ".$batch."\nroll no.: ".$username;
+$msg=$reason."\n".$msg."\n\n"."From::\nname= ".$name."\nbatch= ".$batch."\nroll no.= ".$nam;
 echo "\n$msg";
 $msg=wordwrap($msg,70);
 

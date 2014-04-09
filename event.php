@@ -17,7 +17,7 @@
                    Show / Add Events
                </h2>
   <?php
-     $mysql = mysql_connect("localhost", "root", "");
+     $mysql = mysql_connect("localhost", "root", "toor");
      mysql_select_db("alumni_website", $mysql) or die('Could not connect to the database.');
      if ($_POST)
      {

@@ -1,5 +1,5 @@
 <?php
-    $mysql = mysql_connect("localhost", "root", "");
+    $mysql = mysql_connect("localhost", "root", "toor");
     mysql_select_db("alumni_website", $mysql) or die(mysql_error());
     
     define("ADAY", (60*60*24));

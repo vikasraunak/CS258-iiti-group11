@@ -4,7 +4,7 @@
 <?php
 $mysql_hostname = "localhost";
 $mysql_user = "root";
-$mysql_password = "";
+$mysql_password = "toor";
 $mysql_database = "alumni_website";
 $table="alumni";
 $table_vis='vis_requests';

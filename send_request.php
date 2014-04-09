@@ -11,7 +11,7 @@ $accom='request for accomodation';
 <head>
 <meta charset="UTF-8">
 <title>Send request to institute</title>
-<link href="project/_css/site.css" rel="stylesheet">
+<link href="css/admin_css/site.css" rel="stylesheet">
 <style>
 
 #pwdreset label.error {
@@ -26,8 +26,8 @@ $accom='request for accomodation';
   border: 1px solid red;
 }
 </style>
-<script src="project/_js/jquery-1.7.2.min.js"></script>
-<script src="project/_js/jquery.validate.min.js"></script>
+<script src="js/admin_js/jquery-1.7.2.min.js"></script>
+<script src="js/admin_js/jquery.validate.min.js"></script>
 <script>
 $(document).ready(function() {
  $('#pwdreset').validate({
