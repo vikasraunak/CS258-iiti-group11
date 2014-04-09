@@ -4,12 +4,7 @@
 <?php
 
 include("connection.php");
-$subject ="Your Account in IITI Alumni Website";
-$message = "Please Login with your Roll and this Password.Update Your Profile as well.";
-$from = "admin@iiti.alumni.ac.in";
-$headers = "From:" . $from;
-$message = wordwrap($message, 70, "\r\n");
-$new = RandomPass(10) ;    
+$batch =$_POST["batch"];
 $x = $_POST["first"];
 $m = $_POST["last"];
 $insert_sql =  "INSERT INTO alumni (username,password)
@@ -24,9 +19,16 @@ function RandomPass($numchar)
 }  
 
 for (; $x<=$m; $x++)
-  {
-     $to = $X."@iiti.ac.in" ;
+  {  $message = "Please Login with your Roll .Update Your Profile as well.";
+     $subject ="Your Account in IITI Alumni Website";
+     $from = "admin@iiti.alumni.ac.in";
+     $to = $batch.$x."@iiti.ac.in" ;
+     $headers = "From:" . $from;
+     $message = wordwrap($message, 70, "\r\n");
+     $new = RandomPass(10) ;
+     $message .= "\n new password is \" $new \". change this password after first login.";
      $retval = mail ($to,$subject,$message,$header);
+ 
    if( $retval == true ) 
  {
       echo "Mail $x sent successfully.";
