@@ -13,14 +13,40 @@ $(document).ready(function() {
 </head>
 <body>
 
+
+
 <?php
+	include "admin_connection.php"; 
 
-include("con_config.php") ;
+if( (isset($_POST['Name'])    AND (trim($_POST['Name']) != "")) 
+ AND (isset($_POST['email']) AND trim($_POST['email']) != "") AND (isset($_POST['roll']) AND trim($_POST['roll']) !="")
+ AND (isset($_POST['dob']) AND trim($_POST['dob']) != "")) {
+  
+    $name    = stripslashes($_POST['Name']); 
+    $email = stripslashes($_POST['email']); 
+    $roll    = stripslashes($_POST['roll']); 
+    $dob = stripslashes($_POST['dob']); 
 
-mysqli_query("INSERT INTO pwdreset (name, branch, batch,programme,sex,dob,approval)
-VALUES ('$_POST[name]','$_POST[branch]','$_POST[batch]','$_POST[programme]','$_POST[sex]','$_POST[dob]','0')");
+  $sql  = " INSERT INTO `p_reset` "; 
+  $sql .= " SET `pr_name` = '$name', "; 
+  $sql .= "     `pr_email`= '$email' ,"; 
+  $sql .= "     `pr_roll` = '$roll', "; 
+  $sql .= "     `pr_dob`  = '$dob' ";
+  
+  $resultt=mysql_query($sql) or die('could not update query');
+  if($resultt!=1){
+    echo 'failure';
+    die('could not upload into database');
+  }
 
+}
+else{
+  die('enter all the fields correctly');
+}
 ?>
+
+
+
 <div class="wrapper">
 	<div class="header">
 		<p class="logo">IIT<i> </i> Indore <i class="mm">IITI<br>

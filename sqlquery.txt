@@ -33,9 +33,9 @@ event_start  -  DATETIME
 event_invite_batch - INT(5)
 event_invite_dept - VARCHAR(30)
 
-/*for image, add another column manuallly.  name=img , type=blob ,  NULL ,(leave rest unchanged)*/
-/*add a separate db for admin, add a table for pwd_reset, public posts */
 
-ADD three new columns : 'img', 'type','imgbool'.
-Just ramember to use BLOB while selecting type of the column.
-Rest details are updated on sqlquery.txt.
+/*for profile picture,  run the following query.. */
+
+ALTER TABLE  `alumni` ADD  `img` BLOB NULL;
+
+/*add a separate db for admin, add a table for pwd_reset, public posts */
