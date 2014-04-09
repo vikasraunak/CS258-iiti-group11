@@ -1,5 +1,6 @@
 <html>
 <body>
+<link href="css/admin_css/site.css" rel="stylesheet">
 <?php
 include("admin_connection.php");
 $subject = $_POST ['subject'];
