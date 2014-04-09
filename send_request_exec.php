@@ -38,7 +38,7 @@ $from=$_POST['email'];
 $sub=$_POST['sub'];
 $msg=$_POST['msg'];
 $msg=$reason."\n".$msg."\n\n"."From::\nname= ".$name."\nbatch= ".$batch."\nroll no.= ".$nam;
-echo "\n$msg";
+//echo "\n$msg";
 $msg=wordwrap($msg,70);
 
 mail($to,$sub,$msg,"From: $from\n");
