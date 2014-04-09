@@ -34,7 +34,7 @@ print "<table border=1>";
   print "<tr>"; 
   print "<td>Approve</td>"; 
   print "<td>Remove</td>"; 
-  print "<td>Request</td>"; 
+  print "<td>Request By</td>"; 
   print "<td>Entered Form Inputs</td>"; 
   print "<td>Data Stored in Database</td>"; 
   print "</tr>"; 
