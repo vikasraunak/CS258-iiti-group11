@@ -54,6 +54,8 @@
         </div>
         <br>
         <div align="center"><a href="forgot.php">Forgot Login Credentials</a></div>
+        <br>
+        <div align="center"><a href="admin_index.php">Administrator Login</a></div>
         </div>
   </form>
 </div>
