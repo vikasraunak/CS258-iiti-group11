@@ -16,18 +16,16 @@ IF (isset($_POST['submit_ap'])) :
   IF ($arrDEL) : 
     $sql_in = implode(",", $arrDEL); 
     $sql  = " DELETE FROM `pforum` WHERE `pf_id` IN ($sql_in) "; 
-    print $sql . "<hr>"; 
     $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
   ENDIF; 
   IF ($arrAPP) : 
     $sql_in = implode(",", $arrAPP); 
     $sql  = " UPDATE `pforum` SET `pf_status`=1 WHERE `pf_id` IN ($sql_in) "; 
-    print $sql . "<hr>"; 
     $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
   ENDIF; 
 ENDIF; 
 
-$sql  = " SELECT `pf_id`, `pf_name`, `pf_roll`, DATE_FORMAT(`pf_date`, '%M %D, %Y at %H:%i') as `pf_date` FROM `pforum` "; 
+$sql  = " SELECT `pf_id`, `pf_name`,`pf_title`,`pf_ppost`, `pf_username`, DATE_FORMAT(`pf_date`, '%M %D, %Y at %H:%i') as `pf_date` FROM `pforum` "; 
 $sql .= " WHERE `pf_status`=0 ORDER BY `pf_id` "; 
 $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
 
@@ -37,14 +35,14 @@ print "<table border=1>";
   print "<tr>"; 
   print "<td>Approve</td>"; 
   print "<td>Remove</td>"; 
-  print "<td>Forwarded Post</td>"; 
+  print "<td width=1080>Forwarded Post</td>"; 
   print "</tr>"; 
 WHILE ($row = mysql_fetch_array($qry)) : 
   print "<tr>"; 
-  print "<td><input type='radio' name='action[{$row['pr_id']}]' value='APP'></td>";
-  print "<td><input type='radio' name='action[{$row['pr_id']}]' value='DEL'></td>";
-  print "<td><strong>" . $row['pf_title'] . "</strong>"; 
-  print "<textarea>".$row['pf_ppost']."</textarea>";
+  print "<td><input type='radio' name='action[{$row['pf_id']}]' value='APP'></td>";
+  print "<td><input type='radio' name='action[{$row['pf_id']}]' value='DEL'></td>";
+  print "<td><strong>Title :" . $row['pf_title'] . "</strong>"; 
+  print "<br>". "<strong>Main Post :</strong><br>".$row['pf_ppost'];
   print "<br>&nbsp;&nbsp;(Submitted by " . $row['pf_name'] . " on " . $row['pf_date'] . ")</td>"; 
   print "</tr>"; 
 ENDWHILE; 

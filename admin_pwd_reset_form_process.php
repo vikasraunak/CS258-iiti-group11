@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 
 <?php
-	include "admin_connection.php"; 
+	include "connection.php"; 
 
 if( (isset($_POST['Name'])    AND (trim($_POST['Name']) != "")) 
  AND (isset($_POST['email']) AND trim($_POST['email']) != "") AND (isset($_POST['roll']) AND trim($_POST['roll']) !="")
@@ -26,12 +26,14 @@ if( (isset($_POST['Name'])    AND (trim($_POST['Name']) != ""))
     $email = stripslashes($_POST['email']); 
     $roll    = stripslashes($_POST['roll']); 
     $dob = stripslashes($_POST['dob']); 
+    $branch=stripslashes($_POST['branch']);
 
   $sql  = " INSERT INTO `p_reset` "; 
   $sql .= " SET `pr_name` = '$name', "; 
   $sql .= "     `pr_email`= '$email' ,"; 
   $sql .= "     `pr_roll` = '$roll', "; 
   $sql .= "     `pr_dob`  = '$dob' ";
+  $sql .= "     `pr_branch`  = '$branch' ";
   
   $resultt=mysql_query($sql) or die('could not update query');
   if($resultt!=1){

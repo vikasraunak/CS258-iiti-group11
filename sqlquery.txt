@@ -39,3 +39,7 @@ event_invite_dept - VARCHAR(30)
 ALTER TABLE  `alumni` ADD  `img` BLOB NULL;
 
 /*add a separate db for admin, add a table for pwd_reset, public posts */
+
+ALTER TABLE  `p_reset` ADD  `pr_branch` VARCHAR( 10 ) NULL ;
+
+ALTER TABLE  `alumni` ADD  `dob` DATE NULL ;
