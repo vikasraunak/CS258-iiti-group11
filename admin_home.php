@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Admin Panel</title>
 <link href="css/admin_css/site.css" rel="stylesheet">
+<script src="js/admin_js/jquery-1.7.2.min.js"></script>
+<script src="js/admin_js/site.js"></script>
 <style>
 .tabbedPanels {
 	width: 100%;
@@ -146,5 +148,23 @@ $(document).ready(function() {
 	</div>
 	
 </div>
+  <div id="resources">
+    <p class="open">+</p>
+    <h2>Quick Functions</h2>
+    <ul class="nav">
+      <li><a href="admin_approve_pwd_requests.html">Check New Password Requests</a></li>
+      <li><a href="admin_create_public_post.html">Create A public Post</a></li>
+      <li><a href="admin_">Events</a></li>
+      <li><a href="admin_.html">ZZZ</a></li>
+      <li><a href="admin_.html">YYY</a></li>
+      <li><a href="admin_.html">XXX</a></li>
+    </ul>
+    <h2>Links to Pages</h2>
+    <ul class="nav">
+      <li><a href="http://www.iiti.ac.in">IITI Website</a></li>
+      <li><a href="http://www.iiti.alumni.ac.in/">IITI Alumni Website</a></li>
+      <li><a href="http://admin_display_public_forum.php/">Public Forum</a></li>
+    </ul>
+  </div>
 </body>
 </html>
