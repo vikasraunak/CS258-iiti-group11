@@ -3,17 +3,17 @@
 
 <?php
 
-include("admin_con_config.php");
+include("connection.php");
 $subject ="Your Account in IITI Alumni Website";
-$emails= $_POST['email'];
-$message = "Please Login with your Roll and this Password.Update Your Profile as well.
-                   
-";
-$ new = RandomPass(10) ;    
-$insert_sql = "INSERT INTO alumni (name,branch,batch,email,........ " ;
-                      -------------------------- ------- -------- // New password new  and roll number 
-
-
+$message = "Please Login with your Roll and this Password.Update Your Profile as well.";
+$from = "admin@iiti.alumni.ac.in";
+$headers = "From:" . $from;
+$message = wordwrap($message, 70, "\r\n");
+$new = RandomPass(10) ;    
+$x = $_POST["first"];
+$m = $_POST["last"];
+$insert_sql =  "INSERT INTO alumni (username,password)
+VALUES ($roll,$new)"; 
 function RandomPass($numchar)  
 {  
     $word = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,r,s,t,u,v,w,x,y,z,1,2,3,4,5,6,7,8,9,0";  
@@ -23,19 +23,20 @@ function RandomPass($numchar)
     return substr($newstring, 0, $numchar);  
 }  
 
-$from = "admin@iiti.alumni.ac.in";
-$headers = "From:" . $from;
-$message = wordwrap($message, 70, "\r\n");
-
- $retval = mail ($to,$subject,$message,$header);
+for (; $x<=$m; $x++)
+  {
+     $to = $X."@iiti.ac.in" ;
+     $retval = mail ($to,$subject,$message,$header);
    if( $retval == true ) 
  {
-      echo "Mail sent successfully.";
+      echo "Mail $x sent successfully.";
    }
    else
    {
-      echo "Mail could not be sent.";
+      echo "Mail $x could not be sent.";
    }
+  }
+
 
 ?>
 </body>
