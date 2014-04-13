@@ -1,7 +1,7 @@
 <?php 
 
 include "admin_connection.php"; 
-
+include "admin_auth.php";
 
 IF (isset($_POST['submit_ap'])) : 
   $arrDEL = array(); 

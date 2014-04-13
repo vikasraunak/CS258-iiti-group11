@@ -1,27 +1,19 @@
 <html>
 <body>
-<link href="css/admin_css/site.css" rel="stylesheet">
-<?php
-include("admin_connection.php");
-$subject = $_POST ['subject'];
-$emails= $_POST['emails'];
-$message = $_POST ['message'];
-$to = implode(", ", $emails);
-
-$from = "admin@iiti.alumni.ac.in";
-$header = "From:" . $from;
-$message = wordwrap($message, 70, "\r\n");
-
- $retval = mail ($to,$subject,$message,$header);
-   if( $retval == true ) 
- {
-      echo "Mail sent successfully.";
-   }
-   else
-   {
-      echo "Mail could not be sent.";
-   }
-
+<?php 
+require_once('admin_auth.php');
 ?>
+<link href="css/admin_css/site.css" rel="stylesheet">
+
+
+<form action="admin_send_mail_exec.php" method="post">
+ Subject: <input type="text" name="subject"><br>
+ <p>Recipient(s)<BR></p>
+<TEXTAREA Name="emails[]" rows="2" cols="50"></TEXTAREA>
+<p>Your Message<BR></p>
+<TEXTAREA Name="message" rows="20" cols="100"></TEXTAREA>
+<input type="submit" value="Submit">
+</form>
+
 </body>
 </html>

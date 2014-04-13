@@ -1,8 +1,7 @@
 <?php
         //Start session
-        session_start();        
 
-        if(isset($_SESSION['SESS_USERNAME']) && (trim($_SESSION['SESS_USERNAME']) != '')) 
+        if(isset($_SESSION['SESS_USERNAME_ADMIN']) && (trim($_SESSION['SESS_USERNAME_ADMIN']) != '')) 
         {
                 header("location: admin_home.php");
                 exit();

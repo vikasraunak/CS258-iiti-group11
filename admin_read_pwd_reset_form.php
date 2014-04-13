@@ -1,6 +1,6 @@
 <?php 
 include "connection.php"; 
-
+require_once('admin_auth.php');
 if( (isset($_POST['Name'])    AND (trim($_POST['Name']) != "")) 
  AND (isset($_POST['email']) AND trim($_POST['email']) != "") AND (isset($_POST['roll']) AND trim($_POST['roll']) !="")
  AND (isset($_POST['dob']) AND trim($_POST['dob']) != "")) {

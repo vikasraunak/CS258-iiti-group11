@@ -2,6 +2,7 @@
 
 include "fetchprofile.php"; 
 
+include "admin_auth.php";
 
 function RandomPass($numchar)  
 {  

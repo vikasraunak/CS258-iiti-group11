@@ -4,8 +4,8 @@
 	//Unset the variables stored in session
 	session_start();
 
-	unset($_SESSION['SESS_USERNAME']);
-	unset($_SESSION['SESS_PASSWORD']);
+	unset($_SESSION['SESS_USERNAME_ADMIN']);
+	unset($_SESSION['SESS_PASSWORD_ADMIN']);
 	unset($_SESSION['SESS_ACTIVE']); 
 
 	header('location:admin_index.php');

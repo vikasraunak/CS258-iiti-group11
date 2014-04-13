@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php 
+	require_once('admin_auth.php');
+?>
 <html>
 <head>
 <meta charset="UTF-8">

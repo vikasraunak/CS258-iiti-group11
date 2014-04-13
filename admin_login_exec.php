@@ -57,8 +57,8 @@
 			//Login Successful
 			session_regenerate_id();
 			$member = mysql_fetch_assoc($result);
-			$_SESSION['SESS_USERNAME'] = $member['username'];
-			$_SESSION['SESS_PASSWORD'] = $member['password'];
+			$_SESSION['SESS_USERNAME_ADMIN'] = $member['username'];
+			$_SESSION['SESS_PASSWORD_ADMIN'] = $member['password'];
 			$_SESSION['SESS_ACTIVE']   = $member['active'];
 			session_write_close();
 			header("location: admin_home.php");
