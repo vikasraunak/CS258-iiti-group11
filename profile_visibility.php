@@ -82,12 +82,12 @@ $result=mysql_query($qry);
 			require_once('stringops.php');
 			$friends = explode(" ", getVisibility($_SESSION['SESS_USERNAME']));
 			$num 	 = count($friends);
-
-			if ($num==0) 
+ 
+			if ($num==0 || $friends[0]=='' ||$friends[0]==' ') 
 			{
 				echo '<div align="center" class="alert alert-warning"><span class="glyphicon glyphicon-ban-circle"></span> None</div>';
 			}
-
+			else{
 			$i=0;
 			while ($i < $num)
 			{
@@ -107,7 +107,7 @@ $result=mysql_query($qry);
       
       	<?php
 				$i++;
-			}
+			}}
 		?>
 	</table
 	</div>

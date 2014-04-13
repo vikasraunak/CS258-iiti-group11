@@ -16,7 +16,7 @@ if(count($_GET)==2 && requestStatus($_GET['sent_by'], $_SESSION['SESS_USERNAME']
 
 }
 
-if(count($_GET)==2 && canView($_GET['sent_by'], $_SESSION['SESS_USERNAME'])==1)
+if(count($_GET)==2 && $_GET['f']==2 && canView($_GET['sent_by'], $_SESSION['SESS_USERNAME'])==1)
 	removeVisible($_GET['sent_by'], $_SESSION['SESS_USERNAME']);
 
 header('location: profile_visibility.php');

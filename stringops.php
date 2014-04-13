@@ -14,6 +14,20 @@ function getVisibility($b)
     return trim($visibility);
 }
 
+function fromSameBatch($a, $b)
+{
+	//returns 1 if a and b are from same batch
+	//0 otherwise
+	global $table;
+	$qry 	  = "SELECT batch FROM $table WHERE username='$a' or username='$b'";
+    $result	  = mysql_query($qry);
+    $member   = mysql_fetch_assoc($result);
+    if(mysql_result($result, 0, 'batch')==mysql_result($result, 1, 'batch'))
+    	return 1;
+    else 
+    	return 0;
+}
+
 function requestStatus($a, $b)
 {
 	//returns 1 if $a has already sent request to $b
@@ -88,16 +102,8 @@ function removeVisible($a, $b)
 	global $table;
 
 	$v=getVisibility($b);
-	echo $v;
-	$pos=strpos($v, $b);
-	echo $pos;
-	$v1=substr($v, 0, $pos-1);
-	$v2=substr($v, $pos+count($a));
-	$v=$v1.$v2;
-	echo $v;
-	die();
-
-
+	$pos=strpos($v, $a);
+	$v=substr_replace($v, '', $pos, strlen($a)+1);
 	$qry="UPDATE $table 
 	SET visibility='$v'
 	WHERE username='$b'";
