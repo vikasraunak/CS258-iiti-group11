@@ -36,8 +36,16 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
       }
       else
       {
-        $canView=canView($_SESSION['SESS_USERNAME'],$username);
-        fetchProfile($username,$canView);
+        if (fromSameBatch($_SESSION['SESS_USERNAME'],$username)==1) 
+        {
+          fetchProfile($username,1);
+          $canView=1;
+        }
+        else
+        {
+          $canView=canView($_SESSION['SESS_USERNAME'],$username);
+          fetchProfile($username,$canView);
+        }
       }
     }
     else
@@ -189,5 +197,7 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
 
   </div>
   </div>
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

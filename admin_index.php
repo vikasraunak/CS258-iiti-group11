@@ -10,16 +10,21 @@
 
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/general.css">
-  <div align="center" class="largetext">IIT Indore<br>Alumni Website</div>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--LINK CSS FILES-->
+  <link rel="stylesheet" type="text/css" href="css/general.css"> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
   <title>Admin Login</title>
-  <style type="text/css">
-input.c2 {font-family:'Trebuchet MS';}
-  div.c1 {text-align: right}
-  </style>
+ 
 </head>
 
 <body>
+
+<?php require_once('navbar_main.php');?>
+
   <form name="loginform" action="admin_login_exec.php" method="post" id="loginform">
     <table width="309" border="0" align="center" cellpadding="2" cellspacing="5">
       <tr>
@@ -68,5 +73,7 @@ input.c2 {font-family:'Trebuchet MS';}
       </tr>
     </table>
   </form>
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<?php
+  require_once('auth.php'); ?>
+
 <html>
      <head>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,19 +9,22 @@
         <link rel="stylesheet" type="text/css" href="css/general.css"> 
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
           <title>
-                 Show / Add Events
+                 View or Create Event
           </title>
      </head>
           <body>
+          <div class="container">
+          <div class="row">
+          <div class="col-md-6">
+          <div class="panel panel-info">
+          <div class="panel-heading"><h2>Events on this date</h2></div>
+          <div class="panel-body">
           <!--NAVIGATION BAR START-->
       <?php require_once('navbar.php'); ?>
       <!--NAVIGATION BAR END-->
-               <h2>
-                   Show / Add Events
-               </h2>
+
   <?php
-     $mysql = mysql_connect("localhost", "root", "toor");
-     mysql_select_db("alumni_website", $mysql) or die('Could not connect to the database.');
+     require('connection.php');
      if ($_POST)
      {
        $m = $_POST['m'];
@@ -27,7 +33,7 @@
        $inv_batch = $_POST['event_invite_batch'];
        $invite_dept=implode(',',$_POST['event_invite_dept']);
        $event_date = $y."-".$m."-".$d." ".$_POST["event_time_hh"].":".$_POST["event_time_mm"].":00";
-       $insEvent_sql = "INSERT INTO calendar_events (event_title,event_venue, event_shortdesc, event_start,event_invite_batch,event_invite_dept) VALUES('".$_POST["event_title"]."','".$_POST["event_venue"]."','".$_POST["event_shortdesc"]."', '$event_date','".$_POST["event_invite_batch"]."','$invite_dept')";
+       $insEvent_sql = "INSERT INTO $table_cal (event_title,event_venue, event_shortdesc, event_start,event_invite_batch,event_invite_dept) VALUES('".$_POST["event_title"]."','".$_POST["event_venue"]."','".$_POST["event_shortdesc"]."', '$event_date','".$_POST["event_invite_batch"]."','$invite_dept')";
        $insEvent_res = mysql_query($insEvent_sql) or die('Query failed.');
      }
      else
@@ -37,7 +43,7 @@
        $y = $_GET['y'];
      }
 
-     $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc, date_format(event_start, '%l:%i %p') as fmt_date FROM calendar_events WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
+     $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc, date_format(event_start, '%l:%i %p') as fmt_date FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
      $getEvent_res = mysql_query($getEvent_sql) or die('Query failed.');
      if (mysql_num_rows($getEvent_res) > 0)
      {
@@ -62,11 +68,18 @@
      {
           echo "<p><strong>$d/$m/$y 's Events:</strong></p>$event_txt<hr/>";
      }
+     ?>
+     </div>
+     </div>
+     </div>
+     <div class="col-md-6">
+     <div class="panel panel-info">
+     <div class="panel-heading">
+      <h2>Create event on this date</h2>
+     </div>
+     <div class="panel-body">
 
-         echo "<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">
-               <p><strong>Add Event:</strong><br/>
-                         Complete the form below then press the submit button when you are done.
-               </p>
+     <?php    echo "<form method=\"post\" action=\"".$_SERVER['PHP_SELF']."\">
                <p><strong>Event Title:</strong><br/>
                           <input type=\"text\" name=\"event_title\" size=\"25\" maxlength=\"30\"/>
                </p>
@@ -168,5 +181,10 @@ while($detail_row = mysql_fetch_array($getDetail_res2))
    <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
   <script src="//code.jquery.com/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
  </body>
 </html>

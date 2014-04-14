@@ -4,7 +4,7 @@ $filepath=$_SERVER['PHP_SELF'];
 
 echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
   echo'<ul class="nav navbar-nav">  ';
-    echo'<li><a href="http://www.iiti.ac.in" class="navbar-brand"><img width="25px" height="25px" src="logo.png"></a></li>';
+    echo'<li><a href="index.php" class="navbar-brand"><img width="25px" height="25px" src="logo.png"></a></li>';
     
     if ($filepath=='/home.php') 
     	echo '<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>';
@@ -28,7 +28,7 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
 		echo '<li><a href="search.php"><span class="glyphicon glyphicon-search"></span> Search Database</a></li>';
 
     if ($filepath=='/events.php'||$filepath=='/event.php') 
-        echo '<li class="active"><a href="#"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>';
+        echo '<li class="active"><a href="events.php"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>';
     else
         echo '<li><a href="events.php"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>';
 

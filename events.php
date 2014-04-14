@@ -1,7 +1,6 @@
 <?php
-    $mysql = mysql_connect("localhost", "root", "toor");
-    mysql_select_db("alumni_website", $mysql) or die(mysql_error());
-    
+    require('connection.php');
+    require_once('auth.php');
     define("ADAY", (60*60*24));
     if ((isset($_POST['month'])) && (isset($_POST['year'])))
     {
@@ -44,15 +43,24 @@
       <!--NAVIGATION BAR START-->
       <?php require_once('navbar.php'); ?>
       <!--NAVIGATION BAR END-->
+            <div class="container" align="center">
+            <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-info">
 
-               <h1>Select a Month/Year</h1>
-                      <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                             <select name="month">
+              <div class="panel-heading">
+              <h2>View and Create Events</h2>
+              <p>Select a month and year to view events scheduled. Click on a day to create an event.</p>
+              </div>
+
+              <div class="panel-body">
+              <form method="post" class="form-inline" role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+              
+                             <select class="form-control" name="month">
                              <?php
                                    $months = Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
                                    for ($x=1; $x<=count($months); $x++)
                                    {
-                                     echo "<option value=\"$x\"";
+                                     echo '<option class="form-control" value="'.$x.'"';
                                      if ($x == $month)
                                      {
                                               echo " selected";
@@ -61,11 +69,12 @@
                                    }
                              ?>
                              </select>
-                             <select name="year">
+
+                             <select class="form-control" name="year">
                              <?php
                                   for ($x=2014; $x<=2050; $x++)
                                   {
-                                    echo "<option";
+                                    echo '<option class="form-control"';
                                     if ($x == $year)
                                     {
                                          echo " selected";
@@ -74,16 +83,15 @@
                                   }
                              ?>
                              </select>
-<input type="submit" name="submit" value="Display calendar">
+
+                             <button type="submit" type="submit" class="btn btn-primary" name="submit">Display Calendar</button>
 </form>
-<br />
-
-
+<br>
 <?php
 $days = Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
-echo '<table border=\"1\" cellpadding=\"5\" class="panel panel-default"><tr>';
+echo '<table  class="table table-bordered table-condensed table-hover"><tr>';
 foreach ($days as $day) {
-    echo "<td style=\"background-color: #CCCCCC; text-align: center; width: 14%\">
+    echo "<td style=\"background-color: #99CCFF; text-align: center; width: 14%\">
           <strong>$day</strong></td>\n";
 
 }
@@ -99,8 +107,8 @@ for ($count=0; $count < (6*7); $count++) {
     if ($count < $firstDayArray["wday"] || $dayArray["mon"] != $month) {
         echo "<td> </td>\n";
     } else {
-        $chkEvent_sql = "SELECT event_title FROM calendar_events WHERE month(event_start) = '".$month."' AND dayofmonth(event_start) = '".$dayArray["mday"]."' AND year(event_start) = '".$year."' ORDER BY event_start";
-        $chkEvent_res = mysql_query($chkEvent_sql, $mysql) or die(mysql_error($mysql));
+        $chkEvent_sql = "SELECT event_title FROM $table_cal WHERE month(event_start) = '".$month."' AND dayofmonth(event_start) = '".$dayArray["mday"]."' AND year(event_start) = '".$year."' ORDER BY event_start";
+        $chkEvent_res = mysql_query($chkEvent_sql, $con) or die(mysql_error($con));
         if (mysql_num_rows($chkEvent_res) > 0) {
             $event_title = "<br/>";
             while ($ev = mysql_fetch_array($chkEvent_res)) {
@@ -116,8 +124,8 @@ for ($count=0; $count < (6*7); $count++) {
         $start += ADAY;
     }
 }
-echo "</tr></table>";
-mysql_close($mysql);
+echo "</tr></table></div></div></div></div> ";
+mysql_close($con);
 ?>
 <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
   <script src="//code.jquery.com/jquery.js"></script>

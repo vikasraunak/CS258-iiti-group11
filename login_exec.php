@@ -4,7 +4,6 @@
  
 	//Include database connection details
 	require_once('connection.php');
- 	$table='alumni';
 	//Array to store validation errors
 	$errmsg_arr = array();
  	
@@ -41,7 +40,7 @@
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		session_write_close();
-		header("location: index.php");
+		header("location: alumni_login.php");
 		exit();
 	}
  
@@ -72,7 +71,7 @@
 			if($errflag) {
 				$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 				session_write_close();
-				header("location: index.php");
+				header("location: alumni_login.php");
 				exit();
 			}
 		}

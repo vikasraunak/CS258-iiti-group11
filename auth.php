@@ -4,7 +4,7 @@
 	if(!isset($_SESSION['SESS_USERNAME']) || (trim($_SESSION['SESS_USERNAME']) == '')) 
 	{
 		//check if logged in or not
-		header("location: index.php");
+		header("location: alumni_login.php");
 		exit();
 	}
 	else

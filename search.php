@@ -58,7 +58,7 @@
   		<h3><span class="glyphicon glyphicon-search"></span> Search Results</h3>
   	</div>
   	<div class="panel-body">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th>Index No.</th>
