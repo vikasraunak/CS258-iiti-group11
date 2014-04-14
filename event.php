@@ -30,11 +30,21 @@
        $m = $_POST['m'];
        $d = $_POST['d'];
        $y = $_POST['y'];
+       $batchlower = $_POST['batch_lower'];
+       $batchupper = $_POST['batch_upper'];
        $inv_batch = $_POST['event_invite_batch'];
        $invite_dept=implode(',',$_POST['event_invite_dept']);
        $event_date = $y."-".$m."-".$d." ".$_POST["event_time_hh"].":".$_POST["event_time_mm"].":00";
-       $insEvent_sql = "INSERT INTO $table_cal (event_title,event_venue, event_shortdesc, event_start,event_invite_batch,event_invite_dept) VALUES('".$_POST["event_title"]."','".$_POST["event_venue"]."','".$_POST["event_shortdesc"]."', '$event_date','".$_POST["event_invite_batch"]."','$invite_dept')";
-       $insEvent_res = mysql_query($insEvent_sql) or die('Query failed.');
+       if($batchlower >= $batchupper)
+       {
+         echo "Choose the appropriate batch range";
+       }
+       else
+       {
+           $insEvent_sql = "INSERT INTO calendar_events (event_title,event_venue, event_shortdesc, event_start,event_invite_batch,event_invite_dept,batch_lower,batch_upper) VALUES('".$_POST["event_title"]."','".$_POST["event_venue"]."','".$_POST["event_shortdesc"]."', '$event_date','".$_POST["event_invite_batch"]."','$invite_dept','$batchlower',$batchupper)";
+           $insEvent_res = mysql_query($insEvent_sql) or die('Query failed.');
+       }
+
      }
      else
      {
@@ -43,7 +53,7 @@
        $y = $_GET['y'];
      }
 
-     $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc, date_format(event_start, '%l:%i %p') as fmt_date FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
+     $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc, date_format(event_start, '%l:%i %p') as fmt_date FROM calendar_events WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
      $getEvent_res = mysql_query($getEvent_sql) or die('Query failed.');
      if (mysql_num_rows($getEvent_res) > 0)
      {
@@ -89,12 +99,29 @@
                <p><strong>Event Description:<br/></strong<br/>
                           <input type=\"text\" name=\"event_shortdesc\" size=\"25\" maxlength=\"300\"/>
                </p>
-               <p><strong>Invitees:</br></strong>
-                  <strong>Batch:&nbsp;&nbsp;&nbsp;</strong>
+               <p><strong>Invitees:</br></strong><p><em>Choose either a range of batches or type in a single batch to be invited. </em> </p>
+                  <select name = \"batch_lower\">
+                  " ;
+                     for ($x=2013; $x<2050; $x++)
+                                  {
+                                    echo "<option value=\"$x\">$x</option>";
+                                  }
+                      echo
+                        "
+                        </select>     to
+                  <select name = \"batch_upper\">";
+                       for ($y=2014; $y<=2050; $y++)
+                                  {
+                                        echo "<option value =\"$y\">$y</option>";
+                                  }
+
+                       echo "
+                       </select>
+                  <strong></br></br>Batch:&nbsp;&nbsp;&nbsp;</strong>
                           <input type=\"text\" name=\"event_invite_batch\" size=\"10\" maxlength=\"5\"/> </br>
-                  <em><small>CSE</small></em><input type=\"checkbox\" name=\"event_invite_dept[]\" value=\"CSE\" />
-                  <em><small>&nbsp;&nbsp;&nbsp;EE</small></em><input type=\"checkbox\" name=\"event_invite_dept[]\" value=\"EE\" />
-                  <em><small>&nbsp;&nbsp;&nbsp;ME</small></em><input type=\"checkbox\" name=\"event_invite_dept[]\" value=\"ME\" /> </br>
+                  <em><small>CSE&nbsp;</small></em><input type=\"checkbox\" name=\"event_invite_dept[]\" value=\"CSE\" />
+                  <em><small>&nbsp;&nbsp;&nbsp;EE&nbsp;</small></em><input type=\"checkbox\" name=\"event_invite_dept[]\" value=\"EE\" />
+                  <em><small>&nbsp;&nbsp;&nbsp;ME&nbsp;</small></em><input type=\"checkbox\" name=\"event_invite_dept[]\" value=\"ME\" /> </br>
                </p>
 
                <p><strong>Event Time (hh:mm):</strong><br/>
@@ -122,9 +149,12 @@
  {
  $inv_batch = $_POST['event_invite_batch'];
  $invite_dept2 = explode("," , $invite_dept);
- 
- $count = count($invite_dept2);
+ $batch_lower = $_POST["batch_lower"];
+ $batch_upper = $_POST["batch_upper"];
 
+ $count = count($invite_dept2);
+ if(isset($inv_batch) && !empty($inv_batch))
+ {
  $getDetail_sql0 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[0]."' ORDER by name";
  $getDetail_res0 = mysql_query($getDetail_sql0) or die('Query failed.');
 
@@ -141,9 +171,10 @@ while($detail_row = mysql_fetch_array($getDetail_res0))
   }
 }
 
-if($count>1) {
-$getDetail_sql1 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[1]."' ORDER by name";
-$getDetail_res1 = mysql_query($getDetail_sql1) or die('Query failed.');
+if($count>1)
+{
+   $getDetail_sql1 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[1]."' ORDER by name";
+   $getDetail_res1 = mysql_query($getDetail_sql1) or die('Query failed.');
 
 if (mysql_num_rows($getDetail_res1) > 0)
  {
@@ -158,14 +189,15 @@ while($detail_row = mysql_fetch_array($getDetail_res1))
  }
 }
 
-if($count>2) {
-$getDetail_sql2 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[2]."' ORDER by name";
- $getDetail_res2 = mysql_query($getDetail_sql2) or die('Query failed.');
+if($count>2) 
+{
+  $getDetail_sql2 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[2]."' ORDER by name";
+  $getDetail_res2 = mysql_query($getDetail_sql2) or die('Query failed.');
 
-if (mysql_num_rows($getDetail_res2) > 0)
- {
-while($detail_row = mysql_fetch_array($getDetail_res2))
+  if (mysql_num_rows($getDetail_res2) > 0)
   {
+     while($detail_row = mysql_fetch_array($getDetail_res2))
+   {
     $to = $detail_row['email'];
     $subject = "INVITATION";
     $message = "Dear ".$detail_row['name'].",<br>You have been invited to the ".$_POST['event_title']."being held on ".$m."/".$d."/".$y." at ".$_POST['event_venue'] ;
@@ -175,6 +207,67 @@ while($detail_row = mysql_fetch_array($getDetail_res2))
    }
   }
  }
+ }
+ 
+else
+{
+   for($inv_batch = $batch_lower ; $inv_batch <= $batch_upper ; $inv_batch++)
+   {
+       $getDetail_sql0 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[0]."' ORDER by name";
+ $getDetail_res0 = mysql_query($getDetail_sql0) or die('Query failed.');
+
+if (mysql_num_rows($getDetail_res0) > 0)
+{
+while($detail_row = mysql_fetch_array($getDetail_res0))
+  {
+    $to = $detail_row['email'];
+   $subject = "INVITATION";
+   $message = "Dear ".$detail_row['name'].",<br>You have been invited to the ".$_POST['event_title']."being held on ".$m."/".$d."/".$y." at ".$_POST['event_venue'] ;
+   $header = "From: alumni@iiti.ac.in \r\n";
+   $retval = mail ($to,$subject,$message,$header);
+  
+  }
+}
+
+if($count>1)
+{
+   $getDetail_sql1 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[1]."' ORDER by name";
+   $getDetail_res1 = mysql_query($getDetail_sql1) or die('Query failed.');
+
+if (mysql_num_rows($getDetail_res1) > 0)
+ {
+while($detail_row = mysql_fetch_array($getDetail_res1))
+  {
+    $to = $detail_row['email'];
+   $subject = "INVITATION";
+   $message = "Dear ".$detail_row['name'].",<br>You have been invited to the ".$_POST['event_title']."being held on ".$m."/".$d."/".$y." at ".$_POST['event_venue'] ;
+   $header = "From: alumni@iiti.ac.in \r\n";
+
+  }
+ }
+}
+
+if($count>2) 
+{
+  $getDetail_sql2 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[2]."' ORDER by name";
+  $getDetail_res2 = mysql_query($getDetail_sql2) or die('Query failed.');
+
+  if (mysql_num_rows($getDetail_res2) > 0)
+  {
+     while($detail_row = mysql_fetch_array($getDetail_res2))
+   {
+    $to = $detail_row['email'];
+    $subject = "INVITATION";
+    $message = "Dear ".$detail_row['name'].",<br>You have been invited to the ".$_POST['event_title']."being held on ".$m."/".$d."/".$y." at ".$_POST['event_venue'] ;
+    $header = "From: alumni@iiti.ac.in \r\n";
+    $retval = mail ($to,$subject,$message,$header);
+
+   }
+  }
+ }
+   }
+}
+
 }
 
   ?>
