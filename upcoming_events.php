@@ -18,7 +18,7 @@ for($m=$pmonth;$m<=12;$m++)
 {
 for($d=$pday+1;$d<=31;$d++)
 {
-$getEvent_sql = "SELECT event_title, event_venue, event_shortdesc FROM calendar_events WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$year."' ORDER BY event_start";
+$getEvent_sql = "SELECT event_title, event_venue, event_shortdesc FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$year."' ORDER BY event_start";
      $getEvent_res = mysql_query($getEvent_sql) or die('An error has occured!');
      if (mysql_num_rows($getEvent_res) > 0)
      {

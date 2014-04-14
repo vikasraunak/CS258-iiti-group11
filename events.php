@@ -107,7 +107,7 @@ for ($count=0; $count < (6*7); $count++) {
     if ($count < $firstDayArray["wday"] || $dayArray["mon"] != $month) {
         echo "<td> </td>\n";
     } else {
-        $chkEvent_sql = "SELECT event_title FROM calendar_events WHERE month(event_start) = '".$month."' AND dayofmonth(event_start) = '".$dayArray["mday"]."' AND year(event_start) = '".$year."' ORDER BY event_start";
+        $chkEvent_sql = "SELECT event_title FROM $table_cal WHERE month(event_start) = '".$month."' AND dayofmonth(event_start) = '".$dayArray["mday"]."' AND year(event_start) = '".$year."' ORDER BY event_start";
         $chkEvent_res = mysql_query($chkEvent_sql, $con) or die(mysql_error($con));
         if (mysql_num_rows($chkEvent_res) > 0) {
             $event_title = "<br/>";

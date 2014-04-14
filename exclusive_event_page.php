@@ -4,7 +4,7 @@ include 'connection.php';
 
 $title=$_GET['title'];
 
-$getEvent_sql = "SELECT event_title, event_venue, event_shortdesc,event_start, date_format(event_start, '%l:%i %p') as fmt_time, date_format(event_start, '%D %M %Y') as fmt_date, event_invite_batch, event_invite_dept, batch_lower, batch_upper FROM calendar_events WHERE event_title = '".$title."' ORDER BY event_start";
+$getEvent_sql = "SELECT event_title, event_venue, event_shortdesc,event_start, date_format(event_start, '%l:%i %p') as fmt_time, date_format(event_start, '%D %M %Y') as fmt_date, event_invite_batch, event_invite_dept, batch_lower, batch_upper FROM $table_cal WHERE event_title = '".$title."' ORDER BY event_start";
      $getEvent_res = mysql_query($getEvent_sql) or die('An error has occured!');
      if (mysql_num_rows($getEvent_res) == 1 )
      {

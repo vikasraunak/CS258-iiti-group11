@@ -32,6 +32,8 @@ event_shortdesc  - VARCHAR(300)
 event_start  -  DATETIME
 event_invite_batch - INT(5)
 event_invite_dept - VARCHAR(30)
+batch_lower - INT(5)
+batch_upper - INT(5)
 
 
 /*for profile picture,  run the following query.. */
