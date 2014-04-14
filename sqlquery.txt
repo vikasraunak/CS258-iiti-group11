@@ -21,10 +21,18 @@ CREATE TABLE IF NOT EXISTS `alumni` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 
+For visibility requests, create the table: 
+name: vis_requests
+with members:
+id int(11) AUTO_INCREMENT
+sent_by varchar(25)
+sent_to varchar(25)
+status int(2) default=0
+
 
 For events table: (Create manually)
 
-$table = calendar_events
+table name: calendar_events
 id  - INT  -  primary  -  autoincrement
 event_ title   -  VARCHAR(30)
 event_venue   - VARCHAR(100)
