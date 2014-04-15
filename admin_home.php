@@ -108,7 +108,7 @@ $(document).ready(function() {
 <h2>Panel 1 content</h2>
 <p><img src="images/admin_images/small/iit.png" alt="IIT Indore" width="60" height="60" class="imgRight"></p>
 <p><a href="admin_approve_forum_post.php" style="color: rgb(0,0,0)">Approve Public Posts</a></p>
-<p><a href="admin_display_public_forum.php" style="color: rgb(0,0,0)">Visit Public forum</a></p>
+<p><a href="blog.php" style="color: rgb(0,0,0)">View Blog</a></p>
 </div>
 <div id="panel2" class="panel">
 <h2>Panel 2 content</h2>
@@ -116,8 +116,8 @@ $(document).ready(function() {
 <p></p></div>
 <div id="panel3" class="panel">
 <h2>Panel 3 content</h2>
-<p><a href="admin_forum_form.html" style="color: rgb(0,0,0)">Public Post</a></p>
-<p><a href="admin_Election_Invite.html" style="color: rgb(0,0,0)">Invite Candidates for Election : Form Link</a></p>
+<p><a href="admin_forum_form.php" style="color: rgb(0,0,0)">Public Post</a></p>
+<p><a href="admin_Election_Invite.php" style="color: rgb(0,0,0)">Invite Candidates for Election : Form Link</a></p>
 <p>Post Regarding Events (To be Merged With Admin Panel) </p>
 <p>Create Elections ( Not Done Anything )</p>
 </div>
@@ -132,9 +132,8 @@ $(document).ready(function() {
 <div class="panelContainer">
 <div id="panel4" class="panel">
 <h2>Panel 4 content</h2>
-<p><a href="admin_send_mail.html" style="color: rgb(0,0,0)">Send Mail</a></p>
-<p><a href="admin_generate_users.html" style="color: rgb(0,0,0)">Create a Batch Of Users</a></p>
-<p><a href="admin_create_single_user.php" style="color: rgb(0,0,0)">Create a Single User</a></p>
+<p><a href="admin_send_mail.php" style="color: rgb(0,0,0)">Send Mail</a></p>
+<p><a href="admin_generate_users.php" style="color: rgb(0,0,0)">Create a Batch Of Users</a></p>
 
 
 </div>
@@ -144,9 +143,9 @@ $(document).ready(function() {
 <p></p></div>
 <div id="panel6" class="panel">
 <h2>Panel 6 content</h2>
-<p><a href="admin_in_pagelinks.html" style="color: rgb(0,0,0)">See All Pages</a></p>
-<p><a href="admin_upload.html" style="color: rgb(0,0,0)">Upload Files to Server</a></p>
-<p><a href="admin_pageEditing.html" style="color: rgb(0,0,0)">Edit The Pages</a></p>
+<p><a href="admin_in_pagelinks.php" style="color: rgb(0,0,0)">See All Pages</a></p>
+<p><a href="admin_upload.php" style="color: rgb(0,0,0)">Upload Files to Server</a></p>
+<p><a href="admin_pageEditing.php" style="color: rgb(0,0,0)">Edit The Pages</a></p>
 </div>
 </div>
 </div>
@@ -160,18 +159,17 @@ $(document).ready(function() {
     <h2>Quick Functions</h2>
     <ul class="nav">
       <li><a href="admin_approve_pwd_request.php">New Password Requests</a></li>
-      <li><a href="admin_forum_form.html">Create A public Post</a></li>
+      <li><a href="admin_forum_form.php">Create A public Post</a></li>
       <li><a href="admin_approve_forum_post.php">Pending Public Posts</a></li>
-      <li><a href="admin_send_mail.html">Compose Mail</a></li>
-      <li><a href="admin_create_single_user.php">Create Single User</a></li>
-      <li><a href="admin_generate_users.html">Create Batch Of Users</a></li>
+      <li><a href="admin_send_mail.php">Compose Mail</a></li>
+      <li><a href="admin_generate_users.php">Create Batch Of Users</a></li>
       <li><a href="admin_logout.php">LOG OUT</a></li>
     </ul>
     <h2>Links to Pages</h2>
     <ul class="nav">
       <li><a href="http://www.iiti.ac.in">IITI Website</a></li>
       <li><a href="index.php/">IITI Alumni Website</a></li>
-      <li><a href="admin_display_public_forum.php">Public Forum</a></li>
+      <li><a href="blog.php">Blog</a></li>
     </ul>
   </div>
 </body>

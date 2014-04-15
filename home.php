@@ -13,7 +13,7 @@
   <!--LINK CSS FILES-->
   <link rel="stylesheet" type="text/css" href="css/general.css"> 
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
   <title>Welcome Alumni</title>
 
 </head>
@@ -98,7 +98,7 @@
 
 
   <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
-  <script src="//code.jquery.com/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -28,15 +28,15 @@
       <div class="carousel-inner">
 
         <div class="item active">
-          <img src="images/pic1.jpg" alt="First slide">
+          <img src="./images/pic1.jpg" alt="First slide">
         </div>
 
         <div class="item">
-          <img src="images/pic1.jpg" alt="First slide">
+          <img src="./images/pic1.jpg" alt="First slide">
         </div>
 
         <div class="item">
-          <img src="images/pic1.jpg" alt="First slide">
+          <img src="./images/pic1.jpg" alt="First slide">
         </div>
       </div>
 
@@ -66,9 +66,9 @@
 
 
 <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
-  <script src="//code.jquery.com/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="../../assets/js/docs.min.js"></script>
-  <script src="js/holder.js"></script>
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="../../assets/js/docs.min.js"></script>
+<script src="js/holder.js"></script>
 </body>
 </html>

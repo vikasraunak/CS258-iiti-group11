@@ -22,7 +22,7 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
     if ($filepath=='/blog.php') 
         echo '<li class="active"><a href="#"><span class="glyphicon glyphicon-star"></span> Blog</a></li>';
     else
-        echo '<li><a href="profile_visibility.php"><span class="glyphicon glyphicon-star"></span> Blog</a></li>';
+        echo '<li><a href="blog.php"><span class="glyphicon glyphicon-star"></span> Blog</a></li>';
 
 	if ($filepath=='/gallery.php') 
     	echo '<li class="active"><a href="#"><span class="glyphicon glyphicon-picture"></span> Gallery</a></li>';

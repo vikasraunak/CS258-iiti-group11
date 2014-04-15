@@ -73,7 +73,8 @@
       </tr>
     </table>
   </form>
-  <script src="//code.jquery.com/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-</body>
+
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+  </body>
 </html>
