@@ -25,14 +25,14 @@
  
 	//Sanitize the POST values
 	$username = clean($_POST['username']);
-	$password = clean($_POST['password']);
+	$password = hash('sha256', clean($_POST['password']));
  
 	//Input Validations
 	if($username == '') {
 		$errmsg_arr[] = 'Username missing';
 		$errflag = true;
 	}
-	if($password == '') {
+	if($password == hash('sha256', '')) {
 		$errmsg_arr[] = 'Password missing';
 		$errflag = true;
 	}

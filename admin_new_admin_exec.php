@@ -11,9 +11,8 @@ session_start();
 require_once('admin_auth.php');
 include('admin_connection.php');
 $username=$_POST['username'];
-$password=$_POST['password'];
-$admin='admin';
-mysql_query("INSERT INTO $admin(username, password)VALUES('$username', '$password')");
+$password=hash('sha256', $_POST['password']);
+mysql_query("INSERT INTO $table_admin(username, password)VALUES('$username', '$password')");
 header("location: admin_new_admin.php?remarks=success");
 mysql_close($conn);
 ?>

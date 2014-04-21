@@ -21,20 +21,21 @@
 	//Sanitize the POST values
 	$username 	= clean($_SESSION['SESS_USERNAME']);
 	$password 	= clean($_SESSION['SESS_PASSWORD']);
- 	$oldpass 	= clean($_POST['oldpass']);
- 	$newpass 	= clean($_POST['newpass']);
- 	$newpass2	= clean($_POST['newpass2']);
+ 	$oldpass 	= hash('sha256',clean($_POST['oldpass']));
+ 	$newpass 	= hash('sha256',clean($_POST['newpass']));
+ 	$newpass2	= hash('sha256',clean($_POST['newpass2']));
+ 	$blank		= hash('sha256','');
 
 	//Input Validations
-	if($oldpass == '') {
+	if($oldpass == $blank) {
 		$errmsg_arr[] = 'Old password cannot be left blank';
 		$errflag = true;
 	}
-	if($newpass == '') {
+	if($newpass == $blank) {
 		$errmsg_arr[] = 'New Password cannot be left blank';
 		$errflag = true;
 	}
-	if($newpass2 == '') {
+	if($newpass2 == $blank) {
 		$errmsg_arr[] = 'Re-enter new password cannot be left blank';
 		$errflag = true;
 	}
