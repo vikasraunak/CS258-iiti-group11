@@ -65,8 +65,8 @@
 	SET name='$name', phone='$phone', email='$email', branch='$branch', batch='$batch', curr_loc='$curr_loc', perm_loc='$perm_loc', active='$active', job='$job'
 	WHERE username='$username' AND password='$password'";
 	mysql_query($qry);
-	
-	
+
+
 
 $nameofpic=$_FILES['userFile']['name'];
 
@@ -101,10 +101,10 @@ if(!empty($nameofpic)){
 	}
 }
 
-	
+
 	mysql_close($con);
 	header("location: editprofile.php?remarks=success");
  
 	//Added security, verifies username and pass once again before updating
-	
+
 ?>

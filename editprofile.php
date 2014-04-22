@@ -90,8 +90,8 @@
 
 }
 ?> 
-		<div class="panel-heading">
-          	<h3>Edit Profile</h3>
+    <div class="panel-heading">
+            <h3>Edit Profile</h3>
           </div>
 
 
@@ -112,17 +112,17 @@
 
         <td>
         <select name="batch" class="form-control" required>
-    	<?php for ($i = 2013; $i <= 2099; $i++) 
-    		{
-    			if(intval($batch)==$i)
-    			{?>
-        			<option class="form-control" value="<?php echo $i; ?>" selected><?php echo $i; ?></option>
-           		<?php }
-        		else
-    			{?>
-        		<option class="form-control" value="<?php echo $i; ?>"><?php echo $i; ?></option><?php }
-   			} ?>	
-		</select>
+      <?php for ($i = 2013; $i <= 2099; $i++) 
+        {
+          if(intval($batch)==$i)
+          {?>
+              <option class="form-control" value="<?php echo $i; ?>" selected><?php echo $i; ?></option>
+              <?php }
+            else
+          {?>
+            <option class="form-control" value="<?php echo $i; ?>"><?php echo $i; ?></option><?php }
+        } ?>  
+    </select>
         <!--input type="text" class="form-control" placeholder="2012" name="batch" value="<?php echo $batch;?>" required-->
         </td>
         </tr>
@@ -136,23 +136,23 @@
         </td>
 
         <td>
-        	<select name="branch" class="form-control" required>
-        		<?php for ($i = 0; $i < count($branches); $i++) 
-    			{
-    				if($branches[$i]==$branch)
-    				{	
-    					?>
-        				<option class="form-control" value="<?php echo $branches[$i]; ?>" selected><?php echo $branches[$i]; ?></option>
-           				<?php 
-           			}
-        			else
-    				{
-    					?>
-        				<option class="form-control" value="<?php echo $branches[$i]; ?>"><?php echo $branches[$i]; ?></option>
-        				<?php 
-        			}
-   				} ?>	
-        	</select>
+          <select name="branch" class="form-control" required>
+            <?php for ($i = 0; $i < count($branches); $i++) 
+          {
+            if($branches[$i]==$branch)
+            { 
+              ?>
+                <option class="form-control" value="<?php echo $branches[$i]; ?>" selected><?php echo $branches[$i]; ?></option>
+                  <?php 
+                }
+              else
+            {
+              ?>
+                <option class="form-control" value="<?php echo $branches[$i]; ?>"><?php echo $branches[$i]; ?></option>
+                <?php 
+              }
+          } ?>  
+          </select>
         </td>
         </tr>
 
