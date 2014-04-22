@@ -56,7 +56,7 @@
           </div>
         </div>
         <br>
-        <div align="center"><a href="admin_pwd_reset_form.html">Forgot Login Credentials</a></div>
+        <div align="center"><a href="admin_pwd_reset_form.php">Forgot Login Credentials</a></div>
         <br>
         <div align="center"><a href="admin_index.php">Administrator Login</a></div>
         </div>

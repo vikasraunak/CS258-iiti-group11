@@ -56,12 +56,13 @@ for (; $x<=$m; $x++)
      $headers = "From: ". $from;
      $message = wordwrap($message, 70, "\r\n");
      $new = RandomPass(10) ;
+     $newhash=hash('sha256',$new);
      $message .= "\n new password is \" $new \". change this password after first login.";
      $retval = mail ($to,$subject,$message,$headers);
      //echo $message;
      $roll = $batch.$x ;
      $insert_sql =  "INSERT INTO alumni (username,password)
-     VALUES ('$roll','$new')"; 
+     VALUES ('$roll','$newhash')"; 
      mysql_query($insert_sql);
    if( $retval == true ) 
  {
@@ -84,12 +85,13 @@ for (; $x<=$m; $x++)
      $headers = "From: ". $from;
      $message = wordwrap($message, 70, "\r\n");
      $new = RandomPass(10) ;
+     $newhash=hash('sha256',$new);
      $message .= "\n new password is \" $new \". change this password after first login.";
      $retval = mail ($to,$subject,$message,$headers);
      //echo $message;
      $roll = $batch.$x ;
      $insert_sql =  "INSERT INTO alumni (username,password)
-     VALUES ('$roll','$new')"; 
+     VALUES ('$roll','$newhash')"; 
      mysql_query($insert_sql);
    if( $retval == true ) 
  {

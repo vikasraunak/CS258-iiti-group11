@@ -39,7 +39,8 @@ if((isset($_POST['email']) AND trim($_POST['email']) != "")) {
       $mail     =$member['email'];
       $usrnam  =$member['username'];
       $pwd=RandomPass(10);
-      $sql2="UPDATE `alumni` SET `password`='$pwd' WHERE `username`='$usrnam' ";
+      $pwdhash=hash('sha256',$pwd);
+      $sql2="UPDATE `alumni` SET `password`='$pwdhash' WHERE `username`='$usrnam' ";
       $qr2=mysql_query($sql2) or die("$usrnam could not found");
       //echo $mail;
       $to=$mail;

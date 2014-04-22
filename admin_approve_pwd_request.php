@@ -36,7 +36,8 @@ if(isset($_POST['submit_ap'])){
     while($arr  = mysql_fetch_assoc($qry)){
       $usrnam =$arr['pr_roll'];
       $pwd=RandomPass(10);
-      $sql2="UPDATE `alumni` SET `password`='$pwd' WHERE `username`='$usrnam' ";
+      $pwdhash=hash('sha256',$pwd);
+      $sql2="UPDATE `alumni` SET `password`='$pwdhash' WHERE `username`='$usrnam' ";
       $qr2=mysql_query($sql2) or die("query unsuccessful");
 
       $to=$arr['pr_mail'];
