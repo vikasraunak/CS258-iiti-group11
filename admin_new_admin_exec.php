@@ -15,5 +15,5 @@ $password=$_POST['password'];
 $admin='admin';
 mysql_query("INSERT INTO $admin(username, password)VALUES('$username', '$password')");
 header("location: admin_new_admin.php?remarks=success");
-mysql_close($conn);
+mysql_close($con);
 ?>

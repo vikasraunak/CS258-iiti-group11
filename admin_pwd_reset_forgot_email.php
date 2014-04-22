@@ -25,7 +25,7 @@ $(document).ready(function() {
  $('#pwdreset').validate({
    
    rules: {
-     email: {
+     mail: {
         required: true,
         email: true
      },
@@ -48,7 +48,7 @@ branch: {
      spam: "required"
    }, //end rules
    messages: {
-      email: {
+      mail: {
          required: "Please supply an e-mail address.",
          email: "This is not a valid email address."
        },
@@ -88,17 +88,28 @@ branch: {
 	<div class="content">
 	<div class="main">
 	<h1>Password Reset Form</h1>
-		<form action="admin_pwd_reset_form_process.php" method="post" name="pwdreset" id="pwdreset">
+		<form action="admin_pwd_reset_forgot_email_process.php" method="post" name="pwdreset" id="pwdreset" enctype="multipart/form-data">
+			<div style="position: relative; left: 70px;">
       <div>
-				<br>
-			<div>
-				<label for="email" class="label">E-mail Address</label>
-				<input name="email" type="text" id="email" placeholder="someone@email.com">
+        <label for="branch" class="label">Branch</label>
+        <input name="branch" type="text" id="branch" placeholder="me">
+      </div>
+                                                     <div>
+        <label for="roll" class="label">Roll Number</label>
+        <input name="roll" type="text" id="roll" placeholder="me1100155">
+      </div>
+				<label for="mail" class="label">New E-mail Address</label>
+				<input name="mail" type="text" id="mail" placeholder="someone@email.com">
 			</div>
-			<div style="position: relative; left: 100px;">
-				
-				<h5 ><a href="admin_pwd_reset_forgot_email.php">In case you have not access to your email id</a></h5>
+			<br>
+			<div style="position: relative; left: 60px;">
+				<h5><p>Upload Your any appropriate proof's photo (Must be an image).</p></h5>
 			</div>
+			<div style="position: relative; left: 160px;" >
+				<input type="file" size="40" name="userFile"/>
+			</div>
+
+			<br>
 			<div>
 				<input type="submit" name="submit" id="submit" value="Submit">
 			</div>
@@ -108,3 +119,5 @@ branch: {
 </div>
 </body>
 </html>
+
+

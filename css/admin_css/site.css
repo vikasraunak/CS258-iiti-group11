@@ -133,14 +133,7 @@ em {
 	margin: 20px 0 0 100px;
 }
 
-.footer {
-	position: fixed;
-	bottom: 0;
-	left: 100px;
-	width: 100%;
-	padding-top: 18px;
-	background: url(../_images/bg-footer.png) repeat-x left top;
-}
+
 
 .logo {
 	letter-spacing: -1px;
@@ -256,8 +249,39 @@ fieldset {
 	color: rgb(0,0,0);
 }
 
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 100px;
+	width: 100%;
+	padding-top: 28px;
+	background: url(../_images/bg-footer.png) repeat-x left top;
+}
+
 .footer p {
 	font-size: 14px;
+	font-family: 'ColaborateLightRegular', Arial, sans-serif;
+	padding: .5em .25em .5em 1em;
+	color:rgb(55,76,119);
+	background: rgb(110,138,195);
+	-moz-border-radius: 2px 0 0 0;
+	border-radius: 2px 0 0 0;
+	margin: 0;
+}
+
+.footer1 {
+	font-size: 14px;
+	position: fixed;
+	bottom: 0;
+	left: 100px;
+	width: 100%;
+	padding-top: 28px;
+	background: url(../_images/bg-footer.png) repeat-x left top;
+}
+
+
+.footer1 p {
+	/*font-size: 14px;*/
 	font-family: 'ColaborateLightRegular', Arial, sans-serif;
 	padding: .5em .25em .5em 1em;
 	color:rgb(55,76,119);
@@ -512,6 +536,12 @@ form#order input[type="radio"], form#pwdreset input[type="radio"], form#pwdreset
 form .indent, #submit {
 	margin-left: 215px;	
 }
+
+
+form .indent, #newemail {
+	margin-left: 215px;	
+}
+
 #console label {
 	float: left;
 	width: 100px;

@@ -46,9 +46,20 @@ batch_upper - INT(5)
 
 /*for profile picture,  run the following query.. */
 
-ALTER TABLE  `alumni` ADD  `img` BLOB NULL;
+ALTER TABLE  `alumni` ADD  `img` LONGBLOB NULL;
 
 /*add a separate db for admin, add a table for pwd_reset, public posts */
 
 //in p_reset table, run this query..
 ALTER TABLE  `p_reset` ADD  `pr_branch` VARCHAR( 10 ) NULL ;
+
+ALTER TABLE  `p_reset` ADD  `pr_mail` VARCHAR( 30 ) NULL ;
+
+ALTER TABLE  `p_reset` ADD  `pr_img` LONGBLOB NULL ;
+
+ALTER TABLE  `p_reset` ADD  `pr_type` VARCHAR( 64 ) NULL ,
+ADD  `pr_imgbool` INT( 10 ) NOT NULL DEFAULT  '0';
+
+ALTER TABLE `p_reset`
+  DROP `pr_name`,
+  DROP `pr_email`;
