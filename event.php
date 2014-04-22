@@ -1,5 +1,7 @@
 <?php
   require_once('auth.php');
+  require('connection.php');
+
    ?>
 
 <html>
@@ -26,25 +28,32 @@
 
   <?php
      require('connection.php');
-
-     if ($_POST)
-     {
+       if ($_POST)
+       {
        $m = $_POST['m'];
        $d = $_POST['d'];
        $y = $_POST['y'];
        $batchlower = $_POST['batch_lower'];
        $batchupper = $_POST['batch_upper'];
        $inv_batch = $_POST['event_invite_batch'];
-       $invite_dept=implode(',',$_POST['event_invite_dept']);
-       $event_date = $y."-".$m."-".$d." ".$_POST["event_time_hh"].":".$_POST["event_time_mm"].":00";
-       if($batchlower >= $batchupper)
+       if(empty($_POST['event_invite_dept']))
        {
-         echo "Choose the appropriate batch range";
+         echo "Please choose the branches to be invited.\n";
+       }
+       else
+       {
+          $invite_dept=implode(',',$_POST['event_invite_dept']);
+       }
+       $event_date = $y."-".$m."-".$d." ".$_POST["event_time_hh"].":".$_POST["event_time_mm"].":00";
+       if( ($batchlower >= $batchupper && empty($inv_batch) ) || empty($_POST["event_title"]) || empty($_POST['event_venue']) || empty($_POST['event_shortdesc'])  || empty($_POST['event_invite_dept']))
+       {
+         echo "Please fill in all the details appropriately\n";
        }
        else
        {
            $insEvent_sql = "INSERT INTO calendar_events (event_title,event_venue, event_shortdesc, event_start,event_invite_batch,event_invite_dept,batch_lower,batch_upper) VALUES('".$_POST["event_title"]."','".$_POST["event_venue"]."','".$_POST["event_shortdesc"]."', '$event_date','".$_POST["event_invite_batch"]."','$invite_dept','$batchlower',$batchupper)";
-           $insEvent_res = mysqli_query($con, $insEvent_sql) or die('Query failed.');
+           $insEvent_res = mysqli_query($con, $insEvent_sql) or die(mysqli_error($con));
+
        }
 
      }
@@ -55,11 +64,12 @@
        $y = $_GET['y'];
      }
      $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc, date_format(event_start, '%l:%i %p') as fmt_date FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
-     $getEvent_res = mysqli_query($con, $getEvent_sql) or die('Query failed.');
+     $getEvent_res = mysqli_query($con, $getEvent_sql) or die(mysqli_error($con));
+      empty($_POST["event_title"]) ; empty($_POST['event_venue']) ; empty($_POST['event_shortdesc'])  ; empty($_POST['event_invite_dept']);
      if (mysqli_num_rows($getEvent_res) > 0)
      {
          $event_txt = "<ul>";
-         while($ev = @mysqli_fetch_array($getEvent_res))
+         while($ev = @mysqli_fetch_array($getEvent_res, MYSQLI_ASSOC))
          {
            $event_title = stripslashes($ev["event_title"]);
            $event_venue = stripslashes($ev["event_venue"]);
@@ -68,17 +78,21 @@
            $event_txt .= "<li><strong>".$fmt_date."</strong>: ".$event_title."<br/>".$event_venue."<br/>".$event_shortdesc."</li>";
          }
          $event_txt .="</ul>";
-         mysqli_free_result($getEvent_res);
+         mysqlI_free_result($getEvent_res);
      }
      else
      {
          $event_txt = "";
      }
-
+     if($_POST) {
      if ($event_txt != "")
      {
           echo "<p><strong>$d/$m/$y 's Events:</strong></p>$event_txt<hr/>";
+          header('Refresh: 5; URL=http://localhost/series/alumni/exclusive_event_page.php?title='.$_POST['event_title']);
      }
+
+     }
+
      ?>
      </div>
      </div>
@@ -143,9 +157,10 @@
                                 <input type=\"hidden\" name=\"d\" value=\"".$d."\">
                                 <input type=\"hidden\" name=\"y\" value=\"".$y."\">
                                 <br/><br/>
-                                <input type=\"submit\" name=\"submit\" value=\"Add Event!\">
+                                <input type=\"submit\" value='Submit' name=\"submitbtn\" onclick=\"this.disabled=true;this.form.submit();\">
+
               </form>";
-/* Sends Mails checking the batch and the department code*/
+// Sends Mails by checking the batch and the department code
  if($_POST)
  {
  $inv_batch = $_POST['event_invite_batch'];
@@ -161,7 +176,7 @@
 
 if (mysqli_num_rows($getDetail_res0) > 0)
 {
-while($detail_row = mysqli_fetch_array($getDetail_res0))
+while($detail_row = mysqli_fetch_array($getDetail_res0, MYSQLI_ASSOC))
   {
     $to = $detail_row['email'];
    $subject = "INVITATION";
@@ -179,7 +194,7 @@ if($count>1)
 
 if (mysqli_num_rows($getDetail_res1) > 0)
  {
-while($detail_row = mysqli_fetch_array($getDetail_res1))
+while($detail_row = mysqli_fetch_array($getDetail_res1, MYSQLI_ASSOC))
   {
     $to = $detail_row['email'];
    $subject = "INVITATION";
@@ -197,7 +212,7 @@ if($count>2)
 
   if (mysqli_num_rows($getDetail_res2) > 0)
   {
-     while($detail_row = mysqli_fetch_array($getDetail_res2))
+     while($detail_row = mysqli_fetch_array($getDetail_res2, MYSQLI_ASSOC))
    {
     $to = $detail_row['email'];
     $subject = "INVITATION";
@@ -219,7 +234,7 @@ else
 
 if (mysqli_num_rows($getDetail_res0) > 0)
 {
-while($detail_row = mysqli_fetch_array($getDetail_res0))
+while($detail_row = mysqli_fetch_array($getDetail_res0, MYSQLI_ASSOC))
   {
     $to = $detail_row['email'];
    $subject = "INVITATION";
@@ -237,7 +252,7 @@ if($count>1)
 
 if (mysqli_num_rows($getDetail_res1) > 0)
  {
-while($detail_row = mysqli_fetch_array($getDetail_res1))
+while($detail_row = mysqli_fetch_array($getDetail_res1, MYSQLI_ASSOC))
   {
     $to = $detail_row['email'];
    $subject = "INVITATION";
@@ -255,7 +270,7 @@ if($count>2)
 
   if (mysqli_num_rows($getDetail_res2) > 0)
   {
-     while($detail_row = mysqli_fetch_array($getDetail_res2))
+     while($detail_row = mysqli_fetch_array($getDetail_res2, MYSQLI_ASSOC))
    {
     $to = $detail_row['email'];
     $subject = "INVITATION";
@@ -269,7 +284,7 @@ if($count>2)
    }
 }
 
-}
+}  
 
   ?>
    <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->

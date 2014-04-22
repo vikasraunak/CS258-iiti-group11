@@ -111,7 +111,7 @@ for ($count=0; $count < (6*7); $count++) {
         $chkEvent_res = mysqli_query($con, $chkEvent_sql) or die(mysqli_error($con));
         if (mysqli_num_rows($chkEvent_res) > 0) {
             $event_title = "<br/>";
-            while ($ev = mysqli_fetch_array($chkEvent_res)) {
+            while ($ev = mysqli_fetch_array($chkEvent_res, MYSQLI_ASSOC)) {
 
                 $event_title .= stripslashes($ev["event_title"])."<br/>";
             }
@@ -125,7 +125,7 @@ for ($count=0; $count < (6*7); $count++) {
     }
 }
 echo "</tr></table></div></div></div></div> ";
-mysqli_close($con);
+mysql_close($con);
 ?>
 <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
   <script src="//code.jquery.com/jquery.js"></script>

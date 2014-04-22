@@ -27,11 +27,12 @@
 <p> <h4><strong>Past events:  </strong></h4>
 <?php
 
-require('connection.php');
+require_once('connection.php');
 $nowarray = getdate();
 $year = $nowarray['year'];
 $pdate = $nowarray['mday'];
 $pmonth = $nowarray['mon'];
+$flag=false;
 
 for($m=1;$m<=$pmonth;$m++)
 {
@@ -41,28 +42,34 @@ $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc FROM $table_ca
      $getEvent_res = mysqli_query($con, $getEvent_sql) or die('An error has occured!');
      if (mysqli_num_rows($getEvent_res) > 0)
      {
-         $event_txt = "<ul>";
-         while($ev = @mysqli_fetch_array($getEvent_res))
+         echo "<p align=\"left\"><em>$d/$m/$year 's Events:</em></p>";
+         while($ev = mysqli_fetch_array($getEvent_res, MYSQLI_ASSOC))
          {
+           $event_txt = "<ul>";
            $event_title = stripslashes($ev["event_title"]);
            $event_txt .= "<li type=\"circle\">".$event_title."</br></li>";
-         }
+
          $event_txt .="</ul>";
-         mysqli_free_result($getEvent_res);
+
+         //mysql_free_result($getEvent_res);
+         if($event_txt!="")
+          {
+          echo "<a href=\"exclusive_event_page.php?title=".$event_title."\">$event_txt</a><hr/>\n";
+          $flag=true;
+          }
          }
+     }
          else 
          {
             $event_txt = "";
          }
 
-          if($event_txt!="")
-          {
-          echo "<p align=\"left\"><strong><em>$d/$m/$year 's Events:</em></strong></p><a href=\"exclusive_event_page.php?title=".$event_title."\">$event_txt</a><hr/>";
-          }
+
 
   }
  }
-
+ if($flag==false)
+ {echo 'No events';}
 ?>   </p>
 </div>
 </div>
