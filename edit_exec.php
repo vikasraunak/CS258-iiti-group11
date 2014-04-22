@@ -1,21 +1,12 @@
 <?php
 	session_start();
-	require_once('connection.php');
+	require('connection.php');
+	require_once('stringops.php');
 	//Array to store validation errors
 	$errmsg_arr = array();
 	//Validation error flag
 	$errflag = false;
 	//Function to sanitize values received from the form. Prevents SQL injection
-	function clean($str) 
-	{
-		$str = @trim($str);
-		if( get_magic_quotes_gpc() ) 
-		{
-			//if magic quotes is running, remove slashes it added
-			$str = stripslashes($str);
-		}
-		return mysql_real_escape_string($str);
-	}
  
 	//Sanitize the POST values
 	$username = clean($_SESSION['SESS_USERNAME']);
@@ -64,7 +55,7 @@
 	$qry="UPDATE $table 
 	SET name='$name', phone='$phone', email='$email', branch='$branch', batch='$batch', curr_loc='$curr_loc', perm_loc='$perm_loc', active='$active', job='$job'
 	WHERE username='$username' AND password='$password'";
-	mysql_query($qry);
+	mysqli_query($con,$qry);
 
 
 
@@ -86,14 +77,14 @@ if(!empty($nameofpic)){
 } else {
    fclose ($handle);
    // Commit image to the database
-   $image = mysql_real_escape_string($image);
+   $image = mysqli_real_escape_string($con, $image);
    $imagebool=1;
    $filetype=$_FILES['userFile']['type'];
    $query="UPDATE $table 
 	SET type='$filetype', img='$image', imgbool='$imagebool'
 	WHERE username='$username' AND password='$password'";
 
-   if ( !(mysql_query($query,$con)) ) {
+   if ( !(mysqli_query($con,$query)) ) {
       die('<p>Error writing image to database</p></body></html>');
    } else {
    }
@@ -102,7 +93,7 @@ if(!empty($nameofpic)){
 }
 
 
-	mysql_close($con);
+	mysqli_close($con);
 	header("location: editprofile.php?remarks=success");
  
 	//Added security, verifies username and pass once again before updating

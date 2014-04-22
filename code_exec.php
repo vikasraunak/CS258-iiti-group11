@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('connection.php');
-$table='alumni';
+require('connection.php');
 $username=$_POST['username'];
 $password=hash('sha256',$_POST['password']);
-mysql_query("INSERT INTO $table(username, password)VALUES('$username', '$password')");
+mysqli_query($con, "INSERT INTO $table(username, password)VALUES('$username', '$password')");
 header("location: register.php?remarks=success");
-mysql_close($con);
+mysqli_close($con);
 ?>

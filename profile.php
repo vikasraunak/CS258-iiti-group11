@@ -2,7 +2,7 @@
 your alumni database table. Instructions for that would be on updatetable.txt-->
 
 <?php
-        require_once('auth.php');
+        require('auth.php');
 ?>
 
 
@@ -12,7 +12,7 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
 <head>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
   <!--LINK CSS FILES-->
   <link rel="stylesheet" type="text/css" href="css/general.css"> 
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -197,7 +197,7 @@ your alumni database table. Instructions for that would be on updatetable.txt-->
 
   </div>
   </div>
-  <script src="//code.jquery.com/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

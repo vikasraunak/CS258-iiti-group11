@@ -8,17 +8,17 @@
 require('connection.php');
 
 	$qry="SELECT username, password FROM $table_admin";
-	$result=mysql_query($qry);
-	$num=mysql_numrows($result);
+	$result=mysqli_query($con, $qry);
+	$num=mysqli_numrows($result);
 
 	for ($i=0; $i<$num; $i++)
   	{
-  		$member = mysql_fetch_assoc($result);
-  		$old=mysql_result($result, $i, "password");
-  		$username=mysql_result($result, $i, "username");
+  		$member = mysqli_fetch_assoc($result);
+  		$old=mysqli_result($result, $i, "password");
+  		$username=mysqli_result($result, $i, "username");
   		$password=hash('sha256', $old);
   		echo 'Old: '.$old.' New: '.$password.'<br>';
-  		mysql_query("UPDATE $table_admin SET password='$password' WHERE username='$username'");
+  		mysqli_query($con, "UPDATE $table_admin SET password='$password' WHERE username='$username'");
  	} 
 
 ?>

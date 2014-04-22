@@ -3,10 +3,9 @@
    <title>Upcoming Events</title>
 </head>
 <body>
- <h4 font-family: "tahoma"><strong>Upcoming events :</strong></h4>
 <?php
 
-include 'connection.php';
+require('connection.php');
 
 $nowarray = getdate();
 $year = $nowarray['year'];
@@ -19,17 +18,17 @@ for($m=$pmonth;$m<=12;$m++)
 for($d=$pday+1;$d<=31;$d++)
 {
 $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$year."' ORDER BY event_start";
-     $getEvent_res = mysql_query($getEvent_sql) or die('An error has occured!');
-     if (mysql_num_rows($getEvent_res) > 0)
+     $getEvent_res = mysqli_query($con,$getEvent_sql) or die('An error has occured!');
+     if (mysqli_num_rows($getEvent_res) > 0)
      {
          $event_txt = "<ul>";
-         while($ev = @mysql_fetch_array($getEvent_res))
+         while($ev = @mysqli_fetch_array($getEvent_res))
          {
            $event_title = stripslashes($ev["event_title"]);
            $event_txt .= "<li type=\"circle\">".$event_title."</br></li>";
          }
          $event_txt .="</ul>";
-         mysql_free_result($getEvent_res);
+         mysqli_free_result($getEvent_res);
          }
          else 
          {
@@ -45,7 +44,7 @@ $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc FROM $table_ca
   }
  }
  if($flag==false)
- {echo 'No events';}
+ {echo 'No upcoming events';}
 
 ?>
     </body>

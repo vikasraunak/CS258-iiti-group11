@@ -44,7 +44,7 @@
        else
        {
            $insEvent_sql = "INSERT INTO calendar_events (event_title,event_venue, event_shortdesc, event_start,event_invite_batch,event_invite_dept,batch_lower,batch_upper) VALUES('".$_POST["event_title"]."','".$_POST["event_venue"]."','".$_POST["event_shortdesc"]."', '$event_date','".$_POST["event_invite_batch"]."','$invite_dept','$batchlower',$batchupper)";
-           $insEvent_res = mysql_query($insEvent_sql) or die('Query failed.');
+           $insEvent_res = mysqli_query($con, $insEvent_sql) or die('Query failed.');
        }
 
      }
@@ -55,11 +55,11 @@
        $y = $_GET['y'];
      }
      $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc, date_format(event_start, '%l:%i %p') as fmt_date FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
-     $getEvent_res = mysql_query($getEvent_sql) or die('Query failed.');
-     if (mysql_num_rows($getEvent_res) > 0)
+     $getEvent_res = mysqli_query($con, $getEvent_sql) or die('Query failed.');
+     if (mysqli_num_rows($getEvent_res) > 0)
      {
          $event_txt = "<ul>";
-         while($ev = @mysql_fetch_array($getEvent_res))
+         while($ev = @mysqli_fetch_array($getEvent_res))
          {
            $event_title = stripslashes($ev["event_title"]);
            $event_venue = stripslashes($ev["event_venue"]);
@@ -68,7 +68,7 @@
            $event_txt .= "<li><strong>".$fmt_date."</strong>: ".$event_title."<br/>".$event_venue."<br/>".$event_shortdesc."</li>";
          }
          $event_txt .="</ul>";
-         mysql_free_result($getEvent_res);
+         mysqli_free_result($getEvent_res);
      }
      else
      {
@@ -157,11 +157,11 @@
  if(isset($inv_batch) && !empty($inv_batch))
  {
  $getDetail_sql0 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[0]."' ORDER by name";
- $getDetail_res0 = mysql_query($getDetail_sql0) or die('Query failed.');
+ $getDetail_res0 = mysqli_query($con, $getDetail_sql0) or die('Query failed.');
 
-if (mysql_num_rows($getDetail_res0) > 0)
+if (mysqli_num_rows($getDetail_res0) > 0)
 {
-while($detail_row = mysql_fetch_array($getDetail_res0))
+while($detail_row = mysqli_fetch_array($getDetail_res0))
   {
     $to = $detail_row['email'];
    $subject = "INVITATION";
@@ -175,11 +175,11 @@ while($detail_row = mysql_fetch_array($getDetail_res0))
 if($count>1)
 {
    $getDetail_sql1 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[1]."' ORDER by name";
-   $getDetail_res1 = mysql_query($getDetail_sql1) or die('Query failed.');
+   $getDetail_res1 = mysqli_query($con, $getDetail_sql1) or die('Query failed.');
 
-if (mysql_num_rows($getDetail_res1) > 0)
+if (mysqli_num_rows($getDetail_res1) > 0)
  {
-while($detail_row = mysql_fetch_array($getDetail_res1))
+while($detail_row = mysqli_fetch_array($getDetail_res1))
   {
     $to = $detail_row['email'];
    $subject = "INVITATION";
@@ -193,11 +193,11 @@ while($detail_row = mysql_fetch_array($getDetail_res1))
 if($count>2) 
 {
   $getDetail_sql2 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[2]."' ORDER by name";
-  $getDetail_res2 = mysql_query($getDetail_sql2) or die('Query failed.');
+  $getDetail_res2 = mysqli_query($con, $getDetail_sql2) or die('Query failed.');
 
-  if (mysql_num_rows($getDetail_res2) > 0)
+  if (mysqli_num_rows($getDetail_res2) > 0)
   {
-     while($detail_row = mysql_fetch_array($getDetail_res2))
+     while($detail_row = mysqli_fetch_array($getDetail_res2))
    {
     $to = $detail_row['email'];
     $subject = "INVITATION";
@@ -215,11 +215,11 @@ else
    for($inv_batch = $batch_lower ; $inv_batch <= $batch_upper ; $inv_batch++)
    {
        $getDetail_sql0 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[0]."' ORDER by name";
- $getDetail_res0 = mysql_query($getDetail_sql0) or die('Query failed.');
+ $getDetail_res0 = mysqli_query($con, $getDetail_sql0) or die('Query failed.');
 
-if (mysql_num_rows($getDetail_res0) > 0)
+if (mysqli_num_rows($getDetail_res0) > 0)
 {
-while($detail_row = mysql_fetch_array($getDetail_res0))
+while($detail_row = mysqli_fetch_array($getDetail_res0))
   {
     $to = $detail_row['email'];
    $subject = "INVITATION";
@@ -233,11 +233,11 @@ while($detail_row = mysql_fetch_array($getDetail_res0))
 if($count>1)
 {
    $getDetail_sql1 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[1]."' ORDER by name";
-   $getDetail_res1 = mysql_query($getDetail_sql1) or die('Query failed.');
+   $getDetail_res1 = mysqli_query($con, $getDetail_sql1) or die('Query failed.');
 
-if (mysql_num_rows($getDetail_res1) > 0)
+if (mysqli_num_rows($getDetail_res1) > 0)
  {
-while($detail_row = mysql_fetch_array($getDetail_res1))
+while($detail_row = mysqli_fetch_array($getDetail_res1))
   {
     $to = $detail_row['email'];
    $subject = "INVITATION";
@@ -251,11 +251,11 @@ while($detail_row = mysql_fetch_array($getDetail_res1))
 if($count>2) 
 {
   $getDetail_sql2 = "SELECT name, email, batch, branch FROM alumni WHERE batch = '".$inv_batch."' AND branch = '".$invite_dept2[2]."' ORDER by name";
-  $getDetail_res2 = mysql_query($getDetail_sql2) or die('Query failed.');
+  $getDetail_res2 = mysqli_query($con, $getDetail_sql2) or die('Query failed.');
 
-  if (mysql_num_rows($getDetail_res2) > 0)
+  if (mysqli_num_rows($getDetail_res2) > 0)
   {
-     while($detail_row = mysql_fetch_array($getDetail_res2))
+     while($detail_row = mysqli_fetch_array($getDetail_res2))
    {
     $to = $detail_row['email'];
     $subject = "INVITATION";

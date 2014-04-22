@@ -1,22 +1,12 @@
 <?php
 	session_start();
-	require_once('connection.php');
- 	$table='alumni';
+	require('connection.php');
+	require_once('stringops.php');
 	//Array to store validation errors
 	$errmsg_arr = array();
 	//Validation error flag
 	$errflag = false;
 	//Function to sanitize values received from the form. Prevents SQL injection
-	function clean($str) 
-	{
-		$str = @trim($str);
-		if( get_magic_quotes_gpc() ) 
-		{
-			//if magic quotes is running, remove slashes it added
-			$str = stripslashes($str);
-		}
-		return mysql_real_escape_string($str);
-	}
  
 	//Sanitize the POST values
 	$username 	= clean($_SESSION['SESS_USERNAME']);
@@ -60,8 +50,8 @@
 	$qry="UPDATE $table 
 	SET password='$newpass'
 	WHERE username='$username' AND password='$password'";
-	mysql_query($qry);
-	mysql_close($con);
+	mysqli_query($con, $qry);
+	mysqli_close($con);
 	$_SESSION['SESS_PASSWORD']=$newpass;
 	session_write_close();
 	header("location: changepassword.php?remarks=success");

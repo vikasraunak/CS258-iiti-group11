@@ -108,14 +108,14 @@ for ($count=0; $count < (6*7); $count++) {
         echo "<td> </td>\n";
     } else {
         $chkEvent_sql = "SELECT event_title FROM $table_cal WHERE month(event_start) = '".$month."' AND dayofmonth(event_start) = '".$dayArray["mday"]."' AND year(event_start) = '".$year."' ORDER BY event_start";
-        $chkEvent_res = mysql_query($chkEvent_sql, $con) or die(mysql_error($con));
-        if (mysql_num_rows($chkEvent_res) > 0) {
+        $chkEvent_res = mysqli_query($con, $chkEvent_sql) or die(mysqli_error($con));
+        if (mysqli_num_rows($chkEvent_res) > 0) {
             $event_title = "<br/>";
-            while ($ev = mysql_fetch_array($chkEvent_res)) {
+            while ($ev = mysqli_fetch_array($chkEvent_res)) {
 
                 $event_title .= stripslashes($ev["event_title"])."<br/>";
             }
-            mysql_free_result($chkEvent_res);
+            mysqli_free_result($chkEvent_res);
         } else {
             $event_title = "";
         }
@@ -125,7 +125,7 @@ for ($count=0; $count < (6*7); $count++) {
     }
 }
 echo "</tr></table></div></div></div></div> ";
-mysql_close($con);
+mysqli_close($con);
 ?>
 <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
   <script src="//code.jquery.com/jquery.js"></script>

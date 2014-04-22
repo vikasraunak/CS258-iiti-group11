@@ -1,16 +1,8 @@
 <?php
     require_once('connection.php');
+    require_once('stringops.php');
     $branches=array('CSE', 'EE','ME');
-    function clean($str) 
-    {
-      $str = @trim($str);
-      if( get_magic_quotes_gpc() ) 
-      {
-      //if magic quotes is running, remove slashes it added
-        $str = stripslashes($str);
-      }
-      return mysql_real_escape_string($str);
-    }
+
 
     $name     ='';
     $batch    ='';
@@ -25,10 +17,10 @@
     function fetchProfile($username, $visibility)
     {
       //v describes visibility
-      global $table, $name, $batch, $branch, $email, $phone, $curr_loc, $perm_loc, $job, $type, $img, $imgbool, $mem_id;
+      global $con, $table, $name, $batch, $branch, $email, $phone, $curr_loc, $perm_loc, $job, $type, $img, $imgbool, $mem_id;
       $qry="SELECT * FROM $table WHERE username='$username'";
-      $result=mysql_query($qry);
-      $member   = mysql_fetch_assoc($result);      
+      $result=mysqli_query($con, $qry);
+      $member   = mysqli_fetch_assoc($result);      
       $name     =$member['name'];
       $batch    =$member['batch'];
       $branch   =$member['branch'];

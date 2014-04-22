@@ -1,5 +1,6 @@
 <?php
-	require_once('auth.php');
+	require('auth.php');
+	require_once('stringops.php');
 	$param_batch="";
 	$param_roll="";
 	$param_name="";
@@ -68,25 +69,13 @@
       </tr>
     </thead>
     <?php
-	
-	function clean($str)
-	{
-		$str = @trim($str);
-		
-		if( get_magic_quotes_gpc() )
-		{
-			//if magic quotes is running, remove slashes it added
-			$str = stripslashes($str);
-		}
 
-		return mysql_real_escape_string($str);
-	}
 
 	$flag=false;
 	
 	if($num_param>0)
 	{
-		include('connection.php');
+		require('connection.php');
 		
 		if($param_roll=="" and $param_batch!="" and $param_name=="")
 		{
@@ -129,22 +118,22 @@
 		
 		if($flag)
 		{
-			$result=mysql_query($qry);
-			$num=mysql_numrows($result);
+			$result=mysqli_query($con,$qry);
+			$num=mysqli_num_rows($result);
 
 			if ($num==0) 
 			{
 				echo '<div class="alert alert-warning">No matches found</div>';
 			}
 
-			mysql_close();
+			mysqli_close($con);
 			$i=0;
 			while ($i < $num)
 			{
-				$active=mysql_result($result, $i, "active");
-				$name=mysql_result($result,$i,"name");
-				$roll=mysql_result($result,$i,"username");
-				$batch=mysql_result($result,$i,"batch");
+				$active=mysqli_result($result, $i, "active");
+				$name=mysqli_result($result,$i,"name");
+				$roll=mysqli_result($result,$i,"username");
+				$batch=mysqli_result($result,$i,"batch");
 				?>
       <tr>
         <td><span class="c1"><?php  echo $i+1; ?></span></td>

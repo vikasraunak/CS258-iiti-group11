@@ -26,7 +26,7 @@
 
 
   <div class="container">
-    <div class="col-md-8">
+    <div class="col-md-8  col-md-offset-2">
 
       <div class="row">
         <div class="col-md-12" align="center">
@@ -34,11 +34,10 @@
         <!--WELCOME PANEL START-->
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Welcome</h3>
+              <h3>Welcome <b><?php $username=$_SESSION['SESS_USERNAME']; echo $username; ?></b></h3>
             </div>
             <div class="panel-body">
-              <p>Dear <b><?php $username=$_SESSION['SESS_USERNAME']; echo $username; ?></b></p>
-              <p>You may use the navbar at the top to browse various links. Notifications will appear in the area on the right. The election portal would be active during elections.</p>
+              <p>You may use the navbar at the top to browse various links. <br>[welcome message]</p>
             </div>
           </div>
           
@@ -50,49 +49,24 @@
       <div class="row">
 
       <!--EVENTS PANEL START-->
-        <div class="col-md-4">
+        <div class="col-md-4 col-md-offset-4">
           <div class="panel panel-default" align="center">
             <div class="panel-heading">
-              <h3 class="panel-title">Events</h3>
+              <h3>Events</h3>
             </div>
             <div class="panel-body">
                <?php
                   include 'upcoming_events.php'
                   ?>
+              <br><br>
               <a href="allevents.php">View all events</a>
             </div>
           </div>
         </div>
       <!--EVENTS PANEL END-->
 
-      <!--ELECTION PORTAL START-->
-        <div class="col-md-6" align="center">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Election Portal</h3>
-            </div>
-            <div class="panel-body">
-              Next Election: [Fetch Date from Admin]
-            </div>
-          </div>  
-        </div>
-      <!--ELECTION PORTAL END-->
-
       </div>
     </div>
-
-    <!--NOTIFICATION PANEL START-->
-    <div class="col-md-4" align="center">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-         <h3 class="panel-title">Notifications</h3>
-        </div>
-        <div class="panel-body">
-          No new notifications
-        </div>
-      </div>
-    </div>
-    <!--NOTIFICATION PANEL END-->
   </div>
 
 

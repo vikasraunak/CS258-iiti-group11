@@ -46,16 +46,16 @@
  
 	//Create query
 	$qry="SELECT * FROM $table WHERE username='$username' AND password='$password'";
-	$result=mysql_query($qry);
+	$result=mysqli_query($con, $qry);
  
 	//Check whether the query was successful or not
 	if($result) 
 	{
-		if(mysql_num_rows($result) > 0) 
+		if(mysqli_num_rows($result) > 0) 
 		{
 			//Login Successful
 			session_regenerate_id();
-			$member = mysql_fetch_assoc($result);
+			$member = mysqli_fetch_assoc($result);
 			$_SESSION['SESS_USERNAME'] = $member['username'];
 			$_SESSION['SESS_PASSWORD'] = $member['password'];
 			$_SESSION['SESS_ACTIVE']   = $member['active'];

@@ -2,13 +2,14 @@
 
 require('auth.php');
 require_once('connection.php');
+require_once('stringops.php');
 
 //status:: 0= pending 1=rejected, delete entry and add to user vis string: on accept
 
 $username=$_SESSION['SESS_USERNAME'];
 $qry="SELECT vis_requests.sent_by, alumni.name FROM $table_vis INNER JOIN $table ON vis_requests.sent_by=alumni.username WHERE sent_to='$username' AND status=0";
-$result=mysql_query($qry);
-			$num=mysql_numrows($result);
+$result=mysqli_query($con,$qry);
+			$num=mysqli_num_rows($result);
 ?>
 <html>
 
@@ -45,8 +46,8 @@ $result=mysql_query($qry);
 			$i=0;
 			while ($i < $num)
 			{
-				$sent_by=mysql_result($result,$i,"sent_by");
-				$name=mysql_result($result,$i,"name");
+				$sent_by=mysqli_result($result,$i,"sent_by");
+				$name=mysqli_result($result,$i,"name");
 				?>
       
       <tr>
@@ -79,7 +80,6 @@ $result=mysql_query($qry);
 
 		<table class="table table-striped">
 		<?php
-			require_once('stringops.php');
 			$friends = explode(" ", getVisibility($_SESSION['SESS_USERNAME']));
 			$num 	 = count($friends);
  
@@ -92,8 +92,8 @@ $result=mysql_query($qry);
 			while ($i < $num)
 			{
 				$qry = "SELECT * FROM $table WHERE username='$friends[$i]'";
-				$result=mysql_query($qry);
-				$name=mysql_result($result,0,"name");
+				$result=mysqli_query($con,$qry);
+				$name=mysqli_result($result,0,"name");
 				?>
       
       <tr>
