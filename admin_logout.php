@@ -6,7 +6,6 @@
 
 	unset($_SESSION['SESS_USERNAME_ADMIN']);
 	unset($_SESSION['SESS_PASSWORD_ADMIN']);
-	unset($_SESSION['SESS_ACTIVE']); 
 
 	header('location:admin_index.php');
 

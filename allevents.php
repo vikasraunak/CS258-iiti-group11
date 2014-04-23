@@ -28,6 +28,7 @@
 <?php
 
 require_once('connection.php');
+// date_default_timezone_set("Asia/calcutta");
 $nowarray = getdate();
 $year = $nowarray['year'];
 $pdate = $nowarray['mday'];

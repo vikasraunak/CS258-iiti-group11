@@ -32,7 +32,7 @@ if((isset($_POST['email']) AND trim($_POST['email']) != "")) {
     $email = stripslashes($_POST['email']); 
     $email= mysql_real_escape_string($email);
   $sql= "SELECT `email`,`username` FROM $table WHERE `email`='$email'";
-  $result=mysql_query($sql) or die('could not update query');
+  $result=mysqli_query($con, $sql) or die('Could not update query');
   
   if(mysql_num_rows($result) > 0) {
       $member   = mysql_fetch_assoc($result);      
@@ -41,7 +41,7 @@ if((isset($_POST['email']) AND trim($_POST['email']) != "")) {
       $pwd=RandomPass(10);
       $pwdhash=hash('sha256',$pwd);
       $sql2="UPDATE `alumni` SET `password`='$pwdhash' WHERE `username`='$usrnam' ";
-      $qr2=mysql_query($sql2) or die("$usrnam could not found");
+      $qr2=mysqli_query($con, $sql2) or die("$usrnam could not found");
       //echo $mail;
       $to=$mail;
       $headers='From: admin@alumni.iiti.ac.in';

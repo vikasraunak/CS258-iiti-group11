@@ -35,7 +35,7 @@ if( (isset($_POST['branch'])    AND (trim($_POST['branch']) != "")) AND
   $sql .= "     `pr_roll` = '$roll', "; 
   $sql .= "     `pr_branch`  = '$branch' ";
   
-  $resultt=mysql_query($sql) or die('could not update query');
+  $resultt=mysqli_query($con, $sql) or die('could not update query');
   if($resultt!=1){
     echo 'failure';
     die('could not upload into database');
@@ -60,14 +60,14 @@ if(!empty($nameofpic)){
 } else {
    fclose ($handle);
    // Commit image to the database
-   $image = mysql_real_escape_string($image);
+   $image = mysqli_real_escape_string($con, $image);
    $imagebool=1;
    $filetype=$_FILES['userFile']['type'];
    $query="UPDATE `p_reset` 
   SET `pr_type`='$filetype', `pr_img`='$image', pr_imgbool='$imagebool'
   WHERE `pr_mail`='$mail'";
 
-   if ( !(mysql_query($query,$con)) ) {
+   if ( !(mysqli_query($con, $query)) ) {
       die('<p>Error writing image to database</p></body></html>');
    } else {
    }

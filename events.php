@@ -9,6 +9,7 @@
     } 
     else
     {
+     // date_default_timezone_set("Asia/calcutta");
       $nowArray = getdate();
       $month = $nowArray['mon'];
       $year = $nowArray['year'];
@@ -125,7 +126,7 @@ for ($count=0; $count < (6*7); $count++) {
     }
 }
 echo "</tr></table></div></div></div></div> ";
-mysql_close($con);
+mysqli_close($con);
 ?>
 <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
   <script src="//code.jquery.com/jquery.js"></script>

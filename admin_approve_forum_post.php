@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 include "admin_connection.php"; 
-include "admin_auth.php";
+require("admin_auth.php");
 
 IF (isset($_POST['submit_ap'])) : 
   $arrDEL = array(); 
@@ -16,18 +16,18 @@ IF (isset($_POST['submit_ap'])) :
   IF ($arrDEL) : 
     $sql_in = implode(",", $arrDEL); 
     $sql  = " DELETE FROM `pforum` WHERE `pf_id` IN ($sql_in) "; 
-    $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
+    $qry  = mysqli_query($con, $sql) or die("SQL Error: $sql<br>" . mysqli_error($con));
   ENDIF; 
   IF ($arrAPP) : 
     $sql_in = implode(",", $arrAPP); 
     $sql  = " UPDATE `pforum` SET `pf_status`=1 WHERE `pf_id` IN ($sql_in) "; 
-    $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
-  ENDIF; 
+    $qry  = mysqli_query($con, $sql) or die("SQL Error: $sql<br>" . mysqli_error($con));
+  ENDIF;
 ENDIF; 
 
 $sql  = " SELECT `pf_id`, `pf_name`,`pf_title`,`pf_ppost`, `pf_username`, DATE_FORMAT(`pf_date`, '%M %D, %Y at %H:%i') as `pf_date` FROM `pforum` "; 
 $sql .= " WHERE `pf_status`=0 ORDER BY `pf_id` "; 
-$qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
+$qry  = mysqli_query($con, $sql) or die("SQL Error: $sql<br>" . mysqli_error($con)); 
 
 print "List of Requests pending approval:<br>"; 
 print "<form method='post' action='{$_SERVER['PHP_SELF']}'>"; 

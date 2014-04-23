@@ -63,7 +63,7 @@ for (; $x<=$m; $x++)
      $roll = $batch.$x ;
      $insert_sql =  "INSERT INTO alumni (username,password)
      VALUES ('$roll','$newhash')"; 
-     mysql_query($insert_sql);
+     mysqli_query($con, $insert_sql);
    if( $retval == true ) 
  {
       echo "Mail to $batch"."$x sent successfully.";
@@ -92,7 +92,7 @@ for (; $x<=$m; $x++)
      $roll = $batch.$x ;
      $insert_sql =  "INSERT INTO alumni (username,password)
      VALUES ('$roll','$newhash')"; 
-     mysql_query($insert_sql);
+     mysqli_query($con, $insert_sql);
    if( $retval == true ) 
  {
       echo "Mail to $x sent successfully.";

@@ -30,16 +30,16 @@
       <tr>
         <td colspan="2">
         <?php
-                                if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) 
+                                if( isset($_SESSION['ERRMSG_ARR_ADMIN']) && is_array($_SESSION['ERRMSG_ARR_ADMIN']) && count($_SESSION['ERRMSG_ARR_ADMIN']) >0 ) 
                                 {
                                         //print error messages collected during login
                                         echo '<ul class="err">'; //unordered list formatting (ul)
-                                        foreach($_SESSION['ERRMSG_ARR'] as $msg) 
+                                        foreach($_SESSION['ERRMSG_ARR_ADMIN'] as $msg) 
                                         {
                                                 echo '<li>',$msg,'</li>'; 
                                         }
                                         echo '</ul>';
-                                        unset($_SESSION['ERRMSG_ARR']);
+                                        unset($_SESSION['ERRMSG_ARR_ADMIN']);
                                 }
         ?>
         </td>
