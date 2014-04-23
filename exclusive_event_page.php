@@ -1,6 +1,28 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--LINK CSS FILES-->
+    <link rel="stylesheet" type="text/css" href="css/general.css"> 
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <title>Event</title>
+</head>
+<body>
+ <?php require_once('navbar.php');?>
+<div class="container">
+<div class="col-md-4 col-md-offset-4">
+<div class="panel panel-info">
+<div class="panel-heading">
+    <h2><?php echo strtoupper($_GET['title']);?></h2>
+</div>
+<div class="panel-body">
+
+
+
 <?php
 
-include 'connection.php';
+require('connection.php');
 
 $title=$_GET['title'];
 
@@ -38,6 +60,13 @@ $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc,event_start, d
 
      if ($event_txt != "")
      {
-          echo "<h2>".strtoupper($title)."</h2>$event_txt<hr/>";
+          echo $event_txt;
      }
 ?>
+
+-   </div>
+-   </div>
+-   </div>
+-   </div>
+-   </body>
+-   </html>

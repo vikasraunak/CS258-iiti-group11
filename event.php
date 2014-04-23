@@ -88,7 +88,7 @@
      if ($event_txt != "")
      {
           echo "<p><strong>$d/$m/$y 's Events:</strong></p>$event_txt<hr/>";
-          header('Refresh: 5; URL=http://localhost/series/alumni/exclusive_event_page.php?title='.$_POST['event_title']);
+          header('Refresh: 5; URL=exclusive_event_page.php?title='.$_POST['event_title']);
      }
 
      }
