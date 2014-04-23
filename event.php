@@ -84,13 +84,18 @@
      {
          $event_txt = "";
      }
-     if($_POST) {
+
      if ($event_txt != "")
      {
           echo "<p><strong>$d/$m/$y 's Events:</strong></p>$event_txt<hr/>";
-          header('Refresh: 5; URL=exclusive_event_page.php?title='.$_POST['event_title']);
-     }
 
+     }
+     if($_POST){
+     $getId_sql = "SELECT id FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
+          $getId_res = mysqli_query($con, $getId_sql) or die(mysqli_error($con));
+          $id = @mysqli_fetch_array($getId_res, MYSQLI_ASSOC);
+          header('Refresh: 5; URL=exclusive_event_page.php?id='.$id['id']);
+          mysqlI_free_result($getId_res);
      }
 
      ?>
@@ -284,7 +289,7 @@ if($count>2)
    }
 }
 
-}  
+}
 
   ?>
    <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
