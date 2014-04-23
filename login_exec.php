@@ -4,6 +4,7 @@
  
 	//Include database connection details
 	require_once('connection.php');
+	require_once('stringops.php');
 	//Array to store validation errors
 	$errmsg_arr = array();
  	
@@ -11,16 +12,6 @@
 	$errflag = false;
  
 	//Function to sanitize values received from the form. Prevents SQL injection
-	function clean($str) 
-	{
-		$str = @trim($str);
-		if( get_magic_quotes_gpc() ) 
-		{
-			//if magic quotes is running, remove slashes it added
-			$str = stripslashes($str);
-		}
-		return mysql_real_escape_string($str);
-	}
  
 	//Sanitize the POST values
 	$username = clean($_POST['username']);
