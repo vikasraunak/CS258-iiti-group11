@@ -37,7 +37,7 @@ print "<table border=1>";
   print "<td>Remove</td>"; 
   print "<td width=1080>Forwarded Post</td>"; 
   print "</tr>"; 
-WHILE ($row = mysqli_fetch_array($qry)) : 
+WHILE ($row = mysql_fetch_array($qry)) : 
   print "<tr>"; 
   print "<td><input type='radio' name='action[{$row['pf_id']}]' value='APP'></td>";
   print "<td><input type='radio' name='action[{$row['pf_id']}]' value='DEL'></td>";
