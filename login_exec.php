@@ -3,7 +3,7 @@
 	session_start();
  
 	//Include database connection details
-	require_once('connection.php');
+	require('connection.php');
 	require_once('stringops.php');
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -14,6 +14,8 @@
 	//Function to sanitize values received from the form. Prevents SQL injection
  
 	//Sanitize the POST values
+	if(count($_POST)==2)
+	{
 	$username = clean($_POST['username']);
 	$password = hash('sha256', clean($_POST['password']));
  
@@ -71,4 +73,5 @@
 	{
 		die("Query failed");
 	}
+}
 ?>
