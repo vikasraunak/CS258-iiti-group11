@@ -20,26 +20,7 @@
 </div>
 <div class="container">
 
-<div class="col-md-3">
-  <div class="panel panel-info">
-  <div class="panel-heading">
-    <h4>Posts</h4>
-  </div>
-    <div class="panel-body">
-      Sample Date<br>
-      Sample Date<br>
-      Sample Date<br>
-      Sample Date<br>
-      Sample Date<br>
-      Sample Date<br>
-      Sample Date<br>
-      Sample Date<br>
-      Sample Date<br>
-      Sample Date<br>
-    </div>
-  </div>
-</div>
-<div class="col-md-9">
+<div class="col-md-10 col-md-offset-1">
 <?php 
 
 include "admin_connection.php"; 
@@ -48,10 +29,10 @@ include "navbar_main.php";
 
 $sql  = " SELECT `pf_id`, `pf_name`,`pf_title`,`pf_ppost`, `pf_username`, DATE_FORMAT(`pf_date`, '%M %D, %Y at %H:%i') as `pf_date` FROM `pforum` "; 
 $sql .= " WHERE `pf_status`=1 ORDER BY `pf_id` "; 
-$qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
+$qry  = mysqli_query($con, $sql) or die("SQL Error: $sql<br>" . mysqli_error($con)); 
 
 
-while($row = mysql_fetch_array($qry)){
+while($row = mysqli_fetch_array($qry)){
   print '<div class="well">';
   print "<h2>" . $row['pf_title'] . "</h2>"; 
   print "<h4>Submitted by " . $row['pf_name'] . " on " . $row['pf_date']."</h4>"; 

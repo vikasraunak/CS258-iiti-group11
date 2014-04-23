@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "connection.php"; 
 require_once('admin_auth.php');
 if( (isset($_POST['Name'])    AND (trim($_POST['Name']) != "")) 
@@ -16,7 +16,7 @@ if( (isset($_POST['Name'])    AND (trim($_POST['Name']) != ""))
   $sql .= "     `pr_roll` = '$roll', "; 
   $sql .= "     `pr_dob`  = '$dob' ";
   
-  $resultt=mysql_query($sql) or die(mysql_error());
+  $resultt=mysqli_query($con, $sql) or die(mysqli_error($con));
   if($resultt==1){
     echo 'success';
   }else{

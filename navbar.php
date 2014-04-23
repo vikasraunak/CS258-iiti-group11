@@ -32,6 +32,12 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
     else
         echo '<li><a href="events.php"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>';
 
+    if ($filepath=='/blog_submit.php') 
+        echo '<li class="active"><a href="blog_submit.php"><span class="glyphicon glyphicon-pencil"></span> Write Post Blog</a></li>';
+    else
+        echo '<li><a href="blog_submit.php"><span class="glyphicon glyphicon-pencil"></span> Write Blog Post</a></li>';
+
+
 
 	if ($filepath=='/changepassword.php') 
     	echo '<li class="active"><a href="#"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>';
