@@ -125,7 +125,7 @@ for ($count=0; $count < (6*7); $count++) {
     }
 }
 echo "</tr></table></div></div></div></div> ";
-mysqli_close($con);
+mysql_close($con);
 ?>
 <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
   <script src="//code.jquery.com/jquery.js"></script>
