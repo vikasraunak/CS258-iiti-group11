@@ -28,17 +28,17 @@ if(isset($_POST['submit_ap'])){
   if($arrAPP){
     $sql_in = implode(",", $arrAPP); 
     $sql  = " UPDATE `p_reset` SET `pr_status`=1 WHERE `pr_id` IN ($sql_in) "; 
-    $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
+    $qry  = mysqli_query($con, $sql) or die("SQL Error: $sql<br>" . mysqli_error($con)); 
 
     $sql  = "SELECT `pr_branch`,`pr_mail`,`pr_roll` FROM `p_reset` WHERE `pr_status`=1 ";
-    $qry  = mysql_query($sql) or die('failure in running sql query');
+    $qry  = mysqli_query($con, $sql) or die('failure in running sql query');
     
-    while($arr  = mysql_fetch_assoc($qry)){
+    while($arr  = mysqli_fetch_assoc($qry)){
       $usrnam =$arr['pr_roll'];
       $pwd=RandomPass(10);
       $pwdhash=hash('sha256',$pwd);
       $sql2="UPDATE `alumni` SET `password`='$pwdhash' WHERE `username`='$usrnam' ";
-      $qr2=mysql_query($sql2) or die("query unsuccessful");
+      $qr2=mysqli_query($con, $sql2) or die("query unsuccessful");
 
       $to=$arr['pr_mail'];
       $headers='From: admin@alumni.iiti.ac.in';
@@ -59,14 +59,14 @@ if(isset($_POST['submit_ap'])){
   if($arrDEL){
     $sql_in = implode(",", $arrDEL); 
     $sql  = " DELETE FROM `p_reset` WHERE `pr_id` IN ($sql_in) "; 
-    $qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
+    $qry  = mysqli_query($con, $sql) or die("SQL Error: $sql<br>" . mysqli_error($con)); 
   } 
 }
 print "<br>";
 
 $sql  = " SELECT `pr_id`,`pr_img`,`pr_type`,`pr_branch`,`pr_imgbool`,`pr_roll`, `pr_mail`, DATE_FORMAT(`pr_date`, '%M %D, %Y at %H:%i') as `pr_date` FROM `p_reset` "; 
 $sql .= " WHERE `pr_status`=0 ORDER BY `pr_id` "; 
-$qry  = mysql_query($sql) or die("SQL Error: $sql<br>" . mysql_error()); 
+$qry  = mysqli_query($con, $sql) or die("SQL Error: $sql<br>" . mysqli_error($con)); 
 
 print "<h2>List of Requests pending approval:<h2><br>"; 
 print "<form method='post' action='{$_SERVER['PHP_SELF']}'>"; 
@@ -80,7 +80,7 @@ print "<table border=1>";
   print "</tr>"; 
 
 
-while($row = mysql_fetch_array($qry)){
+while($row = mysqli_fetch_array($qry)){
   print "<tr>"; 
   print "<td><input type='radio' name='action[{$row['pr_id']}]' value='APP'></td>";
   print "<td><input type='radio' name='action[{$row['pr_id']}]' value='DEL'></td>";
@@ -104,7 +104,7 @@ while($row = mysql_fetch_array($qry)){
 }
 
 print "</table>";
-mysql_close($con); 
+mysqli_close($con); 
 
 print "<input type='submit' name='submit_ap' value='Process'>"; 
 print "</form>"; 
