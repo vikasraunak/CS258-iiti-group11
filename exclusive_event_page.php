@@ -14,7 +14,15 @@
 <div class="col-md-4 col-md-offset-4">
 <div class="panel panel-info">
 <div class="panel-heading">
-    <h2><?php echo strtoupper($_GET['title']);?></h2>
+    <h2><?php
+           require 'connection.php';
+           $id= $_GET['id'];
+           $getTitle_sql = "SELECT event_title FROM $table_cal WHERE id = '".$id."' ORDER BY event_start";
+          $getTitle_res = mysqli_query($con, $getTitle_sql) or die(mysqli_error($con));
+          $title = @mysqli_fetch_array($getTitle_res, MYSQLI_ASSOC)  ;
+          echo strtoupper($title["event_title"]);
+          ?>
+     </h2>
 </div>
 <div class="panel-body">
 
@@ -24,9 +32,9 @@
 
 require('connection.php');
 
-$title=$_GET['title'];
+$id=$_GET['id'];
 
-$getEvent_sql = "SELECT event_title, event_venue, event_shortdesc,event_start, date_format(event_start, '%l:%i %p') as fmt_time, date_format(event_start, '%D %M %Y') as fmt_date, event_invite_batch, event_invite_dept, batch_lower, batch_upper FROM $table_cal WHERE event_title = '".$title."' ORDER BY event_start";
+$getEvent_sql = "SELECT event_title, event_venue, event_shortdesc,event_start, date_format(event_start, '%l:%i %p') as fmt_time, date_format(event_start, '%D %M %Y') as fmt_date, event_invite_batch, event_invite_dept, batch_lower, batch_upper FROM $table_cal WHERE id = '".$id."' ORDER BY event_start";
      $getEvent_res = mysqli_query($con, $getEvent_sql) or die('An error has occured!');
      if (mysqli_num_rows($getEvent_res) == 1 )
      {

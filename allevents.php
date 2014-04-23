@@ -38,7 +38,7 @@ for($m=1;$m<=$pmonth;$m++)
 {
 for($d=1;$d<=$pday;$d++)
 {
-$getEvent_sql = "SELECT event_title, event_venue, event_shortdesc FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$year."' ORDER BY event_start";
+$getEvent_sql = "SELECT id, event_title, event_venue, event_shortdesc FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$year."' ORDER BY event_start";
      $getEvent_res = mysqli_query($con, $getEvent_sql) or die('An error has occured!');
      if (mysqli_num_rows($getEvent_res) > 0)
      {
@@ -50,11 +50,12 @@ $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc FROM $table_ca
            $event_txt .= "<li type=\"circle\">".$event_title."</br></li>";
 
          $event_txt .="</ul>";
+         $event_id = $ev['id'];
 
          //mysql_free_result($getEvent_res);
          if($event_txt!="")
           {
-          echo "<a href=\"exclusive_event_page.php?title=".$event_title."\">$event_txt</a><hr/>\n";
+          echo "<a href=\"exclusive_event_page.php?id=".$event_id."\">$event_txt</a><hr/>\n";
           $flag=true;
           }
          }
