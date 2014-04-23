@@ -10,20 +10,6 @@ Project Client: Dr. I. A. Palani, IIT Indore
 - Kartikeya Upasani
 - Vikas Raunak
 
-#TO DO
-
-- Check for potential security breaches like XSS or SQLInjection
-- Add Name as search parameter while searching Alumni Database
-- Add photo to profile. 
-- Add 'Request To Institute' functionality
-- Add 'Friend Profile' and 'Friend Request' functionality
-- Add 'Notification' functionality
-- Add 'Events' functionality
-- Add 'Forums' functionality2
-- Add 'Admin Panel' that comprises of:
-	* Creation of batch usernames and passwords when batch passes
-	* Approve password reset requests
-	* Approving public posts
 
 #Setting up files on local machine
 - Download .zip from GitHub repository and extract files into DocumentRoot of Apache Server (or the appropriate folder as per your local server configuration)
