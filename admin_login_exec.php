@@ -39,7 +39,7 @@
  
 	//If there are input validations, redirect back to the login form
 	if($errflag) {
-		$_SESSION['ERRMSG_ARR_ADMIN'] = $errmsg_arr;
+		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		session_write_close();
 		header("location: admin_index.php");
 		exit();
@@ -70,7 +70,7 @@
 			$errmsg_arr[] = 'Username and Password do not match';
 			$errflag = true;
 			if($errflag) {
-				$_SESSION['ERRMSG_ARR_ADMIN'] = $errmsg_arr;
+				$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 				session_write_close();
 				header("location: admin_index.php");
 				exit();

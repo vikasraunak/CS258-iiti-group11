@@ -30,12 +30,12 @@ function RandomPass($numchar)
 if((isset($_POST['email']) AND trim($_POST['email']) != "")) {
    
     $email = stripslashes($_POST['email']); 
-    $email= mysqli_real_escape_string($con, $email);
+    $email= mysql_real_escape_string($email);
   $sql= "SELECT `email`,`username` FROM $table WHERE `email`='$email'";
   $result=mysql_query($sql) or die('could not update query');
   
-  if(mysqli_num_rows($result) > 0) {
-      $member   = mysqli_fetch_assoc($result);      
+  if(mysql_num_rows($result) > 0) {
+      $member   = mysql_fetch_assoc($result);      
       $mail     =$member['email'];
       $usrnam  =$member['username'];
       $pwd=RandomPass(10);

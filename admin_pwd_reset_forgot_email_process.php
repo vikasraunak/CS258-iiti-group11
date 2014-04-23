@@ -26,9 +26,9 @@ if( (isset($_POST['branch'])    AND (trim($_POST['branch']) != "")) AND
     $roll    = stripslashes($_POST['roll']); 
     $branch=stripslashes($_POST['branch']);
 
-    $mail=mysqli_real_escape_string($mail);
-    $roll=mysqli_real_escape_string($roll);
-    $branch=mysqli_real_escape_string($branch);
+    $mail=mysql_real_escape_string($mail);
+    $roll=mysql_real_escape_string($roll);
+    $branch=mysql_real_escape_string($branch);
 
   $sql  = " INSERT INTO `p_reset` "; 
   $sql .= " SET    `pr_mail`= '$mail' ,"; 
