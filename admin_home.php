@@ -91,7 +91,7 @@ $(document).ready(function() {
 		<p class="logo">IIT<i></i> Indore <i class="mm">IITI<br>Alumni<br>Network</i></p>
  <div style="text-align:center">
     <div style="text-align:left; width:300px;">
-       <a href="logout.php">Logout</a>
+       <a href="admin_logout.php">Logout</a>
     </div>
 </div>
 	<div class="content">
