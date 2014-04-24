@@ -80,7 +80,7 @@ print "<table border=1>";
   print "</tr>"; 
 
 
-while($row = mysql_fetch_array($qry)){
+while($row = mysqli_fetch_array($qry)){
   print "<tr>"; 
   print "<td><input type='radio' name='action[{$row['pr_id']}]' value='APP'></td>";
   print "<td><input type='radio' name='action[{$row['pr_id']}]' value='DEL'></td>";
@@ -90,7 +90,6 @@ while($row = mysql_fetch_array($qry)){
     print "&nbsp;&nbsp;(Requested by <strong>" . $name . "</strong> <br> "."&nbsp;&nbsp;on<strong> " . $row['pr_date'] . ")". "</strong>"."</td>"; 
     print "<td>" ."&nbsp;Username <strong>:". $row['pr_roll'] .  "</strong><br>";
     print "&nbsp;Name:<strong> ".$name."</strong><br>"; 
-    print "&nbsp;Date of Birth: <strong>".$dob."</strong><br>";
     print "&nbsp;Current location:<strong> ".$curr_loc."</strong><br>";
     print "&nbsp;permanent location: <strong>".$perm_loc."</strong><br>";
     print "&nbsp;phone number: <strong>".$phone."</strong><br>";
