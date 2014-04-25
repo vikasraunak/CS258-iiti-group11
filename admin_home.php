@@ -128,7 +128,8 @@ $(document).ready(function() {
 </div>
 
 <div id="panel5" class="panel">
-<p>Create Event (To be Linked With Admin Panel )</p>
+<p><a href="admin_allevents.php" style="color: rgb(0,0,0)">View All Events</a></p>
+<p><a href="admin_events.php" style="color: rgb(0,0,0)">Event Calendar</a></p>
 <p></p></div>
 
 </div>

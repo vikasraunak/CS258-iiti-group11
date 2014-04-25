@@ -1,6 +1,6 @@
 <?php
-  require_once('auth.php');
-  require('connection.php');
+  require('admin_auth.php');
+  require_once('connection.php');
 
    ?>
 
@@ -17,13 +17,14 @@
      </head>
           <body>
           <div class="container">
+
           <div class="row">
           <div class="col-md-6">
+          <div class="well"><a href="admin_home.php"><span class="glyphicon glyphicon-home"></span> Back to Admin Home</a></div>
           <div class="panel panel-info">
           <div class="panel-heading"><h2>Events on this date</h2></div>
           <div class="panel-body">
           <!--NAVIGATION BAR START-->
-      <?php require_once('navbar.php'); ?>
       <!--NAVIGATION BAR END-->
 
   <?php
