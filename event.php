@@ -36,6 +36,7 @@
        $batchlower = $_POST['batch_lower'];
        $batchupper = $_POST['batch_upper'];
        $inv_batch = $_POST['event_invite_batch'];
+       $title = $_POST['event_title'];
        if(empty($_POST['event_invite_dept']))
        {
          echo "Please choose the branches to be invited.\n";
@@ -53,7 +54,7 @@
        {
            $insEvent_sql = "INSERT INTO calendar_events (event_title,event_venue, event_shortdesc, event_start,event_invite_batch,event_invite_dept,batch_lower,batch_upper) VALUES('".$_POST["event_title"]."','".$_POST["event_venue"]."','".$_POST["event_shortdesc"]."', '$event_date','".$_POST["event_invite_batch"]."','$invite_dept','$batchlower',$batchupper)";
            $insEvent_res = mysqli_query($con, $insEvent_sql) or die(mysqli_error($con));
-            $getId_sql = "SELECT id FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
+            $getId_sql = "SELECT id FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' AND  event_title = '".$title."' ";
           $getId_res = mysqli_query($con, $getId_sql) or die(mysqli_error($con));
           $id = @mysqli_fetch_array($getId_res, MYSQLI_ASSOC);
           header('Refresh: 5; URL=exclusive_event_page.php?id='.$id['id']);
@@ -70,7 +71,7 @@
      }
      $getEvent_sql = "SELECT event_title, event_venue, event_shortdesc, date_format(event_start, '%l:%i %p') as fmt_date FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
      $getEvent_res = mysqli_query($con, $getEvent_sql) or die(mysqli_error($con));
-     // empty($_POST["event_title"]) ; empty($_POST['event_venue']) ; empty($_POST['event_shortdesc'])  ; empty($_POST['event_invite_dept']);
+
      if (mysqli_num_rows($getEvent_res) > 0)
      {
          $event_txt = "<ul>";
@@ -94,14 +95,7 @@
           echo "<p><strong>$d/$m/$y 's Events:</strong></p>$event_txt<hr/>";
 
      }
-    /* echo $insEvent_res;
-     if($_POST){
-     $getId_sql = "SELECT id FROM $table_cal WHERE month(event_start) = '".$m."' AND dayofmonth(event_start) = '".$d."' AND year(event_start) = '".$y."' ORDER BY event_start";
-          $getId_res = mysqli_query($con, $getId_sql) or die(mysqli_error($con));
-          $id = @mysqli_fetch_array($getId_res, MYSQLI_ASSOC);
-          header('Refresh: 5; URL=exclusive_event_page.php?id='.$id['id']);
-          mysqlI_free_result($getId_res);
-     } */
+
 
      ?>
      </div>
