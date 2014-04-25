@@ -15,14 +15,8 @@
   <div class="col-md-6 col-md-offset-3">
   	<div class="well">
   	<h3><b>Write Blog Post</b></h3>
-    <form action="admin_public_forum_action.php" id="subForm" name="subForm" method="post" >
-    <p><label for="name" >Name</label>
-      <input type="text" name="name" id="name" /></p>
-<p><label for="roll" >Username</label>
-      <input type="text" name="roll" id="roll" /></p>
-	  <p><label for="prof" >Current Occupation</label>
-      <input type="text" name="prof" id="prof" /></p>
-
+    <form action="blog_exec.php" id="subForm" name="subForm" method="post" >
+    
  <p><label for="title" >Title Post</label>
       <input type="text" name="title" id="title" /></p>
 

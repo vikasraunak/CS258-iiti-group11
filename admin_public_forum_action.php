@@ -1,7 +1,7 @@
 
 <?php 
-
-include "admin_connection.php"; 
+require 'admin_auth.php';
+require("admin_connection.php"); 
 
 
 IF ( (isset($_POST['name'])AND (isset($_POST['title']) 
@@ -18,7 +18,7 @@ IF ( (isset($_POST['name'])AND (isset($_POST['title'])
   $qry = mysqli_query($con, $sql) or die("SQL Error: $sql<br>" . mysqli_error($con)); 
 
   // Acknowledge entry 
-  print "<p><label for='name'>Thank you.Your post has been forwarded, $name <br>"; 
+  print "<p><label for='name'>Thank you $name. Your post has been forwarded.</p><br>"; 
 ENDIF; 
 
 
@@ -28,5 +28,5 @@ ENDIF;
 <br>
 <br>
 
-<a href="home.php">Go to Alumni home page..</a>
+<a href="admin_home.php">Back to Admin Home</a>
 <br>

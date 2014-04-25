@@ -1,8 +1,18 @@
+
+<html>
+<head>
+  <title>Approve Blog Posts</title>
+</head>
+<body>
+<div align="center">
+<a href="admin_home.php">Back to Admin Home</a>
+<br>
+<br>
+
 <?php
 
 include "admin_connection.php"; 
 include "admin_auth.php";
-
 IF (isset($_POST['submit_ap'])) : 
   $arrDEL = array(); 
   $arrAPP = array(); 
@@ -49,4 +59,9 @@ ENDWHILE;
 print "</table>"; 
 print "<input type='submit' name='submit_ap' value='Process'>"; 
 print "</form>"; 
+
 ?>
+
+</div>
+</body>
+</html>

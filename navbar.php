@@ -32,7 +32,7 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
     else
         echo '<li><a href="events.php"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>';
 
-    if ($filepath=='/blog_submit.php') 
+    if ($filepath=='/blog_submit.php' || $filepath=='/blog_exec.php') 
         echo '<li class="active"><a href="blog_submit.php"><span class="glyphicon glyphicon-pencil"></span> Write Post Blog</a></li>';
     else
         echo '<li><a href="blog_submit.php"><span class="glyphicon glyphicon-pencil"></span> Write Blog Post</a></li>';
