@@ -52,7 +52,7 @@
     <div id="background"><p class="logo">IITI Alumni Forum : Public</p>
       <div id="nav">
         <ul>
-          <li><a href="admin_forum_guide.html" id="guide">How this Works</a></li>
+          <li><a href="admin_forum_guide.php" id="guide">How this Works</a></li>
 	<br class="clear"  />
       </div>
       <!-- end nav -->

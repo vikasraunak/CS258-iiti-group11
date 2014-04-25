@@ -38,6 +38,7 @@
        $batchupper = $_POST['batch_upper'];
        $inv_batch = $_POST['event_invite_batch'];
        $title = $_POST['event_title'];
+
        if(empty($_POST['event_invite_dept']))
        {
        	echo'<div class="alert alert-danger">
@@ -50,7 +51,7 @@
           $invite_dept=implode(',',$_POST['event_invite_dept']);
        }
        $event_date = $y."-".$m."-".$d." ".$_POST["event_time_hh"].":".$_POST["event_time_mm"].":00";
-       if( ($batchlower >= $batchupper && empty($inv_batch) ) || ($batchlower < $batchupper && !empty($inv_batch)) || empty($_POST["event_title"]) || empty($_POST['event_venue']) || empty($_POST['event_shortdesc'])  || empty($_POST['event_invite_dept']))
+       if( ($batchlower >= $batchupper && empty($inv_batch) ) || ($batchlower < $batchupper && !empty($inv_batch) && $batchupper!=2014)  || empty($_POST["event_title"]) || empty($_POST['event_venue']) || empty($_POST['event_shortdesc'])  || empty($_POST['event_invite_dept']))
        {
          echo'<div class="alert alert-danger">
          <span class="glyphicon glyphicon-warning-sign"></span> Please fill in all details correctly

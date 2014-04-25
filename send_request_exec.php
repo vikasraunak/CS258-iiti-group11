@@ -5,9 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Reaquest sent to institute</title>
-<link href="css/admin_css/site.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+  <!--LINK CSS FILES-->
+  <link rel="stylesheet" type="text/css" href="css/general.css"> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <title>Request Sent</title>
 <script src="js/admin_js/jquery-1.7.2.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -18,7 +22,7 @@ $(document).ready(function() {
 <body>
 
 <?php
-
+require_once('navbar.php');
 require('fetchprofile.php');
 $nam=$_SESSION['SESS_USERNAME'];
 fetchprofile($nam,0);
@@ -44,26 +48,14 @@ $msg=wordwrap($msg,70);
 mail($to,$sub,$msg,"From: $from\n");
 
 ?>
-<div class="wrapper">
-	<div class="header">
-		<p class="logo">IIT<i> </i> Indore <i class="mm">IITI<br>
-			Alumni<br>
-			Network</i></p>
-	</div>
-	<div class="content">
-		<div class="main">
-			<h1>Form Processed</h1>
-			<p>Yay ! You've successfully mailed the request. </br>
-                                                            Admin will verify your request and </br>
-                                                            You will receive an e-mail shortly on your primary mail.
-                                                     </p>
-			
+<div class="container">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="alert alert-success">
+			Request Submitted Sucessfully
 		</div>
 	</div>
-
-	<div class="footer">
-		<p>Return to <a href="http://www.iiti.ac.in"> IITI Website</a> Or <a href="index.php">IITI Alumni Network</a>.</p>
-	</div>
 </div>
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

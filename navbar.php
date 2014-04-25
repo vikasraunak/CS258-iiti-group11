@@ -37,6 +37,11 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">';
     else
         echo '<li><a href="blog_submit.php"><span class="glyphicon glyphicon-pencil"></span> Write Blog Post</a></li>';
 
+    if ($filepath=='/send_request.php') 
+        echo '<li class="active"><a href="send_request.php"><span class="glyphicon glyphicon-upload "></span> Request to Insti.</a></li>';
+    else
+        echo '<li><a href="send_request.php"><span class="glyphicon glyphicon-upload"></span> Request to Insti.</a></li>';
+
 
 
 	if ($filepath=='/changepassword.php') 

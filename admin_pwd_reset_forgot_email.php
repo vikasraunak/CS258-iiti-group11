@@ -103,7 +103,7 @@ branch: {
 			</div>
 			<br>
 			<div style="position: relative; left: 60px;">
-				<h5><p>Upload Your any appropriate proof's photo (Must be an image).</p></h5>
+				<h5><p>Upload appropriate photo ID proof to validate your identity.</p></h5>
 			</div>
 			<div style="position: relative; left: 160px;" >
 				<input type="file" size="40" name="userFile"/>

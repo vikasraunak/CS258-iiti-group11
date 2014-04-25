@@ -1,5 +1,5 @@
 <?php
-
+require('auth.php');
 $doc='request for documents';
 $accom='request for accomodation';
 
@@ -10,24 +10,16 @@ $accom='request for accomodation';
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Send request to institute</title>
-<link href="css/admin_css/site.css" rel="stylesheet">
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+  <!--LINK CSS FILES-->
+  <link rel="stylesheet" type="text/css" href="css/general.css"> 
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 
-#pwdreset label.error {
-  font-size: 0.8em;
-  color: #F00;
-  font-weight: bold;
-  display: block;
-  margin-left: 215px;
-}
-#pwdreset  input.error, #pwdreset select.error  {
-  background: #FFA9B8;
-  border: 1px solid red;
-}
-</style>
+  <title>Request to Institute</title>
 <script src="js/admin_js/jquery-1.7.2.min.js"></script>
 <script src="js/admin_js/jquery.validate.min.js"></script>
+
 <script>
 $(document).ready(function() {
  $('#pwdreset').validate({
@@ -65,31 +57,27 @@ $(document).ready(function() {
     } 
 
   }); // end validate 
-}); // end ready
-</script>
+}); // end ready</script>
 
 </head>
+
 <body>
-<div class="wrapper">
-  <div class="header">
-    <p class="logo"> IIT <i> </i> Indore <i class="mm">IITI<br>
-      Alumni<br>
-      Network</i></p>
-  </div>
-  <div class="content">
-  <div class="main">
+<?php require('navbar.php'); ?>
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+  <div class="well">
   <h1>Send request to Institute</h1>
     <form action="send_request_exec.php" method="POST" name="pwdreset" id="pwdreset">
       <div>
-        <label for="email" class="label">E-mail From</label>
+        <label for="email" >E-mail From</label>
         <input name="email" type="text" id="email" autofocus required>
       </div>
       <div>
-        <label for="email" class="label">E-mail to</label>
-        <input name="emailto" type="text" id="emailto">
+        <label for="email" >E-mail to</label>
+        <input name="emailto" type="text" id="emailto" value='palaniia@iiti.ac.in'>
       </div>
                                                            <div>
-        <label for="reason" class="label">Reason </label>
+        <label for="reason" >Reason </label>
         <select name="reason" id="programme" value="reason" class="required" title="Please choose a reason.">
           <option value="one">--Please select one--</option>
           <option value="acc">request for accomodation</option>
@@ -98,11 +86,11 @@ $(document).ready(function() {
         </select>
       </div>
       <div>
-        <label for="sub" class="label">Subject</label>
+        <label for="sub" >Subject</label>
         <input type="text" name="sub" title="Write your request" placeholder="Subject here">
       </div>
       <div>
-        <label for="msg" class="label">Body</label>
+        <label for="msg" >Body</label><br>
         <textarea name="msg" rows="10" cols="50" title="Write your request" placeholder="body"></textarea>
       </div>
       
@@ -115,5 +103,7 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
