@@ -89,7 +89,7 @@ for (; $x<=$m; $x++)
      $message .= "\n new password is \" $new \". change this password after first login.";
      $retval = mail ($to,$subject,$message,$headers);
      //echo $message;
-     $roll = $batch.$x ;
+     $roll = $x ;
      $insert_sql =  "INSERT INTO alumni (username,password)
      VALUES ('$roll','$newhash')"; 
      mysqli_query($con, $insert_sql);
