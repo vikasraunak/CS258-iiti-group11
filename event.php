@@ -39,7 +39,10 @@
        $title = $_POST['event_title'];
        if(empty($_POST['event_invite_dept']))
        {
-         echo "Please choose the branches to be invited.\n";
+       	echo'<div class="alert alert-danger">
+         Please choose the branches to be invited
+         </div>';
+         $invite_dept="";
        }
        else
        {
@@ -48,7 +51,9 @@
        $event_date = $y."-".$m."-".$d." ".$_POST["event_time_hh"].":".$_POST["event_time_mm"].":00";
        if( ($batchlower >= $batchupper && empty($inv_batch) ) || empty($_POST["event_title"]) || empty($_POST['event_venue']) || empty($_POST['event_shortdesc'])  || empty($_POST['event_invite_dept']))
        {
-         echo "Please fill in all the details appropriately\n";
+         echo'<div class="alert alert-danger">
+         <span class="glyphicon glyphicon-warning-sign"></span> Please fill in all details correctly
+         </div>';
        }
        else
        {
@@ -165,7 +170,7 @@
 
               </form>";
 // Sends Mails by checking the batch and the department code
- if($_POST)
+ if($_POST && $invite_dept != "")
  {
  $inv_batch = $_POST['event_invite_batch'];
  $invite_dept2 = explode("," , $invite_dept);
