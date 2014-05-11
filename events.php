@@ -43,19 +43,20 @@
       <!--NAVIGATION BAR START-->
       <?php require_once('navbar.php'); ?>
       <!--NAVIGATION BAR END-->
-            <div class="container" align="center">
+            <div class="container">
             <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-info">
 
               <div class="panel-heading">
-              <h2>View and Create Events</h2>
-              <p>Select a month and year to view events scheduled. Click on a day to create an event.</p>
+              	<h2>View and Create Events</h2>
+              	<p>Select a month and year to view events scheduled. Click on a day to create an event.</p>
               </div>
 
               <div class="panel-body">
-              <form method="post" class="form-inline" role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+              <div class="row" align="center">
+              <form method="post" role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>">
               
-                             <select class="form-control" name="month">
+                             <select name="month">
                              <?php
                                    $months = Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
                                    for ($x=1; $x<=count($months); $x++)
@@ -70,7 +71,7 @@
                              ?>
                              </select>
 
-                             <select class="form-control" name="year">
+                             <select name="year">
                              <?php
                                   for ($x=2014; $x<=2050; $x++)
                                   {
@@ -85,7 +86,8 @@
                              </select>
 
                              <button type="submit" type="submit" class="btn btn-primary" name="submit">Display Calendar</button>
-</form>
+				</form>
+				</div>
 <br>
 <?php
 $days = Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
@@ -123,12 +125,13 @@ for ($count=0; $count < (6*7); $count++) {
         unset($event_title);
         $start += ADAY;
     }
-}
-echo "</tr></table></div></div></div></div> ";
+}	
 mysqli_close($con);
 ?>
+</tr></table></div></div></div></div>
 <!--INCLUDE SCRIPTS NECESSARY FOR BOOTSTRAP COMPONENTS-->
   <script src="//code.jquery.com/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
