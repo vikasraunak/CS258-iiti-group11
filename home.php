@@ -37,7 +37,9 @@
               <h3>Welcome <b><?php $username=$_SESSION['SESS_USERNAME']; echo $username; ?></b></h3>
             </div>
             <div class="panel-body">
-              <p>You may use the navbar at the top to browse various links. <br>[welcome message]</p>
+              <p>You may use the navbar at the top to browse various links.<br>Once an alumni has logged in and updated their profile, that alumni will appear in the database. Public components of the profile like Name and Roll Number will be visible to all. Other details can be viewed if:<br>1. Two Alumni are from the same batch.<br>2. You send the other alumni a visibility request which he/she accepts.</p>
+            	<br>
+            <p>To help us and the alumni communicate better amongst each other, kindly keep your profile updated. Posts to the alumni blog can be submitted and will appear as a part of the blog once the admin approves them.</p>
             </div>
           </div>
           

@@ -46,7 +46,7 @@
 	<div class="col-md-8 col-md-offset-2 well" align="center">
 
 		<h2>Search Alumni Database</h2>
-		<p>Enter 1 in Active to see alumni that have logged in and updated their profile.<br>Enter 0 in Active to see alumni that have not yet updated their profile.<br>Leave Active blank to see all alumni irrespective.</p>
+		<p>Enter one or more of the following: Name, Batch(Year of passing out), Roll Number.<br>Enter 1 in Active to see alumni that have logged in and updated their profile.<br>Enter 0 in Active to see alumni that have not yet updated their profile.<br>Leave Active blank to see all alumni irrespective.</p>
 		<h4><a href="admin_home.php"><span class='glyphicon glyphicon-home'></span> Back to Admin Home</a></h4>
 	</div>
 	<div class="row">
